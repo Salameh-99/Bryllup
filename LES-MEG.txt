@@ -1,0 +1,27 @@
+BRYLLUPSINVITASJON – Kayhan & Amanda
+=====================================
+
+ÅPNE I VS CODE
+1. Pakk ut denne mappen.
+2. VS Code → File → Open Folder… → velg mappen "project".
+3. All tekst du vil endre ligger øverst i index.html i objektet CONFIG
+   (navn, dato, sted, program, e-post, musikk, video).
+
+SE PÅ DEN MENS DU JOBBER
+- Installer utvidelsen "Live Server" i VS Code.
+- Høyreklikk index.html → "Open with Live Server".
+  (Konvolutt-åpning, auto-scroll og musikk virker kun i nettleser, ikke i
+   VS Code-forhåndsvisningen.)
+
+BYTTE BILDER
+- Legg dine egne bilder i img-mappen og pek på dem i index.html
+  (hero-bildet: <img class="hero-bg" src="img/hero.jpg">, og i galleriet).
+
+LEGGE UT PÅ NETT (gratis)
+- Gå til https://app.netlify.com/drop og dra HELE mappen inn.
+- Du får en delbar lenke på sekunder.
+
+MUSIKK/VIDEO
+- "Ordinary"-sangen og videoen peker på malforfatterens server og kan
+  forsvinne. Last gjerne opp egne filer i mappen og bytt URL i CONFIG
+  (musicSrc / videoSrc) til f.eks. "musikk.mp3" / "video.mp4".
