@@ -1,27 +1,74 @@
-BRYLLUPSINVITASJON – Kayhan & Amanda
+BRYLLUPSINVITASJON — Amanda & Kayhan
 =====================================
 
-ÅPNE I VS CODE
-1. Pakk ut denne mappen.
-2. VS Code → File → Open Folder… → velg mappen "project".
-3. All tekst du vil endre ligger øverst i index.html i objektet CONFIG
-   (navn, dato, sted, program, e-post, musikk, video).
+Klar til levering. Alt ligger i én fil: index.html + img-mappen.
 
-SE PÅ DEN MENS DU JOBBER
-- Installer utvidelsen "Live Server" i VS Code.
-- Høyreklikk index.html → "Open with Live Server".
-  (Konvolutt-åpning, auto-scroll og musikk virker kun i nettleser, ikke i
-   VS Code-forhåndsvisningen.)
 
-BYTTE BILDER
-- Legg dine egne bilder i img-mappen og pek på dem i index.html
-  (hero-bildet: <img class="hero-bg" src="img/hero.jpg">, og i galleriet).
+FØR LEVERANSE (sjekkliste)
+--------------------------
+[ ] Oppdater rsvpEmail i CONFIG (nå: eksempel-adresse)
+[ ] Test på mobil — åpning, musikk, språkbytte, RSVP
+[ ] Last opp til GitHub Pages (se under)
 
-LEGGE UT PÅ NETT (gratis)
-- Gå til https://app.netlify.com/drop og dra HELE mappen inn.
-- Du får en delbar lenke på sekunder.
 
-MUSIKK/VIDEO
-- "Ordinary"-sangen og videoen peker på malforfatterens server og kan
-  forsvinne. Last gjerne opp egne filer i mappen og bytt URL i CONFIG
-  (musicSrc / videoSrc) til f.eks. "musikk.mp3" / "video.mp4".
+REDIGERE INNHOLD
+----------------
+Åpne index.html. Øverst finner du CONFIG — alt innhold styres der:
+
+  names, fullNames     Navn (norsk + persisk)
+  date                 Dato og klokkeslett for vielsen
+  durationHours        Varighet for «Lagre datoen» i kalender
+  musicSrc             URL til bakgrunnsmusikk (tom = av)
+  videoSrc             URL til cover-video (tom = kun farge)
+  venue                Sted, adresse, kart-søk
+  rsvpEmail            E-post for RSVP-svar
+  images               hero, seal, gallery
+  program              Tidsplan
+  t                    All tekst på norsk (no) og persisk (fa)
+
+
+BILDER (img/)
+-------------
+  hero-venue.png       Tegning øverst på invitasjonen
+  wax-seal.png         Vokssegl på forsiden
+  venue-*.jpg          Galleri fra Kokkeplassen
+  couple-1.png         Par-bilde i galleriet
+
+Bytt filer i img/ og oppdater CONFIG.images ved behov.
+
+
+SE LOKALT
+---------
+1. Installer «Live Server» i Cursor/VS Code
+2. Høyreklikk index.html → Open with Live Server
+
+Eller: python3 -m http.server 8765
+       → http://localhost:8765/index.html
+
+
+LEGGE UT PÅ NETT
+----------------
+GitHub Pages (anbefalt):
+  Repo: https://github.com/Salameh-99/Bryllup
+  1. Settings → Pages
+  2. Source: Deploy from branch
+  3. Branch: main · Folder: / (root) → Save
+  4. Live lenke (etter 1–2 min):
+     https://salameh-99.github.io/Bryllup/
+
+Netlify (alternativ):
+  1. Gå til https://app.netlify.com/drop
+  2. Dra hele mappen bryllup-prosjekt inn
+  3. Del lenken med gjestene
+
+
+FILSTRUKTUR
+-----------
+  index.html      Hele invitasjonen (HTML, CSS, JS)
+  img/            Bilder
+  LES-MEG.txt     Denne filen
+
+
+DESIGN
+------
+Invitasjon designet av sosmedia.no
