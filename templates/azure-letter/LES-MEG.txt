@@ -1,0 +1,67 @@
+AZURE LETTER — Frittstående mal
+================================
+
+Egen invitasjonsmal inspirert av Golden Invite «Azure Letter».
+Demo-innhold: Layla & Yusuf — bytt alt i CONFIG til ditt eget konsept.
+
+
+FILSTRUKTUR
+-----------
+  templates/azure-letter/
+    index.html        Hele malen (én fil)
+    img/
+      hero.jpg        Hovedbilde (bue/landskap)
+      clouds.jpg      Skybakgrunn (program + avslutning)
+      wax-seal.png    Gullvokssegl (hjerte)
+    LES-MEG.txt       Denne filen
+
+
+SE LOKALT
+---------
+  python3 -m http.server 8765
+  → http://localhost:8765/templates/azure-letter/
+
+
+FUNKSJONER (som originalen)
+---------------------------
+  ✓ Konvolutt-cover med vokssegl — trykk for å åpne
+  ✓ Språkbytte NO | عربي
+  ✓ Hero med fallende kronblad
+  ✓ Skrap-for-å-avsløre dato (dag / måned / år)
+  ✓ Blå konvolutt med brev som åpner ved scroll
+  ✓ Nedtelling i fire bokser
+  ✓ Program med vekslende tidslinje og skybakgrunn
+  ✓ Sted med kart og veibeskrivelse
+  ✓ Avslutning «Med all vår kjærlighet»
+
+
+FØR LEVERANSE
+-------------
+[ ] Bytt nameFirst og nameSecond
+[ ] Sett riktig date (ISO-format)
+[ ] Oppdater venue (navn, adresse, mapsQuery)
+[ ] Juster program med riktige tider
+[ ] Bytt img/hero.jpg og img/clouds.jpg med egne bilder
+[ ] Sett musicSrc hvis ønskelig (valgfritt)
+[ ] Test på mobil — cover, skrapekort, konvolutt, språk
+
+
+REDIGERE
+--------
+Åpne index.html → CONFIG øverst:
+
+  nameFirst, nameSecond   Navn i hero og signatur
+  date                    f.eks. "2026-09-12T17:00:00"
+  program                 Tidsplan (no + ar)
+  venue                   Sted og Google Maps-søk
+  images.hero             "img/hero.jpg"
+  images.clouds           "img/clouds.jpg"
+  t.no / t.ar             All tekst per språk
+
+
+NYTT KONSEPT
+------------
+1. Kopier mappen azure-letter/ til f.eks. templates/mitt-bryllup/
+2. Rediger CONFIG
+3. Legg inn egne bilder i img/
+4. Deploy separat
