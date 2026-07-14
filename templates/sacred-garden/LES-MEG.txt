@@ -1,0 +1,53 @@
+THE SACRED GARDEN — Frittstående mal
+=====================================
+
+Dette er en egen invitasjonsmal, helt adskilt fra Amanda & Kayhan (index.html).
+Basert på Tilda-konseptet «The Sacred Garden».
+
+Demo-innhold: Rose & Zohan — bytt alt i CONFIG til ditt eget konsept.
+
+
+FILSTRUKTUR
+-----------
+  templates/sacred-garden/
+    index.html      Hele malen
+    img/            Egne bilder for dette konseptet
+      hero.jpg      Hovedbilde (bytt med eget)
+    LES-MEG.txt     Denne filen
+
+
+SE LOKALT
+---------
+  python3 -m http.server 8765
+  → http://localhost:8765/templates/sacred-garden/
+
+
+FØR LEVERANSE
+-------------
+[ ] Bytt nameFirst, nameSecond, fullNames, initials
+[ ] Sett riktig date og program
+[ ] Oppdater venue (sted, adresse, mapsQuery)
+[ ] Sett rsvpEmail til ekte e-post
+[ ] Bytt img/hero.jpg med eget bilde
+[ ] Legg til musicSrc hvis ønskelig
+[ ] Test på mobil — cover, animasjoner, RSVP
+
+
+REDIGERE
+--------
+Åpne index.html → CONFIG øverst:
+
+  nameFirst, nameSecond  Navn (stablet i hero)
+  fullNames, initials    Fullt navn og vokssegl
+  date                   ISO-dato, f.eks. "2026-09-27T17:00:00"
+  program                Tidsplan med nikkah, middag osv.
+  t                      All tekst (kun norsk)
+  images.hero            "img/hero.jpg"
+
+
+NYTT KONSEPT FRA SCRATCH
+------------------------
+1. Kopier hele mappen sacred-garden/ til f.eks. templates/mitt-bryllup/
+2. Rediger CONFIG med nye navn, dato, sted og tekster
+3. Legg inn egne bilder i img/
+4. Deploy mappen separat (egen GitHub Pages-mappe eller Netlify)
