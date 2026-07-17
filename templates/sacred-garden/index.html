@@ -39,15 +39,19 @@ const CONFIG = {
   design: { url: "https://sosmedia.no", brand: "sosmedia.no" },
 
   images: {
-    envelope:    "img/envelope.png",
-    arch:          "img/arch.png",
-    roseLeft:      "img/rose-left.png",
-    roseRight:     "img/rose-right.png",
-    parchment:     "img/parchment.png",
-    mapFrame:      "img/map-frame.png",
-    roseMarker:    "img/rose-marker.png",
-    decorFlourish: "img/decor-flourish.png",
-    hero:          "img/hero.jpg"
+    envelope:         "img/envelope.png",
+    arch:             "img/arch.png",
+    roseLeft:         "img/rose-left.png",
+    roseRight:        "img/rose-right.png",
+    parchment:        "img/parchment.png",
+    mapFrame:         "img/map-frame.png",
+    roseMarker:       "img/rose-marker.png",
+    decorFlourish:    "img/decor-flourish.png",
+    hero:             "img/hero.jpg",
+    programSprigLeft: "img/left-element_1.png",
+    programSprigRight:"img/right-element_1.png",
+    acommDecor:       "img/acomm-decor.png",
+    programBg:        "img/ChatGPT_Image_May_25.png"
   },
 
   program: [
@@ -310,12 +314,16 @@ const CONFIG = {
 
   /* timeline / program */
   #program{ padding-top:1.2rem; padding-bottom:2.2rem; }
-  .program-panel{ padding:1.85rem 1.2rem 1.65rem; }
+  .program-panel{ padding:1.85rem 1.2rem 1.65rem; overflow:visible; }
   .program-panel .s-script{ margin-bottom:0; font-size:clamp(1.55rem,4.8vw,2rem); }
-  .program-panel .s-flourish{ margin:.35rem auto 1rem; }
+  .program-panel .s-flourish{ margin:.35rem auto .55rem; }
+  .program-bg{ position:absolute; left:50%; top:52%; transform:translate(-50%,-50%);
+    width:min(380px,108%); height:auto; max-height:247px; object-fit:contain;
+    opacity:.22; pointer-events:none; z-index:0; filter:brightness(.72) saturate(.9); }
   .program-veil{ position:absolute; inset:0; z-index:0; border-radius:inherit; pointer-events:none;
     background:rgba(246,241,232,.55); }
-  .program-inner{ position:relative; z-index:1; }
+  .program-inner{ position:relative; z-index:2; }
+  .program-acomm{ display:block; width:96px; height:auto; margin:.1rem auto 1rem; opacity:.9; }
 
   .timeline{ --tl-mark:20px;
     list-style:none; width:100%; max-width:280px; margin-inline:auto; position:relative; padding:.15rem 0 .35rem; }
@@ -331,13 +339,20 @@ const CONFIG = {
   @keyframes tlIn{ to{ opacity:1; transform:none; } }
   .tl-item.rose-event .tl-event{ color:var(--ink); font-family:var(--display); font-size:.88rem;
     letter-spacing:.05em; text-transform:uppercase; font-weight:500; }
-  .tl-item.rose-event .tl-marker img{ animation:rosePulse 2.5s ease-in-out infinite; }
+  .tl-item.rose-event .tl-rose{ animation:rosePulse 2.5s ease-in-out infinite; }
   @keyframes rosePulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
   .tl-time{ text-align:end; font-family:var(--display); font-size:.95rem; color:var(--ink);
     letter-spacing:.02em; line-height:1.2; white-space:nowrap; }
-  .tl-marker{ display:grid; place-items:center; z-index:1; width:var(--tl-mark); height:var(--tl-mark); }
+  .tl-marker{ display:grid; place-items:center; z-index:1; width:var(--tl-mark); height:var(--tl-mark);
+    position:relative; }
   .tl-marker svg{ width:9px; height:9px; color:var(--gold); }
-  .tl-marker img{ width:20px; height:auto; display:block; }
+  .tl-marker .tl-rose{ width:20px; height:auto; display:block; position:relative; z-index:2; }
+  .tl-sprig{ position:absolute; top:50%; width:78px; height:auto; pointer-events:none;
+    opacity:.88; z-index:0; }
+  .tl-sprig-l{ right:calc(100% + 2px); transform:translateY(-50%); }
+  .tl-sprig-r{ left:calc(100% + 2px); transform:translateY(-50%); }
+  .tl-item.rose-event .tl-time,
+  .tl-item.rose-event .tl-event{ position:relative; z-index:2; }
   .tl-event{ text-align:start; font-size:.9rem; color:var(--ink-soft); line-height:1.3; }
 
   /* venue */
@@ -461,7 +476,9 @@ const CONFIG = {
     #roseRight{ right:4.5%; bottom:22.5%; width:34%; max-width:126px; }
     .scroll-cue{ bottom:calc(13.5% + 56px); }
     .program-panel{ padding:1.65rem 1rem 1.45rem; }
+    .program-bg{ width:min(340px,112%); max-height:220px; opacity:.18; }
     .timeline{ max-width:260px; }
+    .tl-sprig{ width:64px; }
     .tl-time{ font-size:.88rem; }
     .tl-event{ font-size:.86rem; }
     .attend-row{ flex-direction:column; }
@@ -546,10 +563,12 @@ const CONFIG = {
   <section id="program">
     <div class="wrap reveal">
       <div class="parch-panel program-panel" id="programPanel">
+        <img class="program-bg" id="programBg" src="" alt="" aria-hidden="true">
         <div class="program-veil" aria-hidden="true"></div>
         <div class="inner program-inner">
           <h2 class="s-script" id="programTitle"></h2>
           <div class="s-flourish"><img id="flourish2" src="" alt=""></div>
+          <img class="program-acomm" id="programAcomm" src="" alt="" aria-hidden="true">
           <ul class="timeline" id="timeline"></ul>
         </div>
       </div>
@@ -687,7 +706,11 @@ const CONFIG = {
     if(imgs.roseRight) $("detailRoseR").src = imgs.roseRight;
     if(imgs.hero) $("heroImg").src = imgs.hero;
     if(imgs.mapFrame) $("mapFrameImg").src = imgs.mapFrame;
+    if(imgs.programBg) $("programBg").src = imgs.programBg;
+    if(imgs.acommDecor) $("programAcomm").src = imgs.acommDecor;
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
+    document.querySelectorAll(".tl-sprig-l").forEach(el => { if(imgs.programSprigLeft) el.src = imgs.programSprigLeft; });
+    document.querySelectorAll(".tl-sprig-r").forEach(el => { if(imgs.programSprigRight) el.src = imgs.programSprigRight; });
 
     const cv = $("coverVideo");
     if(CONFIG.coverVideo){ cv.src = CONFIG.coverVideo; cv.load(); cv.play().catch(()=>{}); }
@@ -722,11 +745,20 @@ const CONFIG = {
     buildCountdown();
 
     const roseImg = CONFIG.images?.roseMarker || "";
-    $("timeline").innerHTML = CONFIG.program.map((p,i) =>
-      `<li class="tl-item${p.rose ? " rose-event" : ""}" style="--i:${i}"><span class="tl-time">${fmtTime(p.time)}</span>`+
-      `<span class="tl-marker">${p.rose && roseImg ? `<img src="${roseImg}" alt="">` : DIAMOND}</span>`+
-      `<span class="tl-event">${p.label}</span></li>`
-    ).join("");
+    const sprigL = CONFIG.images?.programSprigLeft || "";
+    const sprigR = CONFIG.images?.programSprigRight || "";
+    $("timeline").innerHTML = CONFIG.program.map((p,i) => {
+      let marker = DIAMOND;
+      if(p.rose && roseImg){
+        marker =
+          (sprigL ? `<img class="tl-sprig tl-sprig-l" src="${sprigL}" alt="" aria-hidden="true">` : "")+
+          `<img class="tl-rose" src="${roseImg}" alt="">`+
+          (sprigR ? `<img class="tl-sprig tl-sprig-r" src="${sprigR}" alt="" aria-hidden="true">` : "");
+      }
+      return `<li class="tl-item${p.rose ? " rose-event" : ""}" style="--i:${i}"><span class="tl-time">${fmtTime(p.time)}</span>`+
+        `<span class="tl-marker">${marker}</span>`+
+        `<span class="tl-event">${p.label}</span></li>`;
+    }).join("");
 
     $("venueTitle").textContent = t.venueTitle;
     $("venueName").textContent = CONFIG.venue.name;
