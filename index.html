@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Bryllupsinvitasjon — Amanda & Kayhan, 17. april 2027, Kokkeplassen Hisøy">
-<title>Amanda & Kayhan</title>
+<meta name="description" content="Bryllupsinvitasjon — Olivia & Kayhan, 17. april 2027, Kokkeplassen Hisøy">
+<title>Olivia & Kayhan</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,18 +16,18 @@
    no = norsk · fa = persisk (farsi)
    ══════════════════════════════════════════════════════════════════════ */
 const CONFIG = {
-  names: { no: "Amanda & Kayhan", fa: "آماندا و کیهان" },
-  fullNames: { no: "Amanda Olivia Lindqvist  &  Kayhan Mokri Roshanfeker",
+  names: { no: "Olivia & Kayhan", fa: "الیویا و کیهان" },
+  fullNames: { no: "Olivia Olivia Lindqvist  &  Kayhan Mokri Roshanfeker",
                fa: "آماندا اولیویا لیندکوییست  &  کیهان مکری روشن‌فکر" },
 
   // Dato/tid (gregoriansk). Sett riktig klokkeslett for vielsen.
-  date: "2027-04-17T15:00:00",
+  date: "2027-04-17T16:00:00",
   durationHours: 7,
 
   // Bakgrunnsmusikk: "Ordinary" – starter når man åpner invitasjonen.
   musicSrc: "https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/Alex%20Warren%20-%20Ordinary%20Lyrics.mp3",
   // Bakgrunnsvideo på cover-siden (samme som malen). La stå tom for kun farge.
-  videoSrc: "https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/IMG_6230%20(1).MP4",
+  videoSrc: "video/cover-doors.mp4",
 
   venue: {
     name: { no: "Kokkeplassen, Hisøy", fa: "کوکه‌پلاسن، هیسوی" },
@@ -35,19 +35,19 @@ const CONFIG = {
     mapsQuery: "Kokkeplassen Hisøy Arendal"
   },
 
-  rsvpEmail: "kayhan.og.camilla@example.com", // ← bytt til ekte e-post før levering
+  rsvpEmail: "oliviaogkayhan@yahoo.com",
   rsvpDeadline: { no: "Vennligst svar innen 1. mars 2027", fa: "لطفاً تا ۱ مارس ۲۰۲۷ پاسخ دهید" },
 
   design: { url: "https://sosmedia.no", brand: "sosmedia.no" },
 
   // Bilder — bytt filnavn her (legg nye filer i img-mappen)
   images: {
-    hero: "img/hero-venue.png",         // hovedbilde øverst
+    hero: "img/hero-venue.jpg",         // hovedbilde øverst
     seal: "img/wax-seal.png",         // vokssegl på cover
     gallery: [
       { src: "img/venue-dining.jpg",    tall: true, pos: "center center" },
       { src: "img/venue-lounge.jpg",    pos: "center center" },
-      { src: "img/couple-1.png",        pos: "center 28%" },
+      { src: "img/couple-1.jpg",        pos: "center 28%" },
       { src: "img/venue-terrace.jpg",   pos: "center center" },
       { src: "img/venue-waterfront.jpg",pos: "center 22%" },
       { src: "img/venue-garden.jpg",    pos: "center center" }
@@ -55,10 +55,11 @@ const CONFIG = {
   },
 
   program: [
-    { time: "15:00", icon: "ceremony", no: "Vielse",              fa: "مراسم عقد" },
-    { time: "16:00", icon: "welcome",  no: "Mottakelse & bobler", fa: "پذیرایی و نوشیدنی" },
-    { time: "18:00", icon: "dinner",   no: "Middag",              fa: "شام" },
-    { time: "20:00", icon: "music",    no: "Fest & dans",         fa: "جشن و رقص" }
+    { time: "16:00",          icon: "welcome",  no: "Velkommen og velkomstdrink", fa: "خوش‌آمدگویی و نوشیدنی خوش‌آمد" },
+    { time: "16:30",          icon: "cake",     no: "Kake og søtt",               fa: "کیک و شیرینی" },
+    { time: "18:00",          icon: "dinner",   no: "Middag",                     fa: "شام" },
+    { time: "21:00",          icon: "celebrate",no: "Let's Celebrate",            fa: "بیایید جشن بگیریم" },
+    { time: "Utover kvelden", icon: "music",    no: "Dans • Bar • Feiring",       fa: "رقص • بار • جشن" }
   ],
 
   t: {
@@ -77,8 +78,6 @@ const CONFIG = {
       directions: "Veibeskrivelse",
       galleryTitle: "Kokkeplassen",
       gallerySub: "Der vi skal feire — et blikk inn i magien",
-      giftTitle: "En liten hilsen",
-      gift: "Deres nærvær er den største gaven. Ønsker dere likevel å gi noe, settes et bidrag til vår felles fremtid stor pris på.",
       closing: "Vi gleder oss til å feire denne dagen sammen med dere.",
       rsvpTitle: "Bekreft din deltakelse",
       fName: "Navn", fGuests: "Antall gjester", fNotes: "Allergier eller annet",
@@ -103,8 +102,6 @@ const CONFIG = {
       directions: "مسیریابی",
       galleryTitle: "کوکه‌پلاسن",
       gallerySub: "جایی که جشن می‌گیریم — نگاهی به زیبایی آن",
-      giftTitle: "یادداشت",
-      gift: "حضور شما بزرگ‌ترین هدیه است. اگر مایل به هدیه‌ای هستید، کمک به آیندهٔ مشترک ما را قدردانی می‌کنیم.",
       closing: "بی‌صبرانه منتظریم این روز را در کنار شما جشن بگیریم.",
       rsvpTitle: "تأیید حضور",
       fName: "نام", fGuests: "تعداد مهمانان", fNotes: "آلرژی یا توضیحات",
@@ -236,12 +233,13 @@ const CONFIG = {
   .hero-frame::before,.hero-frame::after{ content:""; position:absolute; width:18px; height:18px; border-color:var(--gold); border-style:solid; opacity:.55; }
   .hero-frame::before{ top:10px; left:10px; border-width:1px 0 0 1px; }
   .hero-frame::after{ bottom:10px; right:10px; border-width:0 1px 1px 0; }
-  .hero-inner{ position:relative; z-index:3; max-width:34rem; padding:.4rem 1rem 0; margin-top:clamp(1.8rem,5.5vh,3.4rem); }
+  .hero-inner{ position:absolute; z-index:3; max-width:min(80vw,30rem); text-align:center;
+    top:calc(env(safe-area-inset-top) + clamp(4.2rem,12vh,6.2rem)); left:50%; transform:translateX(-50%); padding:0; margin:0; }
   .eyebrow{ font-family:var(--ui); font-size:.78rem; letter-spacing:.34em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:.85rem; }
   html[lang="fa"] .eyebrow{ letter-spacing:.06em; font-size:.95rem; text-transform:none; }
   .names{ display:flex; flex-direction:column; align-items:center; gap:.04em; line-height:1.05; filter:drop-shadow(0 1px 0 rgba(255,255,255,.65)); }
   .name-part{
-    font-family:var(--display); font-weight:500; letter-spacing:.03em; font-size:clamp(2.6rem,10vw,4.4rem);
+    font-family:var(--display); font-weight:500; letter-spacing:.03em; font-size:clamp(2.6rem,9vw,4.2rem);
     background:linear-gradient(115deg, var(--gold-deep) 0%, var(--gold) 48%, #C9A24B 72%, var(--gold-soft) 100%);
     -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; }
   html[lang="fa"] .names{ gap:.1em; }
@@ -250,7 +248,7 @@ const CONFIG = {
     font-size:clamp(1.5rem,5.5vw,2.3rem); line-height:1; margin:.1em 0 .06em; font-weight:400; }
   html[lang="fa"] .amp{ font-family:"Gulzar",serif; font-size:clamp(1.2rem,4.5vw,1.8rem); }
   html[lang="fa"] .amp.amp-inline{ display:inline; margin:0; }
-  .hero-divider{ display:flex; align-items:center; gap:.8rem; margin:.9rem auto 0; color:var(--gold); width:min(200px,55vw); }
+  .hero-divider{ display:flex; align-items:center; gap:.8rem; margin:.9rem auto 0; color:var(--gold); width:min(160px,42vw); }
   .hero-divider::before,.hero-divider::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
   .hero-date{ position:absolute; left:50%; transform:translateX(-50%); z-index:4; top:clamp(66%,70vh,74%);
     font-family:var(--display); font-size:clamp(.95rem,3.6vw,1.35rem); letter-spacing:.12em; color:var(--espresso);
@@ -269,9 +267,9 @@ const CONFIG = {
     .hero{ min-height:92svh; padding:3.2rem 1rem 3.5rem; }
     .hero-bg{ object-position:center 58%; }
     .hero-frame{ inset:12px; }
-    .hero-inner{ padding:.2rem .5rem 0; margin-top:clamp(1.4rem,4.5vh,2.6rem); }
+    .hero-inner{ max-width:min(88vw,22rem); top:calc(env(safe-area-inset-top) + clamp(3.4rem,10vh,4.4rem)); }
     .name-part{ font-size:clamp(2rem, 12vw, 3.2rem); }
-    .hero-divider{ width:min(180px,65vw); margin-top:.7rem; }
+    .hero-divider{ width:min(130px,50vw); margin-top:.6rem; }
     .hero-date{ top:clamp(62%,66vh,70%); font-size:clamp(.85rem,3.4vw,1.1rem); padding:.45rem 1rem; }
     .scroll-cue{ bottom:60px; font-size:1.25rem; }
     .letter-card{ padding:2rem 1.25rem; }
@@ -287,6 +285,7 @@ const CONFIG = {
   @media (min-width: 721px) and (max-width: 1024px) {
     .wrap{ max-width:600px; }
     #gallery .wrap{ max-width:680px; }
+    .hero-inner{ max-width:min(70vw,28rem); top:calc(env(safe-area-inset-top) + clamp(4.6rem,11vh,6rem)); }
   }
 
   /* ── seksjoner ──────────────────────────────────────── */
@@ -376,10 +375,6 @@ const CONFIG = {
   .gallery img{ display:block; width:100%; height:100%; aspect-ratio:1/1; object-fit:cover; border-radius:15px; border:none; box-shadow:none; }
   .gallery figure.tall{ grid-row:span 2; }
   .gallery figure.tall img{ aspect-ratio:auto; min-height:100%; }
-
-  /* gave */
-  .gift{ padding:1.8rem 1.7rem; text-align:center; font-family:var(--display); font-size:1.12rem; color:var(--espresso); }
-  html[lang="fa"] .gift{ font-family:"Vazirmatn",sans-serif; font-size:1rem; }
 
   /* avslutning */
   .closing{ font-family:var(--script); font-size:clamp(1.7rem,7vw,2.4rem); color:var(--gold-deep); line-height:1.3; max-width:26rem; margin-inline:auto; }
@@ -550,14 +545,6 @@ const CONFIG = {
     </div>
   </section>
 
-  <!-- ░ GAVE / DETALJER ░ -->
-  <section class="alt">
-    <div class="wrap reveal">
-      <h2 class="s-title" id="giftTitle"></h2><div class="s-rule"></div>
-      <div class="card gift" id="giftBody"></div>
-    </div>
-  </section>
-
   <!-- ░ RSVP ░ -->
   <section id="rsvp">
     <div class="wrap reveal">
@@ -612,7 +599,10 @@ const CONFIG = {
     welcome:  '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>',
     ceremony: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path>',
     dinner:   '<rect x="3" y="7" width="18" height="14" rx="2" ry="2"></rect><path d="M12 7v14"></path><path d="M3 12h18"></path>',
-    music:    '<path d="M9 17V5l12-2v12"></path><circle cx="6" cy="17" r="3"></circle><circle cx="18" cy="15" r="3"></circle>'
+    music:    '<path d="M9 17V5l12-2v12"></path><circle cx="6" cy="17" r="3"></circle><circle cx="18" cy="15" r="3"></circle>',
+    cake:     '<path d="M12 2v3"></path><circle cx="12" cy="3.5" r="0.6" fill="currentColor" stroke="none"></circle><rect x="4" y="10" width="16" height="10" rx="1.5"></rect><path d="M4 14.5c1.5-1 2.5 1 4 0s2.5-1 4 0 2.5-1 4 0 2-1 4 0"></path>',
+    heart:    '<path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.4 2.9 3.5 7 3.5c2.1 0 3.7 1.2 5 3 1.3-1.8 2.9-3 5-3 4.1 0 6.6 3.9 5 7.7-2.5 4.7-10 9.3-10 9.3z"></path>',
+    celebrate:'<path d="M4 21l6-1.5L21 8.5a2.1 2.1 0 0 0-3-3L7 16.5 5.5 22 4 21z"></path><path d="M14 6l1-3"></path><path d="M18 10l3-1"></path><path d="M17.5 4.5l2 2"></path>'
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]||'<circle cx="12" cy="12" r="3"/>'}</svg>`;
 
@@ -717,9 +707,6 @@ const CONFIG = {
     $("galleryTitle").textContent=t.galleryTitle;
     $("gallerySub").textContent=t.gallerySub;
 
-    $("giftTitle").textContent=t.giftTitle;
-    $("giftBody").textContent=t.gift;
-
     $("closingLine").textContent=t.closing;
 
     $("rsvpTitle").textContent=t.rsvpTitle;
@@ -765,7 +752,7 @@ const CONFIG = {
 
   // ── media (lyd + video) ──
   const audio=$("bgAudio"); let playing=false, userPaused=false;
-  if(CONFIG.musicSrc){ audio.src=CONFIG.musicSrc; audio.preload="auto"; audio.load(); }
+  if(CONFIG.musicSrc){ audio.src=CONFIG.musicSrc; audio.preload="none"; }
   const cvL=$("coverVideoL"), cvR=$("coverVideoR");
   if(CONFIG.videoSrc){
     [cvL,cvR].forEach(v=>{ v.src=CONFIG.videoSrc; v.load(); });
