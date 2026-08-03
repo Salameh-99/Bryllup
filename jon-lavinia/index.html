@@ -29,9 +29,13 @@ const CONFIG = {
   durationHours: 7,
 
   musicSrc: "",
-  // Fontene-video: bytt til "video/fountain.mp4" når din egen animasjon er lastet opp
-  heroVideo: "video/fountain-preview.mp4",
-  heroVideoFallback: "img/venue-courtyard.jpg",
+  /* ── Egne media (legg filene i mappene under) ──
+     video/fountain.mp4   ← din fontene-animasjon (brukes automatisk hvis filen finnes)
+     img/couple.jpg       ← parbilde av Lavinia & Jon
+     img/garden-1.jpg …   ← flere hage-/interiørbilder (valgfritt)
+  */
+  heroVideo: "video/fountain.mp4",
+  heroVideoFallback: "video/fountain-preview.mp4",
 
   venue: {
     name: { no: "Bjellandstrand gård, Tromøya", fa: "Bjellandstrand gård, Tromøya" },
@@ -55,19 +59,22 @@ const CONFIG = {
     roseMarker:       "img/decor/rose-marker.png",
     decorFlourish:    "img/decor/decor-flourish.png",
     roseBotanical:    "img/decor/rose-botanical.png",
-    hero:             "img/fountain-hero.jpg",
+    hero:             "img/venue-courtyard.jpg",
     heroFallback:     "img/venue-courtyard.jpg",
     programSprigLeft: "img/decor/left-element_1.png",
     programSprigRight:"img/decor/right-element_1.png",
     acommDecor:       "img/decor/acomm-decor.png",
     programBg:        "img/decor/ChatGPT_Image_May_25.png",
+    // Manglende filer skjules automatisk — legg inn couple.jpg når du er klar
     gallery: [
+      { src: "img/couple.jpg",          tall: true,  pos: "center 28%" },
       { src: "img/venue-courtyard.jpg", tall: false, pos: "center 40%" },
       { src: "img/venue-garden.jpg",    tall: false, pos: "center center" },
       { src: "img/venue-paths.jpg",     tall: true,  pos: "center 35%" },
       { src: "img/venue-aerial.jpg",    tall: false, pos: "center center" },
-      { src: "img/venue-interior.jpg",  tall: false, pos: "center center" },
-      { src: "img/fountain-hero.jpg",   tall: false, pos: "center 45%" }
+      { src: "img/garden-1.jpg",        tall: false, pos: "center center" },
+      { src: "img/garden-2.jpg",        tall: false, pos: "center center" },
+      { src: "img/venue-interior.jpg",  tall: false, pos: "center center" }
     ]
   },
 
@@ -1006,8 +1013,12 @@ const CONFIG = {
 
   function renderGallery(){
     const items = CONFIG.images?.gallery || [];
-    $("galleryGrid").innerHTML = items.map(g =>
-      `<figure class="${g.tall ? "tall" : ""}"><img src="${g.src}" alt="" loading="lazy" style="object-position:${g.pos||"center"}"></figure>`
+    $("galleryGrid").innerHTML = items.map((g, i) =>
+      `<figure class="${g.tall ? "tall" : ""}" data-g="${i}" hidden>
+         <img src="${g.src}" alt="" loading="lazy" style="object-position:${g.pos||"center"}"
+              onload="this.closest('figure').hidden=false"
+              onerror="this.closest('figure').remove()">
+       </figure>`
     ).join("");
   }
 

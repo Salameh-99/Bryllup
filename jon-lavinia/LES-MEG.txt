@@ -8,12 +8,26 @@ Egen invitasjon — adskilt fra Olivia & Kayhan (rot-index.html).
   Dato: 17. juli 2027
 
 
+LEGG INN EGNE FILER (når du er klar)
+------------------------------------
+Dropp filene direkte i mappene — ingen kodeendring trengs:
+
+  jon-lavinia/video/fountain.mp4   Fontene-animasjonen din
+                                   (brukes automatisk i hero)
+
+  jon-lavinia/img/couple.jpg       Parbilde av Lavinia & Jon
+                                   (vises øverst i galleriet)
+
+  jon-lavinia/img/garden-1.jpg     Ekstra hage-/interiørbilder
+  jon-lavinia/img/garden-2.jpg     (valgfritt — skjulte til filene finnes)
+
+Bedre kvalitet senere? Bare overskriv samme filnavn.
+
+
 FØR LEVERANSE
 -------------
 [ ] Sett rsvpEmail i CONFIG (nå: din-epost@example.com)
-[ ] Last opp fontene-animasjon som video/fountain.mp4
-    og sett CONFIG.heroVideo = "video/fountain.mp4"
-[ ] Legg inn egne par-bilder i img/ og oppdater gallery
+[ ] Legg inn fountain.mp4 + couple.jpg
 [ ] Sett musicSrc hvis ønskelig
 [ ] Test på mobil — hageport åpner, blomster faller
 
@@ -27,8 +41,7 @@ REDIGERE
   date                     "2027-07-17T16:00:00"
   venue                    Bjellandstrand
   images.gate              Hageport (splittes i to dører)
-  images.gateGarden        Hagen bak porten
-  images.gallery           Galleri-bilder
+  images.gallery           Galleri (manglende filer skjules)
   program                  Tidsplan
   t                        Tekster
 
@@ -38,8 +51,16 @@ FILSTRUKTUR
   jon-lavinia/
     index.html
     LES-MEG.txt
-    img/               Venue + dekor (garden-gate, roser …)
-    video/             Fontene-preview (bytt til egen fountain.mp4)
+    img/
+      couple.jpg           ← legg inn
+      garden-1.jpg         ← valgfritt
+      garden-2.jpg         ← valgfritt
+      venue-*.jpg          Hagebilder fra Bjellandstrand
+      decor/               Port, roser, bue …
+    video/
+      fountain.mp4         ← legg inn din fontene-video
+      fountain-preview.mp4 Midlertidig fallback
+
 
 COVER
 -----
