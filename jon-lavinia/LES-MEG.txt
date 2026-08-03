@@ -1,0 +1,52 @@
+SECRET GARDEN — Lavinia Nordseth & Jon Christiansen
+====================================================
+
+Egen invitasjon — adskilt fra Olivia & Kayhan (rot-index.html).
+
+  Live: https://salameh-99.github.io/Bryllup/jon-lavinia/
+  Sted: Bjellandstrand gård, Tromøya
+  Dato: 17. juli 2027
+
+
+FØR LEVERANSE
+-------------
+[ ] Sett rsvpEmail i CONFIG (nå: din-epost@example.com)
+[ ] Last opp fontene-animasjon som video/fountain.mp4
+    og sett CONFIG.heroVideo = "video/fountain.mp4"
+[ ] Legg inn egne par-bilder i img/ og oppdater gallery
+[ ] Sett musicSrc hvis ønskelig
+[ ] Test på mobil
+
+
+REDIGERE
+--------
+Åpne jon-lavinia/index.html → CONFIG øverst:
+
+  nameFirst / nameSecond   Lavinia & Jon
+  fullNames / initials     Fullt navn og vokssegl (L&J)
+  date                     "2027-07-17T16:00:00"
+  venue                    Bjellandstrand
+  images.gallery           Galleri-bilder
+  program                  Tidsplan
+  t                        Tekster
+
+
+FILSTRUKTUR
+-----------
+  jon-lavinia/
+    index.html
+    LES-MEG.txt
+    img/               Venue + dekor
+    video/             Fontene-preview (bytt til egen fountain.mp4)
+
+
+SE LOKALT
+---------
+  python3 -m http.server 8765
+  → http://localhost:8765/jon-lavinia/
+
+
+DESIGN
+------
+Secret Garden-tema med palett: myk beige, dus grønn, myk brun, dus rosa, mørk grå.
+Invitasjon designet av sosmedia.no

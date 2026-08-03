@@ -4,10 +4,11 @@ Hver mal er en frittstående invitasjon med eget innhold og egne bilder.
 
 | Mal | Beskrivelse | Demo |
 |-----|-------------|------|
-| *(rot)* [../index.html](../index.html) | **Secret Garden** — Bjellandstrand, fontene, NO/FA | Olivia & Kayhan |
+| *(rot)* [../index.html](../index.html) | Gull/elfenben, video-dører, galleri · Kokkeplassen | Olivia & Kayhan |
+| [../jon-lavinia/](../jon-lavinia/) | **Secret Garden** — Bjellandstrand, fontene | Lavinia & Jon |
 | [sacred-garden/](sacred-garden/) | Original Sacred Garden-demo (Tilda) | Rose & Zohan |
 | [azure-letter/](azure-letter/) | Azure Letter-klon: konvolutt, skrapdato, blått brev | Layla & Yusuf |
-| [gull-elfenben/](gull-elfenben/) | Forrige gull/elfenben-versjon | Olivia & Kayhan · Kokkeplassen |
+| [gull-elfenben/](gull-elfenben/) | Arkivkopi av rot-invitasjonen | Olivia & Kayhan |
 
 ## Starte en ny mal
 
