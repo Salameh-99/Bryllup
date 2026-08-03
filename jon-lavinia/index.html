@@ -51,11 +51,8 @@ const CONFIG = {
   images: {
     gate:             "img/decor/garden-gate.jpg",
     gateGarden:       "img/decor/gate-garden-bg.jpg",
-    arch:             "img/decor/arch.png",
     roseLeft:         "img/decor/rose-left.png",
     roseRight:        "img/decor/rose-right.png",
-    parchment:        "img/decor/parchment.png",
-    mapFrame:         "img/decor/map-frame.png",
     roseMarker:       "img/decor/rose-marker.png",
     decorFlourish:    "img/decor/decor-flourish.png",
     roseBotanical:    "img/decor/rose-botanical.png",
@@ -63,8 +60,6 @@ const CONFIG = {
     heroFallback:     "img/venue-courtyard.jpg",
     programSprigLeft: "img/decor/left-element_1.png",
     programSprigRight:"img/decor/right-element_1.png",
-    acommDecor:       "img/decor/acomm-decor.png",
-    programBg:        "img/decor/ChatGPT_Image_May_25.png",
     // Manglende filer skjules automatisk — legg inn couple.jpg når du er klar
     gallery: [
       { src: "img/couple.jpg",          tall: true,  pos: "center 28%" },
@@ -92,7 +87,6 @@ const CONFIG = {
       weddingDay: "Bryllupsdagen",
       scrollDown: "Rull ned",
       eyebrow: "En hemmelig hage",
-      bismillah: "",
       tagline: ["To sjeler", "Én skjebne", "Et liv skrevet med kjærlighet"],
       letterSalut: "Kjære familie og venner,",
       letter: "Når vi nå forbereder oss på å si «ja», fylles vi av takknemlighet for alle de fine menneskene i livene våre. Det ville være en ære å ha dere med oss i den hemmelige hagen på Bjellandstrand gård når vi begynner vårt liv sammen.",
@@ -106,15 +100,14 @@ const CONFIG = {
       galleryTitle: "Bjellandstrand",
       gallerySub: "Der vi skal feire — en hemmelig hage ved havet",
       dressTitle: "Kleskode",
-      dress: "Sommerfin festantrekk. Tenk myke toner i naturen — beige, grønt, rosa og hvitt. Unngå dyp rød og burgunder.",
+      dress: "Sommerfin festantrekk. Tenk myke toner i naturen — beige, grønt, rosa og hvitt.",
       giftTitle: "Gaveønske",
       gift: "Deres nærvær er den største gaven. Ønsker dere likevel å gi noe, mottar vi det med glede.",
       closing: "Vi håper å se deg i hagen!",
       rsvpTitle: "Bekreft din deltakelse",
       rsvpIntro: "For å hjelpe oss med å forberede en gledelig feiring, ber vi deg bekrefte din deltakelse.",
       rsvpOpen: "Trykk for å åpne",
-      fName: "Navn", fGuests: "Antall gjester", fSong: "En sang som får deg til å danse",
-      fChildren: "Barn som deltar", fNotes: "Allergier eller annet",
+      fName: "Navn", fGuests: "Antall gjester", fNotes: "Allergier eller annet",
       yes: "Kommer gjerne", noBtn: "Kan dessverre ikke",
       send: "Send svar", thanks: "Takk! E-posten din åpnes — trykk send.",
       nav: { home: "Hjem", program: "Program", place: "Sted", rsvp: "Svar", music: "Musikk" },
@@ -126,7 +119,6 @@ const CONFIG = {
       weddingDay: "Bryllupsdagen",
       scrollDown: "Rull ned",
       eyebrow: "En hemmelig hage",
-      bismillah: "",
       tagline: ["To sjeler", "Én skjebne", "Et liv skrevet med kjærlighet"],
       letterSalut: "Kjære familie og venner,",
       letter: "Når vi nå forbereder oss på å si «ja», fylles vi av takknemlighet for alle de fine menneskene i livene våre. Det ville være en ære å ha dere med oss i den hemmelige hagen på Bjellandstrand gård når vi begynner vårt liv sammen.",
@@ -140,15 +132,14 @@ const CONFIG = {
       galleryTitle: "Bjellandstrand",
       gallerySub: "Der vi skal feire — en hemmelig hage ved havet",
       dressTitle: "Kleskode",
-      dress: "Sommerfin festantrekk. Tenk myke toner i naturen — beige, grønt, rosa og hvitt. Unngå dyp rød og burgunder.",
+      dress: "Sommerfin festantrekk. Tenk myke toner i naturen — beige, grønt, rosa og hvitt.",
       giftTitle: "Gaveønske",
       gift: "Deres nærvær er den største gaven. Ønsker dere likevel å gi noe, mottar vi det med glede.",
       closing: "Vi håper å se deg i hagen!",
       rsvpTitle: "Bekreft din deltakelse",
       rsvpIntro: "For å hjelpe oss med å forberede en gledelig feiring, ber vi deg bekrefte din deltakelse.",
       rsvpOpen: "Trykk for å åpne",
-      fName: "Navn", fGuests: "Antall gjester", fSong: "En sang som får deg til å danse",
-      fChildren: "Barn som deltar", fNotes: "Allergier eller annet",
+      fName: "Navn", fGuests: "Antall gjester", fNotes: "Allergier eller annet",
       yes: "Kommer gjerne", noBtn: "Kan dessverre ikke",
       send: "Send svar", thanks: "Takk! E-posten din åpnes — trykk send.",
       nav: { home: "Hjem", program: "Program", place: "Sted", rsvp: "Svar", music: "Musikk" },
@@ -181,13 +172,11 @@ const CONFIG = {
     --gold-light:var(--sage);
     --cream:var(--beige-light);
     --cream-light:#F7F3EC;
-    --parchment:#E5D9C8;
     --burgundy:var(--taupe);
     --burgundy-deep:#6E6154;
     --display:"Cormorant Garamond", Georgia, serif;
     --script:"Great Vibes", "Cormorant Garamond", cursive;
     --body:"Outfit", "Cormorant Garamond", sans-serif;
-    --arabic:"Gulzar", "Vazirmatn", serif;
     --content-w:340px;
     --section-x:1.25rem;
   }
@@ -202,9 +191,6 @@ const CONFIG = {
   body.locked .nav{ transform:translateY(110%); opacity:0; pointer-events:none; }
   body.invitation-open .nav{ transform:none; opacity:1; pointer-events:auto;
     transition:transform .6s ease .8s, opacity .5s ease .8s; }
-  body.fa{ font-family:var(--arabic), var(--body); }
-  body.fa .s-script, body.fa .hero-name, body.fa .hero-amp, body.fa .closing,
-  body.fa .footer-names, body.fa .detail-title, body.fa .modal-title{ font-family:var(--script); }
   ::selection{ background:rgba(95,111,78,.22); color:var(--ink); }
   main{ position:relative; z-index:1; background:
     radial-gradient(ellipse 120% 80% at 50% -10%, rgba(168,181,154,.18), transparent 55%),
@@ -433,11 +419,6 @@ const CONFIG = {
       linear-gradient(180deg, rgba(243,238,228,.4) 0%, transparent 22%, transparent 62%,
       rgba(243,238,228,.45) 82%, var(--cream) 97%); }
 
-  .hero-arch{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:var(--hero-w); z-index:5;
-    pointer-events:none; line-height:0; overflow:hidden; }
-  .hero-arch img{ width:100%; height:auto; display:block; clip-path:inset(12% 0 0 0); margin-top:-12%;
-    filter:sepia(.15) hue-rotate(45deg) saturate(.85); }
-
   .hero-stage{ position:absolute; inset:0; left:50%; transform:translateX(-50%); width:var(--hero-w);
     z-index:6; pointer-events:none; }
 
@@ -490,8 +471,6 @@ const CONFIG = {
   .intro-rose{ width:min(120px,36vw); height:auto; margin:0 auto 1rem; display:block; opacity:0;
     filter:drop-shadow(0 4px 12px rgba(95,111,78,.12)); }
   .reveal.in .intro-rose{ animation:flourishIn .9s ease .1s both; }
-  .bismillah{ font-family:var(--arabic); font-size:clamp(1.6rem,5.5vw,2.2rem); font-weight:600;
-    color:var(--ink); line-height:1.55; letter-spacing:.015em; margin-bottom:1.2rem; direction:rtl; }
   .tagline{ margin:1rem 0 1.5rem; }
   .tagline p{ font-family:var(--script); font-size:clamp(1.45rem,4.8vw,1.95rem); color:var(--moss); line-height:1.55;
     opacity:0; transform:translateY(14px); }
@@ -503,14 +482,6 @@ const CONFIG = {
   .letter-body{ font-size:.98rem; color:var(--ink-soft); max-width:24rem; margin-inline:auto; line-height:1.9; }
   .letter-sign{ margin-top:1.1rem; font-family:var(--display); font-style:italic; color:var(--ink-muted); font-size:.92rem; }
   .letter-names{ font-family:var(--script); font-size:1.55rem; color:var(--moss); margin-top:.2rem; }
-
-  .parch-panel{ position:relative; background:var(--cream-light); padding:2rem 1.35rem 1.85rem; margin:0 auto;
-    max-width:var(--content-w); width:100%;
-    box-shadow:0 4px 28px rgba(74,69,63,.07), inset 0 1px 0 rgba(255,255,255,.5);
-    border:1px solid rgba(95,111,78,.12); border-radius:2px; }
-  .parch-panel::before{ content:""; position:absolute; inset:0; opacity:.12; pointer-events:none; border-radius:inherit;
-    background:url("img/decor/parchment.png") center 55% / 95% auto no-repeat; mix-blend-mode:multiply; }
-  .parch-panel .inner{ position:relative; z-index:1; }
 
   #countdown{ text-align:center; padding-top:1.8rem; padding-bottom:2.2rem; }
   #countdown .s-script{ margin-bottom:.85rem; }
@@ -524,17 +495,9 @@ const CONFIG = {
   .cd-sep{ font-family:var(--display); font-size:clamp(1.5rem,6.5vw,2.2rem); color:var(--moss); opacity:.45; align-self:flex-start; margin-top:.1rem; padding:0 .05rem; }
 
   #program{ padding-top:1.2rem; padding-bottom:2.2rem; }
-  .program-panel{ padding:1.85rem 1.2rem 1.65rem; overflow:visible; }
+  .program-panel{ padding:1.4rem .4rem 1.2rem; overflow:visible; }
   .program-panel .s-script{ margin-bottom:0; font-size:clamp(1.55rem,4.8vw,2rem); }
-  .program-panel .s-flourish{ margin:.35rem auto .55rem; }
-  .program-bg{ position:absolute; left:50%; top:52%; transform:translate(-50%,-50%);
-    width:min(380px,108%); height:auto; max-height:247px; object-fit:contain;
-    opacity:.18; pointer-events:none; z-index:0; filter:brightness(.75) saturate(.85) hue-rotate(25deg); }
-  .program-veil{ position:absolute; inset:0; z-index:0; border-radius:inherit; pointer-events:none;
-    background:rgba(247,243,236,.58); }
-  .program-inner{ position:relative; z-index:2; }
-  .program-acomm{ display:block; width:96px; height:auto; margin:.1rem auto 1rem; opacity:.88;
-    filter:sepia(.15) hue-rotate(40deg); }
+  .program-panel .s-flourish{ margin:.35rem auto .85rem; }
 
   .timeline{ --tl-mark:20px;
     list-style:none; width:100%; max-width:280px; margin-inline:auto; position:relative; padding:.15rem 0 .35rem; }
@@ -574,10 +537,10 @@ const CONFIG = {
   #place .s-flourish{ margin:.45rem auto 1rem; }
   .venue-name{ font-family:var(--display); font-size:1.2rem; color:var(--ink); margin-bottom:.2rem; letter-spacing:.04em; }
   .venue-addr{ color:var(--ink-muted); font-size:.88rem; margin-bottom:.85rem; line-height:1.55; }
-  .map-wrap{ position:relative; padding:10px; margin:0 auto; max-width:var(--content-w); }
-  .map-wrap .frame{ position:absolute; inset:0; width:100%; height:100%; object-fit:fill; pointer-events:none; z-index:2;
-    filter:sepia(.12) hue-rotate(40deg) saturate(.85); }
-  .map-frame{ width:100%; aspect-ratio:1/1; border:0; display:block; border-radius:2px; position:relative; z-index:1; }
+  .map-wrap{ position:relative; margin:0 auto; max-width:var(--content-w);
+    border:1px solid rgba(95,111,78,.16); border-radius:2px; overflow:hidden;
+    box-shadow:0 4px 20px rgba(74,69,63,.06); }
+  .map-frame{ width:100%; aspect-ratio:4/3; border:0; display:block; }
   .venue-btns{ display:flex; gap:.55rem; margin-top:1rem; flex-wrap:wrap; }
   .btn{ flex:1; text-align:center; cursor:pointer; font-family:var(--display); font-size:.82rem; letter-spacing:.06em;
     padding:.72rem .9rem; border-radius:2px; text-decoration:none; transition:.2s; }
@@ -598,24 +561,11 @@ const CONFIG = {
     transition:transform 1.1s cubic-bezier(.2,.8,.2,1); }
   .gallery-grid figure:hover img{ transform:scale(1.04); }
 
-  #details{ padding-top:.8rem; padding-bottom:2rem; }
-  .details-wrap{ max-width:var(--content-w); margin-inline:auto; }
-  .details-wrap .torn-top{ margin-bottom:-1px; }
-  .details-card{ position:relative; padding:2rem 1.35rem 1.85rem; margin:0;
-    background:var(--cream-light);
-    box-shadow:0 6px 32px rgba(74,69,63,.08), inset 0 1px 0 rgba(255,255,255,.45);
-    border:1px solid rgba(95,111,78,.12); border-radius:0 0 2px 2px; overflow:hidden; }
-  .details-card::before{ content:""; position:absolute; inset:0; opacity:.18; pointer-events:none;
-    background:url("img/decor/parchment.png") center/cover no-repeat; mix-blend-mode:multiply; }
-  .details-card .detail-roses{ position:absolute; inset:0; pointer-events:none; z-index:1; }
-  .details-card .detail-roses img{ position:absolute; width:68px; height:auto; opacity:.75;
-    filter:sepia(.1) hue-rotate(35deg); }
-  .details-card .detail-roses img:first-child{ display:none; }
-  .details-card .detail-roses img:last-child{ top:.15rem; right:.15rem; transform:none; }
-  .details-card .detail-inner{ position:relative; z-index:2; }
-  .detail-block + .detail-block{ margin-top:1.6rem; padding-top:1.6rem; border-top:1px solid rgba(95,111,78,.16); }
-  .detail-title{ font-family:var(--script); font-size:1.55rem; color:var(--moss); margin-bottom:.4rem; text-align:center; }
-  .detail-text{ font-size:.98rem; color:var(--ink-soft); line-height:1.8; text-align:center; }
+  #details{ padding-top:1.4rem; padding-bottom:2.2rem; }
+  .details-simple{ max-width:var(--content-w); margin-inline:auto; text-align:center; }
+  .detail-block + .detail-block{ margin-top:1.8rem; padding-top:1.8rem; border-top:1px solid rgba(95,111,78,.14); }
+  .detail-title{ font-family:var(--script); font-size:1.55rem; color:var(--moss); margin-bottom:.45rem; }
+  .detail-text{ font-size:.98rem; color:var(--ink-soft); line-height:1.8; max-width:22rem; margin-inline:auto; }
 
   #rsvp{ padding-top:1.8rem; padding-bottom:2.8rem; text-align:center; }
   #rsvp .s-script{ margin-bottom:0; }
@@ -695,8 +645,7 @@ const CONFIG = {
     #roseLeft{ left:0; bottom:16%; width:42%; max-width:150px; }
     #roseRight{ right:-1%; bottom:14%; width:44%; max-width:156px; }
     .scroll-cue{ bottom:calc(13.5% + 56px); }
-    .program-panel{ padding:1.65rem 1rem 1.45rem; }
-    .program-bg{ width:min(340px,112%); max-height:220px; opacity:.15; }
+    .program-panel{ padding:1.2rem .2rem 1rem; }
     .timeline{ max-width:260px; }
     .tl-sprig{ width:52px; }
     .attend-row{ flex-direction:column; }
@@ -782,7 +731,6 @@ const CONFIG = {
       </div>
       <div class="hero-veil"></div>
     </div>
-    <div class="hero-arch"><img id="archImg" src="" alt=""></div>
     <div class="hero-stage">
       <div class="hero-content">
         <p class="hero-label" id="heroLabel"></p>
@@ -798,7 +746,6 @@ const CONFIG = {
     <div class="torn-top"></div>
     <div class="wrap reveal">
       <img class="intro-rose" id="introRose" src="" alt="">
-      <p class="bismillah" id="bismillah"></p>
       <div class="tagline" id="tagline"></div>
       <p class="letter-salut" id="letterSalut"></p>
       <p class="letter-body" id="letterBody"></p>
@@ -817,15 +764,10 @@ const CONFIG = {
 
   <section id="program">
     <div class="wrap reveal">
-      <div class="parch-panel program-panel" id="programPanel">
-        <img class="program-bg" id="programBg" src="" alt="" aria-hidden="true">
-        <div class="program-veil" aria-hidden="true"></div>
-        <div class="inner program-inner">
-          <h2 class="s-script" id="programTitle"></h2>
-          <div class="s-flourish"><img id="flourish2" src="" alt=""></div>
-          <img class="program-acomm" id="programAcomm" src="" alt="" aria-hidden="true">
-          <ul class="timeline" id="timeline"></ul>
-        </div>
+      <div class="program-panel" id="programPanel">
+        <h2 class="s-script" id="programTitle"></h2>
+        <div class="s-flourish"><img id="flourish2" src="" alt=""></div>
+        <ul class="timeline" id="timeline"></ul>
       </div>
     </div>
   </section>
@@ -838,7 +780,6 @@ const CONFIG = {
       <p class="venue-addr" id="venueAddr"></p>
       <div class="map-wrap">
         <iframe class="map-frame" id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kart"></iframe>
-        <img class="frame" id="mapFrameImg" src="" alt="">
       </div>
       <div class="venue-btns">
         <a class="btn btn-gold" id="saveBtn" target="_blank" rel="noopener"></a>
@@ -857,23 +798,14 @@ const CONFIG = {
 
   <section id="details">
     <div class="wrap reveal">
-      <div class="details-wrap">
-        <div class="torn-top"></div>
-        <div class="details-card">
-          <div class="detail-roses">
-            <img id="detailRoseL" src="" alt="">
-            <img id="detailRoseR" src="" alt="">
-          </div>
-          <div class="detail-inner">
-            <div class="detail-block">
-              <h3 class="detail-title" id="dressTitle"></h3>
-              <p class="detail-text" id="dressBody"></p>
-            </div>
-            <div class="detail-block">
-              <h3 class="detail-title" id="giftTitle"></h3>
-              <p class="detail-text" id="giftBody"></p>
-            </div>
-          </div>
+      <div class="details-simple">
+        <div class="detail-block">
+          <h3 class="detail-title" id="dressTitle"></h3>
+          <p class="detail-text" id="dressBody"></p>
+        </div>
+        <div class="detail-block">
+          <h3 class="detail-title" id="giftTitle"></h3>
+          <p class="detail-text" id="giftBody"></p>
         </div>
       </div>
     </div>
@@ -908,8 +840,6 @@ const CONFIG = {
     </div>
     <div class="field"><label for="rName" id="lName"></label><input type="text" id="rName" autocomplete="name"></div>
     <div class="field"><label for="rGuests" id="lGuests"></label><input type="number" id="rGuests" min="1" value="1"></div>
-    <div class="field"><label for="rSong" id="lSong"></label><input type="text" id="rSong"></div>
-    <div class="field"><label for="rChildren" id="lChildren"></label><input type="text" id="rChildren"></div>
     <div class="field"><label for="rNotes" id="lNotes"></label><textarea id="rNotes" rows="2"></textarea></div>
     <button type="button" class="btn btn-gold btn-send" id="sendBtn"></button>
     <p class="rsvp-msg" id="rsvpMsg"></p>
@@ -990,22 +920,16 @@ const CONFIG = {
       $("gateImgR").src = imgs.gate;
     }
     if(imgs.gateGarden) $("gateGarden").src = imgs.gateGarden;
-    if(imgs.arch) $("archImg").src = imgs.arch;
     if(imgs.roseLeft){
       $("roseLeft").src = imgs.roseLeft;
       $("gateVineL").src = imgs.roseLeft;
-      $("detailRoseL").src = imgs.roseLeft;
     }
     if(imgs.roseRight){
       $("roseRight").src = imgs.roseRight;
       $("gateVineR").src = imgs.roseRight;
-      $("detailRoseR").src = imgs.roseRight;
     }
     if(imgs.hero) $("heroImg").src = imgs.hero;
     if(imgs.roseBotanical) $("introRose").src = imgs.roseBotanical;
-    if(imgs.mapFrame) $("mapFrameImg").src = imgs.mapFrame;
-    if(imgs.programBg) $("programBg").src = imgs.programBg;
-    if(imgs.acommDecor) $("programAcomm").src = imgs.acommDecor;
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
 
     setHeroVideo(CONFIG.heroVideo || CONFIG.heroVideoFallback || "");
@@ -1043,8 +967,6 @@ const CONFIG = {
       `<span class="hero-name">${CONFIG.nameSecond}</span>`;
     $("scrollCue").textContent = T.scrollDown;
 
-    $("bismillah").textContent = T.bismillah || "";
-    $("bismillah").style.display = T.bismillah ? "" : "none";
     $("tagline").innerHTML = T.tagline.map(l => `<p>${l}</p>`).join("");
     $("letterSalut").textContent = T.letterSalut;
     $("letterBody").textContent = T.letter;
@@ -1096,7 +1018,6 @@ const CONFIG = {
     $("modalTitle").textContent = T.rsvpTitle;
     $("optYes").textContent = T.yes; $("optNo").textContent = T.noBtn;
     $("lName").textContent = T.fName; $("lGuests").textContent = T.fGuests;
-    $("lSong").textContent = T.fSong; $("lChildren").textContent = T.fChildren;
     $("lNotes").textContent = T.fNotes;
     $("sendBtn").textContent = T.send; $("rsvpMsg").textContent = "";
 
@@ -1155,12 +1076,10 @@ const CONFIG = {
     const T = t();
     const name = $("rName").value.trim() || "—";
     const guests = $("rGuests").value || "1";
-    const song = $("rSong").value.trim() || "—";
-    const children = $("rChildren").value.trim() || "—";
     const att = document.querySelector('input[name="attend"]:checked').value;
     const attTxt = att === "yes" ? T.yes : T.noBtn;
     const notes = $("rNotes").value.trim() || "—";
-    const body = `${T.fName}: ${name}\n${T.rsvpTitle}: ${attTxt}\n${T.fGuests}: ${guests}\n${T.fSong}: ${song}\n${T.fChildren}: ${children}\n${T.fNotes}: ${notes}`;
+    const body = `${T.fName}: ${name}\n${T.rsvpTitle}: ${attTxt}\n${T.fGuests}: ${guests}\n${T.fNotes}: ${notes}`;
     window.location.href = `mailto:${CONFIG.rsvpEmail}?subject=${encodeURIComponent("RSVP — "+name)}&body=${encodeURIComponent(body)}`;
     $("rsvpMsg").textContent = T.thanks;
   }
