@@ -1,12 +1,15 @@
-BRYLLUPSINVITASJON — Olivia & Kayhan
-=====================================
+BRYLLUPSINVITASJON — Olivia & Kayhan · Secret Garden
+=====================================================
 
-Klar til levering. Alt ligger i én fil: index.html + img-mappen.
+Tema: Hemmelig hage · Bjellandstrand gård, Tromøya · 17. juli 2027
 
 
 FØR LEVERANSE (sjekkliste)
 --------------------------
-[ ] Oppdater rsvpEmail i CONFIG (nå: eksempel-adresse)
+[ ] Oppdater rsvpEmail i CONFIG (nå: oliviaogkayhan@yahoo.com)
+[ ] Last opp din egen fontene-video som video/fountain.mp4
+    og sett CONFIG.heroVideo = "video/fountain.mp4"
+[ ] Bytt inn egne par-bilder i img/ ved behov
 [ ] Test på mobil — åpning, musikk, språkbytte, RSVP
 [ ] Last opp til GitHub Pages (se under)
 
@@ -15,60 +18,60 @@ REDIGERE INNHOLD
 ----------------
 Åpne index.html. Øverst finner du CONFIG — alt innhold styres der:
 
-  names, fullNames     Navn (norsk + persisk)
-  date                 Dato og klokkeslett for vielsen
-  durationHours        Varighet for «Lagre datoen» i kalender
-  musicSrc             URL til bakgrunnsmusikk (tom = av)
-  videoSrc             URL til cover-video (tom = kun farge)
-  venue                Sted, adresse, kart-søk
-  rsvpEmail            E-post for RSVP-svar
-  images               hero, seal, gallery
-  program              Tidsplan
-  t                    All tekst på norsk (no) og persisk (fa)
+  names, fullNames, initials   Navn (norsk + persisk)
+  date                         Dato/tid (ISO), f.eks. "2027-07-17T16:00:00"
+  coverVideo                   Konvolutt-animasjon
+  heroVideo                    Fontene-/hero-video
+  venue                        Sted, adresse, kart-søk
+  rsvpEmail                    E-post for RSVP-svar
+  images                       Dekor, hero, galleri
+  program                      Tidsplan
+  t                            All tekst på norsk (no) og persisk (fa)
 
 
 BILDER (img/)
 -------------
-  hero-venue.png       Tegning øverst på invitasjonen
-  wax-seal.png         Vokssegl på forsiden
-  venue-*.jpg          Galleri fra Kokkeplassen
-  couple-1.png         Par-bilde i galleriet
+  fountain-hero.jpg       Soft hero-still (fontene/hage)
+  venue-courtyard.jpg     Hagen med fontene (Bjellandstrand)
+  venue-garden.jpg        Flyfoto / gård
+  venue-paths.jpg         Hagepartier
+  venue-aerial.jpg        Oversikt
+  venue-interior.jpg      Interiør
+  couple-1.jpg            Par-bilde
+  decor/                  Sacred Garden-dekor (konvolutt, roser, bue …)
 
-Bytt filer i img/ og oppdater CONFIG.images ved behov.
+
+VIDEO (video/)
+--------------
+  fountain-preview.mp4    Midlertidig hero-bevegelse (hagen/fontenen)
+  fountain.mp4            ← legg din egen fontene-animasjon her
+  cover-doors.mp4         (gammel cover — brukes ikke i secret garden)
 
 
 SE LOKALT
 ---------
-1. Installer «Live Server» i Cursor/VS Code
-2. Høyreklikk index.html → Open with Live Server
-
-Eller: python3 -m http.server 8765
-       → http://localhost:8765/index.html
+  python3 -m http.server 8765
+  → http://localhost:8765/
 
 
 LEGGE UT PÅ NETT
 ----------------
-GitHub Pages (anbefalt):
+GitHub Pages:
   Repo: https://github.com/Salameh-99/Bryllup
   1. Settings → Pages
   2. Source: Deploy from branch
   3. Branch: main · Folder: / (root) → Save
-  4. Live lenke (etter 1–2 min):
-     https://salameh-99.github.io/Bryllup/
-
-Netlify (alternativ):
-  1. Gå til https://app.netlify.com/drop
-  2. Dra hele mappen bryllup-prosjekt inn
-  3. Del lenken med gjestene
-
-
-FILSTRUKTUR
------------
-  index.html      Hele invitasjonen (HTML, CSS, JS)
-  img/            Bilder
-  LES-MEG.txt     Denne filen
+  4. Live: https://salameh-99.github.io/Bryllup/
 
 
 DESIGN
 ------
+Secret Garden-tema med palett: myk beige, dus grønn, myk brun, dus rosa, mørk grå.
 Invitasjon designet av sosmedia.no
+
+
+ANDRE MALER
+-----------
+  templates/sacred-garden/   Original Sacred Garden-demo
+  templates/azure-letter/    Azure Letter-mal
+  templates/gull-elfenben/   Forrige gull/elfenben-versjon (Kokkeplassen)
