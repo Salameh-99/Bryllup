@@ -15,7 +15,7 @@ FØR LEVERANSE
     og sett CONFIG.heroVideo = "video/fountain.mp4"
 [ ] Legg inn egne par-bilder i img/ og oppdater gallery
 [ ] Sett musicSrc hvis ønskelig
-[ ] Test på mobil
+[ ] Test på mobil — hageport åpner, blomster faller
 
 
 REDIGERE
@@ -23,9 +23,11 @@ REDIGERE
 Åpne jon-lavinia/index.html → CONFIG øverst:
 
   nameFirst / nameSecond   Lavinia & Jon
-  fullNames / initials     Fullt navn og vokssegl (L&J)
+  fullNames / initials     Fullt navn og port-monogram (L&J)
   date                     "2027-07-17T16:00:00"
   venue                    Bjellandstrand
+  images.gate              Hageport (splittes i to dører)
+  images.gateGarden        Hagen bak porten
   images.gallery           Galleri-bilder
   program                  Tidsplan
   t                        Tekster
@@ -36,8 +38,13 @@ FILSTRUKTUR
   jon-lavinia/
     index.html
     LES-MEG.txt
-    img/               Venue + dekor
+    img/               Venue + dekor (garden-gate, roser …)
     video/             Fontene-preview (bytt til egen fountain.mp4)
+
+COVER
+-----
+Hageport med to dører som svinger opp — ikke konvolutt/vokssegl.
+Blomster faller og roser blomstrer når hagen åpnes.
 
 
 SE LOKALT

@@ -29,8 +29,6 @@ const CONFIG = {
   durationHours: 7,
 
   musicSrc: "",
-  // Konvolutt-animasjon på cover
-  coverVideo: "https://pub-96ce671efbac4dbfbc89b044c631a913.r2.dev/1782224012851.mp4",
   // Fontene-video: bytt til "video/fountain.mp4" når din egen animasjon er lastet opp
   heroVideo: "video/fountain-preview.mp4",
   heroVideoFallback: "img/venue-courtyard.jpg",
@@ -47,7 +45,8 @@ const CONFIG = {
   design: { url: "https://sosmedia.no", brand: "sosmedia.no" },
 
   images: {
-    envelope:         "img/decor/envelope.png",
+    gate:             "img/decor/garden-gate.jpg",
+    gateGarden:       "img/decor/gate-garden-bg.jpg",
     arch:             "img/decor/arch.png",
     roseLeft:         "img/decor/rose-left.png",
     roseRight:        "img/decor/rose-right.png",
@@ -82,7 +81,7 @@ const CONFIG = {
 
   t: {
     no: {
-      coverTap: "Trykk for å åpne",
+      coverTap: "Trykk for å åpne hagen",
       weddingDay: "Bryllupsdagen",
       scrollDown: "Rull ned",
       eyebrow: "En hemmelig hage",
@@ -116,7 +115,7 @@ const CONFIG = {
       designCredit: "Invitasjon designet av"
     },
     fa: {
-      coverTap: "Trykk for å åpne",
+      coverTap: "Trykk for å åpne hagen",
       weddingDay: "Bryllupsdagen",
       scrollDown: "Rull ned",
       eyebrow: "En hemmelig hage",
@@ -212,88 +211,110 @@ const CONFIG = {
   body.locked .lang-btn{ opacity:0; pointer-events:none; }
   body.invitation-open .lang-btn{ opacity:1; transition-delay:.9s; }
 
-  /* ── COVER ─────────────────────────────────────────── */
-  .cover{ --open-lift-delay:.18s; --open-lift-dur:1.15s; --open-video-fade:.72s; --open-video-fade-delay:.22s;
+  /* ── COVER: HAGEPORT ───────────────────────────────── */
+  .cover{
     position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
-    background:
-      radial-gradient(ellipse 70% 55% at 50% 42%, rgba(216,184,180,.2), transparent 60%),
-      linear-gradient(165deg, #EDE6D8 0%, var(--beige) 45%, #D9CFBC 100%);
-    cursor:pointer; overflow:hidden;
-    transition:opacity .5s ease .95s, visibility .5s ease .95s, background .55s ease .42s; }
-  .cover::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.35;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-    background-size:180px; mix-blend-mode:multiply; }
-  .cover::after{ content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
-    background:radial-gradient(ellipse 70% 60% at 50% 45%, transparent 30%, rgba(74,87,64,.06) 100%);
-    transition:opacity .55s ease .35s; }
-  .cover.opening{ pointer-events:none; background:transparent; }
-  .cover.opening::before,.cover.opening::after{ opacity:0; }
+    background:#1a2018; cursor:pointer; overflow:hidden;
+    perspective:1400px;
+    transition:opacity .55s ease 1.35s, visibility .55s ease 1.35s; }
+  .cover.opening{ pointer-events:none; }
   .cover.opening.done{ opacity:0; visibility:hidden; pointer-events:none; }
 
-  .cover-stage{ position:relative; z-index:2; width:min(300px,78vw); will-change:transform,opacity;
-    transform-origin:50% 62%; }
-  .cover-video{ position:absolute; left:50%; top:50%; width:320%; height:320%;
-    transform:translate(-50%,-50%); object-fit:cover; object-position:50% 44%;
-    opacity:.62; filter:saturate(.75) brightness(1.05) sepia(.08) hue-rotate(35deg);
-    z-index:0; pointer-events:none;
-    transition:opacity var(--open-video-fade) ease var(--open-video-fade-delay), filter .45s ease .08s; }
-  .cover.opening .cover-video{ opacity:0; filter:saturate(1.05) brightness(1.1); }
+  .gate-scene{ position:absolute; inset:0; z-index:1; }
+  .gate-garden{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%;
+    transform:scale(1.08); filter:saturate(.92) brightness(.92);
+    transition:transform 2.4s cubic-bezier(.2,.7,.2,1), filter 1.4s ease; }
+  .cover.opening .gate-garden{ transform:scale(1); filter:saturate(1.05) brightness(1.05); }
 
-  .envelope-wrap{ position:relative; z-index:1; width:100%; will-change:transform,opacity;
-    transition:transform .35s cubic-bezier(.2,.8,.2,1); animation:envFloat 4s ease-in-out infinite; }
-  @keyframes envFloat{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-  .cover.opening .cover-stage{ animation:envOpen var(--open-lift-dur) cubic-bezier(.42,.02,.15,1) var(--open-lift-delay) forwards; }
-  .cover.opening .envelope-wrap{ animation:none; }
-  .cover:not(.opening):hover .cover-stage{ animation:none; transform:scale(1.025) translateY(-4px); }
-  .cover:not(.opening):active .cover-stage{ animation:none; transform:scale(.98); }
-  @keyframes envOpen{
-    0%{ transform:scale(1) translateY(0); opacity:1; }
-    12%{ transform:scale(1.02) translateY(-0.4vh); opacity:1; }
-    38%{ transform:scale(1.06) translateY(-3.5vh) perspective(900px) rotateX(5deg); opacity:1; }
-    68%{ transform:scale(1.12) translateY(-11vh) perspective(900px) rotateX(11deg); opacity:.45; }
-    100%{ transform:scale(1.2) translateY(-20vh) perspective(900px) rotateX(16deg); opacity:0; }
-  }
-  .envelope-img{ width:100%; height:auto; display:block; filter:drop-shadow(0 12px 28px rgba(74,87,64,.14)); }
+  .gate-doors{ position:absolute; inset:0; z-index:2; display:flex; transform-style:preserve-3d; }
+  .gate-door{ position:relative; flex:1; height:100%; overflow:hidden;
+    background:#2a3228;
+    transition:transform 1.45s cubic-bezier(.45,.05,.2,1); will-change:transform; }
+  .gate-door::before{ content:""; position:absolute; inset:0;
+    background:linear-gradient(90deg, rgba(0,0,0,.28), transparent 35%, transparent 65%, rgba(0,0,0,.28));
+    pointer-events:none; z-index:2; }
+  .gate-door.left{ transform-origin:left center; border-right:1px solid rgba(232,223,208,.18); }
+  .gate-door.right{ transform-origin:right center; border-left:1px solid rgba(232,223,208,.18); }
+  .gate-door img{ position:absolute; top:0; height:100%; width:200%; max-width:none; object-fit:cover; object-position:center center;
+    filter:saturate(.85) contrast(1.05); }
+  .gate-door.left img{ left:0; }
+  .gate-door.right img{ right:0; }
+  .cover.opening .gate-door.left{ transform:rotateY(-78deg); }
+  .cover.opening .gate-door.right{ transform:rotateY(78deg); }
 
-  .wax-seal{ position:absolute; top:47%; left:50%; transform:translate(-50%,-50%); z-index:5;
-    width:92px; height:92px; border:none; cursor:pointer; padding:0;
-    background:radial-gradient(ellipse 75% 65% at 38% 32%, #9A8878, var(--taupe) 55%, var(--burgundy-deep));
-    border-radius:50%; box-shadow:0 8px 20px rgba(58,58,58,.28), inset 0 2px 8px rgba(255,255,255,.12);
-    animation:sealPulse 2.8s ease-in-out infinite; }
-  .wax-seal .initials{ position:absolute; inset:0; display:grid; place-items:center;
+  .gate-post{ position:absolute; top:0; bottom:0; width:10px; z-index:4; pointer-events:none;
+    background:linear-gradient(180deg, #3d342c, #2a241e 40%, #1c1814);
+    box-shadow:0 0 12px rgba(0,0,0,.35); }
+  .gate-post.left{ left:0; }
+  .gate-post.right{ right:0; }
+
+  .gate-vines{ position:absolute; inset:0; z-index:5; pointer-events:none; }
+  .gate-vines img{ position:absolute; width:min(42vw,180px); height:auto; opacity:.92;
+    filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));
+    animation:vineSway 5s ease-in-out infinite; }
+  .gate-vines .vl{ left:-2%; bottom:8%; transform-origin:bottom left; }
+  .gate-vines .vr{ right:-2%; bottom:8%; transform:scaleX(-1); transform-origin:bottom right; animation-delay:1.1s; }
+  @keyframes vineSway{ 0%,100%{ transform:rotate(-1.5deg) } 50%{ transform:rotate(2deg) } }
+  .gate-vines .vr{ animation-name:vineSwayR; }
+  @keyframes vineSwayR{ 0%,100%{ transform:scaleX(-1) rotate(-1.5deg) } 50%{ transform:scaleX(-1) rotate(2deg) } }
+  .cover.opening .gate-vines{ opacity:0; transition:opacity .6s ease .2s; }
+
+  .gate-bloom{ position:absolute; z-index:6; width:14px; height:14px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #f3d7d2, var(--blush-deep) 55%, #b88a84);
+    box-shadow:0 0 0 3px rgba(168,181,154,.25); opacity:.85;
+    animation:bloomPulse 2.8s ease-in-out infinite; }
+  .gate-bloom.b1{ top:22%; left:10%; animation-delay:.2s; }
+  .gate-bloom.b2{ top:38%; right:12%; width:11px; height:11px; animation-delay:.9s; }
+  .gate-bloom.b3{ bottom:28%; left:14%; width:12px; height:12px; animation-delay:1.4s; }
+  .gate-bloom.b4{ top:18%; right:18%; width:10px; height:10px; animation-delay:.5s; }
+  @keyframes bloomPulse{ 0%,100%{ transform:scale(1); opacity:.75 } 50%{ transform:scale(1.25); opacity:1 } }
+  .cover.opening .gate-bloom{ opacity:0; transition:opacity .4s ease; }
+
+  .gate-cta{ position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); z-index:8;
+    width:86px; height:86px; border:none; cursor:pointer; padding:0;
+    background:radial-gradient(ellipse 75% 65% at 38% 32%, #6f7f5c, var(--moss) 55%, var(--moss-deep));
+    border-radius:50%; box-shadow:0 8px 24px rgba(0,0,0,.35), inset 0 2px 8px rgba(255,255,255,.14);
+    animation:gatePulse 2.8s ease-in-out infinite; }
+  .gate-cta .initials{ position:absolute; inset:0; display:grid; place-items:center;
     font-family:var(--script); font-size:1.55rem; color:var(--beige-light); pointer-events:none;
-    text-shadow:0 1px 3px rgba(0,0,0,.28); }
-  @keyframes sealPulse{
-    0%,100%{ box-shadow:0 8px 20px rgba(58,58,58,.28); }
-    50%{ box-shadow:0 10px 26px rgba(58,58,58,.35), 0 0 16px rgba(168,181,154,.3); }
+    text-shadow:0 1px 3px rgba(0,0,0,.35); }
+  @keyframes gatePulse{
+    0%,100%{ box-shadow:0 8px 24px rgba(0,0,0,.35); }
+    50%{ box-shadow:0 10px 28px rgba(0,0,0,.4), 0 0 18px rgba(168,181,154,.35); }
   }
-  .cover.opening .wax-seal{ animation:sealBreak .5s cubic-bezier(.2,.8,.2,1) forwards; }
-  @keyframes sealBreak{
+  .cover.opening .gate-cta{ animation:gateFade .55s ease forwards; }
+  @keyframes gateFade{
     0%{ transform:translate(-50%,-50%) scale(1); opacity:1; }
-    40%{ transform:translate(-50%,-50%) scale(1.2); opacity:.85; }
-    100%{ transform:translate(-50%,-50%) scale(1.7) rotate(12deg); opacity:0; }
+    100%{ transform:translate(-50%,-50%) scale(1.35); opacity:0; }
   }
 
   .cover-hint{ position:absolute; bottom:max(2.2rem,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%);
-    z-index:3; text-align:center; color:rgba(74,69,63,.62); font-family:var(--display); font-size:.72rem;
+    z-index:9; text-align:center; color:rgba(243,238,228,.88); font-family:var(--display); font-size:.72rem;
     letter-spacing:.28em; text-transform:uppercase; animation:hintPulse 2.5s ease-in-out infinite;
-    transition:opacity .4s ease; }
+    transition:opacity .4s ease; text-shadow:0 2px 10px rgba(0,0,0,.45); }
   .cover.opening .cover-hint{ opacity:0; animation:none; }
-  @keyframes hintPulse{ 0%,100%{opacity:.65} 50%{opacity:1} }
+  @keyframes hintPulse{ 0%,100%{opacity:.7} 50%{opacity:1} }
   .cover-hint::before{ content:"⌃"; display:block; font-size:.95rem; margin-bottom:.25rem; opacity:.55; }
 
-  .spark{ position:fixed; z-index:201; color:var(--sage); pointer-events:none; opacity:0;
-    animation:spark .85s ease-out forwards; }
-  @keyframes spark{ 0%{opacity:1;transform:translate(0,0) scale(.35)} 100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1)} }
+  .spark{ position:fixed; z-index:201; pointer-events:none; opacity:0;
+    width:10px; height:10px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #fff7f2, var(--blush));
+    animation:spark .9s ease-out forwards; }
+  @keyframes spark{ 0%{opacity:1;transform:translate(0,0) scale(.35)} 100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.2)} }
 
-  .petal{ position:fixed; top:-20px; z-index:40; color:var(--blush-deep); pointer-events:none; opacity:0;
-    animation:fall linear forwards; }
-  @keyframes fall{ 0%{opacity:0;transform:translateY(0) rotate(0)} 10%{opacity:.7} 100%{opacity:0;transform:translateY(105vh) rotate(360deg)} }
+  .petal{ position:fixed; top:-24px; z-index:40; pointer-events:none; opacity:0;
+    width:16px; height:16px; animation:fall linear forwards; }
+  .petal svg{ width:100%; height:100%; display:block; filter:drop-shadow(0 1px 2px rgba(0,0,0,.12)); }
+  @keyframes fall{
+    0%{ opacity:0; transform:translateY(0) translateX(0) rotate(0) scale(.7); }
+    12%{ opacity:.9; }
+    100%{ opacity:0; transform:translateY(105vh) translateX(var(--drift, 40px)) rotate(420deg) scale(1.05); }
+  }
 
   .open-flash{ position:fixed; inset:0; z-index:199; pointer-events:none; opacity:0;
-    background:radial-gradient(circle at 50% 48%, rgba(243,238,228,.9) 0%, rgba(243,238,228,.4) 40%, transparent 70%); }
-  .open-flash.on{ animation:openFlash .9s ease forwards; }
-  @keyframes openFlash{ 0%{opacity:0} 25%{opacity:.85} 100%{opacity:0} }
+    background:radial-gradient(circle at 50% 48%, rgba(243,238,228,.85) 0%, rgba(168,181,154,.25) 40%, transparent 70%); }
+  .open-flash.on{ animation:openFlash 1s ease forwards; }
+  @keyframes openFlash{ 0%{opacity:0} 30%{opacity:.8} 100%{opacity:0} }
 
   /* ── HERO + FONTENE ───────────────────────────────── */
   .hero{ --hero-w:min(100%,480px); position:relative; min-height:100svh; min-height:100dvh;
@@ -351,14 +372,53 @@ const CONFIG = {
     100%{ top:78%; opacity:0; transform:scale(1.1) }
   }
 
-  .hero-roses{ position:absolute; inset:0; z-index:3; pointer-events:none; }
+  .hero-roses{ position:absolute; inset:0; z-index:3; pointer-events:none; overflow:visible; }
   .hero-roses img{ position:absolute; height:auto; opacity:0;
-    transform:translateY(6px); transition:opacity .85s ease, transform .85s cubic-bezier(.2,.8,.2,1); }
-  #roseLeft{ left:7%; bottom:25.5%; width:29%; max-width:140px; transform-origin:left bottom; }
-  #roseRight{ right:5.5%; bottom:24%; width:30%; max-width:144px;
-    transform:scaleX(-1) translateY(6px); transform-origin:right bottom; }
-  body.invitation-open #roseLeft{ opacity:1; transform:none; transition-delay:.75s; }
-  body.invitation-open #roseRight{ opacity:1; transform:scaleX(-1); transition-delay:.88s; }
+    filter:drop-shadow(0 8px 16px rgba(74,87,64,.18)); }
+  #roseLeft{ left:2%; bottom:18%; width:38%; max-width:170px; transform-origin:30% 85%;
+    transform:translateY(28px) scale(.55) rotate(-8deg); }
+  #roseRight{ right:1%; bottom:16%; width:40%; max-width:176px; transform-origin:70% 85%;
+    transform:scaleX(-1) translateY(28px) scale(.55) rotate(-8deg); }
+  body.invitation-open #roseLeft{
+    animation:roseBloom 1.35s cubic-bezier(.2,.8,.2,1) .55s forwards, roseSway 4.5s ease-in-out 2s infinite; }
+  body.invitation-open #roseRight{
+    animation:roseBloomFlip 1.35s cubic-bezier(.2,.8,.2,1) .72s forwards, roseSwayFlip 4.8s ease-in-out 2.2s infinite; }
+  @keyframes roseBloom{
+    0%{ opacity:0; transform:translateY(28px) scale(.55) rotate(-8deg); }
+    60%{ opacity:1; transform:translateY(-4px) scale(1.06) rotate(2deg); }
+    100%{ opacity:1; transform:translateY(0) scale(1) rotate(0deg); }
+  }
+  @keyframes roseBloomFlip{
+    0%{ opacity:0; transform:scaleX(-1) translateY(28px) scale(.55) rotate(-8deg); }
+    60%{ opacity:1; transform:scaleX(-1) translateY(-4px) scale(1.06) rotate(2deg); }
+    100%{ opacity:1; transform:scaleX(-1) translateY(0) scale(1) rotate(0deg); }
+  }
+  @keyframes roseSway{
+    0%,100%{ transform:translateY(0) rotate(-1deg); }
+    50%{ transform:translateY(-3px) rotate(2deg); }
+  }
+  @keyframes roseSwayFlip{
+    0%,100%{ transform:scaleX(-1) translateY(0) rotate(-1deg); }
+    50%{ transform:scaleX(-1) translateY(-3px) rotate(2deg); }
+  }
+
+  /* Floating blossoms in hero after open */
+  .hero-blossoms{ position:absolute; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
+  .hero-blossoms span{ position:absolute; width:10px; height:10px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #fff5f0, var(--blush-deep));
+    opacity:0; }
+  body.invitation-open .hero-blossoms span{ animation:blossomFloat 7s ease-in-out infinite; }
+  .hero-blossoms span:nth-child(1){ left:18%; top:62%; animation-delay:.4s; }
+  .hero-blossoms span:nth-child(2){ left:72%; top:55%; width:8px; height:8px; animation-delay:1.2s; }
+  .hero-blossoms span:nth-child(3){ left:30%; top:40%; width:7px; height:7px; animation-delay:2s; }
+  .hero-blossoms span:nth-child(4){ left:80%; top:70%; width:9px; height:9px; animation-delay:2.8s; }
+  .hero-blossoms span:nth-child(5){ left:12%; top:48%; width:6px; height:6px; animation-delay:1.6s; }
+  @keyframes blossomFloat{
+    0%{ opacity:0; transform:translateY(12px) scale(.6); }
+    20%{ opacity:.85; }
+    80%{ opacity:.7; }
+    100%{ opacity:0; transform:translateY(-70px) scale(1.1); }
+  }
 
   .hero-veil{ position:absolute; inset:0; z-index:4; pointer-events:none;
     background:
@@ -560,7 +620,7 @@ const CONFIG = {
     background:radial-gradient(ellipse 75% 65% at 38% 32%, #9A8878, var(--taupe) 55%, var(--burgundy-deep));
     border-radius:50%; font-family:var(--display); font-size:1rem; letter-spacing:.14em; color:var(--beige-light);
     text-transform:uppercase; box-shadow:0 8px 24px rgba(58,58,58,.28), inset 0 2px 8px rgba(255,255,255,.1);
-    transition:transform .25s ease; animation:sealPulse 2.8s ease-in-out infinite; }
+    transition:transform .25s ease; animation:gatePulse 2.8s ease-in-out infinite; }
   .rsvp-open-btn:hover{ transform:scale(1.06); }
   .rsvp-open-hint{ text-align:center; margin-top:.8rem; font-family:var(--display); font-size:.68rem;
     letter-spacing:.22em; text-transform:uppercase; color:var(--ink-muted); }
@@ -622,20 +682,20 @@ const CONFIG = {
   body:not(.invitation-open) .reveal{ opacity:0; transform:translateY(20px); }
 
   @media (max-width:720px){
-    .wax-seal{ width:80px; height:80px; }
-    .cover-stage{ width:min(270px,82vw); }
+    .gate-cta{ width:76px; height:76px; }
+    .gate-cta .initials{ font-size:1.35rem; }
     .hero-content{ top:37%; width:min(80vw,270px); }
-    #roseLeft{ left:5.5%; bottom:23.5%; width:33%; max-width:122px; }
-    #roseRight{ right:4.5%; bottom:22.5%; width:34%; max-width:126px; }
+    #roseLeft{ left:0; bottom:16%; width:42%; max-width:150px; }
+    #roseRight{ right:-1%; bottom:14%; width:44%; max-width:156px; }
     .scroll-cue{ bottom:calc(13.5% + 56px); }
     .program-panel{ padding:1.65rem 1rem 1.45rem; }
     .program-bg{ width:min(340px,112%); max-height:220px; opacity:.15; }
     .timeline{ max-width:260px; }
-    .tl-sprig{ width:64px; }
+    .tl-sprig{ width:52px; }
     .attend-row{ flex-direction:column; }
   }
   @media (prefers-reduced-motion:reduce){
-    .scroll-cue,.cover-hint,.wax-seal,.rsvp-open-btn,.fountain-jet,.fountain-drop{ animation:none !important; }
+    .scroll-cue,.cover-hint,.gate-cta,.rsvp-open-btn,.fountain-jet,.fountain-drop{ animation:none !important; }
     body.invitation-open .hero-name,body.invitation-open .hero-amp,body.invitation-open .hero-label,
     body.invitation-open .hero-date-short,body.invitation-open .scroll-cue,body.invitation-open #roseLeft,body.invitation-open #roseRight,
     body.invitation-open .fountain{ opacity:1; transform:none; animation:none !important; }
@@ -644,8 +704,10 @@ const CONFIG = {
     .reveal,.tl-item{ opacity:1; transform:none; }
     .timeline::before{ transform:translateX(-50%) scaleY(1); }
     .timeline.show .tl-item{ animation:none; opacity:1; transform:none; }
-    .petal,.spark{ display:none !important; }
-    .cover.opening .cover-stage,.cover.opening .wax-seal{ animation:none; opacity:0; }
+    .petal,.spark,.gate-bloom,.gate-vines img,.hero-blossoms span{ display:none !important; }
+    .cover.opening .gate-door.left,.cover.opening .gate-door.right{ transform:none; opacity:0; }
+    body.invitation-open #roseLeft,body.invitation-open #roseRight{ opacity:1; animation:none !important; }
+    body.invitation-open #roseRight{ transform:scaleX(-1); }
   }
 </style>
 <script>if("scrollRestoration" in history)history.scrollRestoration="manual";scrollTo(0,0);</script>
@@ -658,14 +720,25 @@ const CONFIG = {
 <div class="open-flash" id="openFlash" aria-hidden="true"></div>
 
 <div class="cover" id="cover">
-  <div class="cover-stage" id="coverStage">
-    <video class="cover-video" id="coverVideo" autoplay muted loop playsinline preload="auto"></video>
-    <div class="envelope-wrap">
-      <img class="envelope-img" id="envelopeImg" src="" alt="">
-      <button class="wax-seal" id="seal" aria-label="Åpne">
-        <span class="initials" id="sealInitials"></span>
-      </button>
+  <div class="gate-scene" id="gateScene">
+    <img class="gate-garden" id="gateGarden" src="" alt="" decoding="async">
+    <div class="gate-doors">
+      <div class="gate-door left"><img id="gateImgL" src="" alt=""></div>
+      <div class="gate-door right"><img id="gateImgR" src="" alt=""></div>
     </div>
+    <div class="gate-post left" aria-hidden="true"></div>
+    <div class="gate-post right" aria-hidden="true"></div>
+    <div class="gate-vines" aria-hidden="true">
+      <img class="vl" id="gateVineL" src="" alt="">
+      <img class="vr" id="gateVineR" src="" alt="">
+    </div>
+    <span class="gate-bloom b1" aria-hidden="true"></span>
+    <span class="gate-bloom b2" aria-hidden="true"></span>
+    <span class="gate-bloom b3" aria-hidden="true"></span>
+    <span class="gate-bloom b4" aria-hidden="true"></span>
+    <button class="gate-cta" id="seal" aria-label="Åpne hagen">
+      <span class="initials" id="sealInitials"></span>
+    </button>
   </div>
   <p class="cover-hint" id="coverTap"></p>
 </div>
@@ -695,6 +768,9 @@ const CONFIG = {
         <div class="hero-roses">
           <img id="roseLeft" src="" alt="">
           <img id="roseRight" src="" alt="">
+        </div>
+        <div class="hero-blossoms" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
       <div class="hero-veil"></div>
@@ -902,22 +978,28 @@ const CONFIG = {
 
   function applyMedia(){
     const imgs = CONFIG.images || {};
-    if(imgs.envelope) $("envelopeImg").src = imgs.envelope;
+    if(imgs.gate){
+      $("gateImgL").src = imgs.gate;
+      $("gateImgR").src = imgs.gate;
+    }
+    if(imgs.gateGarden) $("gateGarden").src = imgs.gateGarden;
     if(imgs.arch) $("archImg").src = imgs.arch;
-    if(imgs.roseLeft) $("roseLeft").src = imgs.roseLeft;
-    if(imgs.roseRight) $("roseRight").src = imgs.roseRight;
-    if(imgs.roseLeft) $("detailRoseL").src = imgs.roseLeft;
-    if(imgs.roseRight) $("detailRoseR").src = imgs.roseRight;
+    if(imgs.roseLeft){
+      $("roseLeft").src = imgs.roseLeft;
+      $("gateVineL").src = imgs.roseLeft;
+      $("detailRoseL").src = imgs.roseLeft;
+    }
+    if(imgs.roseRight){
+      $("roseRight").src = imgs.roseRight;
+      $("gateVineR").src = imgs.roseRight;
+      $("detailRoseR").src = imgs.roseRight;
+    }
     if(imgs.hero) $("heroImg").src = imgs.hero;
     if(imgs.roseBotanical) $("introRose").src = imgs.roseBotanical;
     if(imgs.mapFrame) $("mapFrameImg").src = imgs.mapFrame;
     if(imgs.programBg) $("programBg").src = imgs.programBg;
     if(imgs.acommDecor) $("programAcomm").src = imgs.acommDecor;
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
-
-    const cv = $("coverVideo");
-    if(CONFIG.coverVideo){ cv.src = CONFIG.coverVideo; cv.load(); cv.play().catch(()=>{}); }
-    else cv.style.display = "none";
 
     setHeroVideo(CONFIG.heroVideo || CONFIG.heroVideoFallback || "");
   }
@@ -1140,42 +1222,57 @@ const CONFIG = {
     }
   }
 
+  const FLOWER_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="12" cy="12" r="3.2" fill="#E8C4A8"/>
+    <ellipse cx="12" cy="5.5" rx="3.2" ry="4.2" fill="#D8B8B4"/>
+    <ellipse cx="12" cy="18.5" rx="3.2" ry="4.2" fill="#C4A09C"/>
+    <ellipse cx="5.5" cy="12" rx="4.2" ry="3.2" fill="#D8B8B4"/>
+    <ellipse cx="18.5" cy="12" rx="4.2" ry="3.2" fill="#C4A09C"/>
+  </svg>`;
+
   function spawnSparkles(){
     if(reduceMotion) return;
     const s = $("seal"); if(!s) return;
     const r = s.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
-    for(let i=0;i<12;i++){
-      const sp = document.createElement("div"); sp.className = "spark"; sp.textContent = "✦";
-      const a = Math.random()*Math.PI*2, dist = 50 + Math.random()*100;
-      sp.style.left = cx+"px"; sp.style.top = cy+"px"; sp.style.fontSize = (7+Math.random()*10)+"px";
+    for(let i=0;i<16;i++){
+      const sp = document.createElement("div"); sp.className = "spark";
+      const a = Math.random()*Math.PI*2, dist = 60 + Math.random()*120;
+      sp.style.left = cx+"px"; sp.style.top = cy+"px";
+      sp.style.width = (7+Math.random()*8)+"px";
+      sp.style.height = sp.style.width;
       sp.style.setProperty("--dx", (Math.cos(a)*dist).toFixed(0)+"px");
       sp.style.setProperty("--dy", (Math.sin(a)*dist).toFixed(0)+"px");
-      document.body.appendChild(sp); setTimeout(()=>sp.remove(),900);
+      document.body.appendChild(sp); setTimeout(()=>sp.remove(),950);
     }
   }
   function spawnPetals(){
     if(reduceMotion) return;
-    for(let i=0;i<14;i++){
-      const p = document.createElement("div"); p.className = "petal"; p.textContent = "❀";
-      p.style.left = (Math.random()*100)+"vw"; p.style.fontSize = (8+Math.random()*11)+"px";
-      p.style.animationDuration = (6+Math.random()*6)+"s"; p.style.animationDelay = (Math.random()*4)+"s";
-      document.body.appendChild(p); setTimeout(()=>p.remove(),14000);
+    for(let i=0;i<22;i++){
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.innerHTML = FLOWER_SVG;
+      p.style.left = (Math.random()*100)+"vw";
+      p.style.width = (12+Math.random()*14)+"px";
+      p.style.height = p.style.width;
+      p.style.setProperty("--drift", ((Math.random()-.5)*120).toFixed(0)+"px");
+      p.style.animationDuration = (5.5+Math.random()*6)+"s";
+      p.style.animationDelay = (Math.random()*2.8)+"s";
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(), 15000);
     }
   }
 
-  const OPEN = { seal:0, lift:180, hero:420, petals:780, hide:1320 };
+  const OPEN = { hero:520, petals:680, petals2:1600, hide:1900 };
 
   let opened = false;
   function openInvitation(){
     if(opened) return; opened = true;
     const cover = $("cover");
-    const cv = $("coverVideo");
     const flash = $("openFlash");
 
     spawnSparkles();
-    if(flash){ flash.classList.add("on"); setTimeout(()=>flash.classList.remove("on"), 900); }
+    if(flash){ flash.classList.add("on"); setTimeout(()=>flash.classList.remove("on"), 1000); }
 
-    if(cv){ cv.play().catch(()=>{}); }
     cover.classList.add("opening");
     document.body.classList.remove("locked");
 
@@ -1187,8 +1284,8 @@ const CONFIG = {
     }, OPEN.hero);
 
     setTimeout(spawnPetals, OPEN.petals);
+    setTimeout(spawnPetals, OPEN.petals2);
     setTimeout(() => {
-      if(cv){ cv.pause(); }
       cover.classList.add("done");
       cover.style.display = "none";
       observeScrollAnimations();
