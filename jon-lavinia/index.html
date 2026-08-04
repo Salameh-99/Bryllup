@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Bryllupsinvitasjon — Lavinia & Jon, 17. juli 2027, Bjellandstrand gård Tromøya">
 <title>Lavinia & Jon</title>
-<meta name="theme-revision" content="fjern-blomst-potter-20260804">
+<meta name="theme-revision" content="kun-potte-animasjon-20260804">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -247,7 +247,35 @@ const CONFIG = {
   .gate-post.left{ left:0; }
   .gate-post.right{ right:0; }
 
-  .gate-vines,.gate-bloom,.hero-roses,.hero-blossoms,.hero-pots,.gate-pots{ display:none !important; }
+  .gate-vines,.gate-bloom,.hero-roses,.hero-blossoms,.hero-pots{ display:none !important; }
+
+  .gate-pots{ position:absolute; inset:0; z-index:7; pointer-events:none; overflow:hidden; }
+  .gate-pots img{
+    position:absolute;
+    display:block;
+    opacity:1;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 18px rgba(0,0,0,.18));
+    will-change:transform, opacity;
+  }
+  #gatePotBlue{
+    animation:potFloatLeft 5.2s ease-in-out infinite;
+  }
+  #gatePotTall{
+    animation:potFloatRight 5.6s ease-in-out infinite;
+  }
+  @keyframes potFloatLeft{
+    0%,100%{ transform:translate3d(0,0,0) rotate(-.7deg); }
+    50%{ transform:translate3d(0,-6px,0) rotate(.9deg); }
+  }
+  @keyframes potFloatRight{
+    0%,100%{ transform:translate3d(0,0,0) rotate(.7deg); }
+    50%{ transform:translate3d(0,-6px,0) rotate(-.9deg); }
+  }
+  .cover.opening .gate-pots img{
+    opacity:0;
+    transition:opacity .28s ease;
+  }
 
   .gate-cta{ position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); z-index:8;
     width:86px; height:86px; border:none; cursor:pointer; padding:0;
@@ -559,6 +587,10 @@ const CONFIG = {
     </div>
     <div class="gate-post left" aria-hidden="true"></div>
     <div class="gate-post right" aria-hidden="true"></div>
+    <div class="gate-pots" aria-hidden="true">
+      <img class="pot-blue" id="gatePotBlue" src="" alt="">
+      <img class="pot-tall" id="gatePotTall" src="" alt="">
+    </div>
     <button class="gate-cta" id="seal" aria-label="Åpne hagen">
       <span class="initials" id="sealInitials"></span>
     </button>
@@ -799,11 +831,45 @@ const CONFIG = {
       $("gateImgR").src = imgs.gate;
     }
     if(imgs.gateGarden) $("gateGarden").src = imgs.gateGarden;
+    if(imgs.potBlue) $("gatePotBlue").src = imgs.potBlue;
+    if(imgs.potTall) $("gatePotTall").src = imgs.potTall;
     if(imgs.hero) $("heroImg").src = imgs.hero;
     if(imgs.roseBotanical) $("introRose").src = imgs.roseBotanical;
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
 
     resolveHeroVideo();
+  }
+
+  function objectCoverRect(nw, nh, cw, ch, posX, posY){
+    const scale = Math.max(cw / nw, ch / nh);
+    const rw = nw * scale;
+    const rh = nh * scale;
+    return { left:(cw - rw) * posX, top:(ch - rh) * posY, scale };
+  }
+
+  function syncGatePots(){
+    const cover = $("cover");
+    const gate = $("gateImgL");
+    const blue = $("gatePotBlue");
+    const tall = $("gatePotTall");
+    if(!cover || !gate || !blue || !tall || !gate.naturalWidth) return;
+
+    const { left, top, scale } = objectCoverRect(
+      gate.naturalWidth, gate.naturalHeight, cover.clientWidth, cover.clientHeight, .5, .58
+    );
+
+    const placements = [
+      { el: blue, x:0.00, y:0.58, w:0.50, h:0.42, pos:"left bottom" },
+      { el: tall, x:0.50, y:0.58, w:0.50, h:0.42, pos:"right bottom" }
+    ];
+
+    placements.forEach(({ el, x, y, w, h, pos }) => {
+      el.style.left = `${left + gate.naturalWidth * x * scale}px`;
+      el.style.top = `${top + gate.naturalHeight * y * scale}px`;
+      el.style.width = `${gate.naturalWidth * w * scale}px`;
+      el.style.height = `${gate.naturalHeight * h * scale}px`;
+      el.style.objectPosition = pos;
+    });
   }
 
   function renderGallery(){
@@ -1094,7 +1160,12 @@ const CONFIG = {
 
   resetToStart();
   addEventListener("pageshow", resetToStart);
+  addEventListener("resize", syncGatePots, { passive:true });
+  $("gateImgL").addEventListener("load", syncGatePots);
+  $("gatePotBlue").addEventListener("load", syncGatePots);
+  $("gatePotTall").addEventListener("load", syncGatePots);
   applyMedia();
+  requestAnimationFrame(syncGatePots);
   render();
 })();
 </script>
