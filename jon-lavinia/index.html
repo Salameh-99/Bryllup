@@ -247,10 +247,7 @@ const CONFIG = {
   .gate-post.left{ left:0; }
   .gate-post.right{ right:0; }
 
-  .gate-vines,.gate-bloom,.hero-roses,.hero-blossoms,.hero-pots{ display:none !important; }
-
-  /* Potter ligger allerede i portbildet — ingen ekstra overlegg */
-  .gate-pots{ display:none !important; }
+  .gate-vines,.gate-bloom,.hero-roses,.hero-blossoms,.hero-pots,.gate-pots{ display:none !important; }
 
   .gate-cta{ position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); z-index:8;
     width:86px; height:86px; border:none; cursor:pointer; padding:0;
@@ -562,10 +559,6 @@ const CONFIG = {
     </div>
     <div class="gate-post left" aria-hidden="true"></div>
     <div class="gate-post right" aria-hidden="true"></div>
-    <div class="gate-pots" aria-hidden="true">
-      <img class="pot-blue" id="gatePotBlue" src="" alt="">
-      <img class="pot-tall" id="gatePotTall" src="" alt="">
-    </div>
     <button class="gate-cta" id="seal" aria-label="Åpne hagen">
       <span class="initials" id="sealInitials"></span>
     </button>
@@ -806,8 +799,6 @@ const CONFIG = {
       $("gateImgR").src = imgs.gate;
     }
     if(imgs.gateGarden) $("gateGarden").src = imgs.gateGarden;
-    if(imgs.potBlue) $("gatePotBlue").src = imgs.potBlue;
-    if(imgs.potTall) $("gatePotTall").src = imgs.potTall;
     if(imgs.hero) $("heroImg").src = imgs.hero;
     if(imgs.roseBotanical) $("introRose").src = imgs.roseBotanical;
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
