@@ -34,7 +34,8 @@ const CONFIG = {
      img/couple.jpg       ← parbilde av Lavinia & Jon
      img/garden-1.jpg …   ← flere hage-/interiørbilder (valgfritt)
   */
-  heroVideo: "video/fountain.mp4",
+  /* Bruk fountain-preview til din egen fountain.mp4 er lagt inn */
+  heroVideo: "video/fountain-preview.mp4",
   heroVideoFallback: "video/fountain-preview.mp4",
 
   venue: {
@@ -311,15 +312,17 @@ const CONFIG = {
 
   /* ── FONTENE (første seksjon) ─────────────────────── */
   .fountain-open{ --hero-w:100%; position:relative; min-height:100svh; min-height:100dvh;
-    overflow:hidden; background:var(--cream); }
+    overflow:hidden; background:#1a2018; }
 
   .hero-media{ position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
     width:var(--hero-w); z-index:0; overflow:hidden; }
-  .hero-motion{ position:absolute; inset:0; opacity:0; transform:scale(1.06);
-    transition:opacity 1.2s ease .45s, transform 10s ease .45s; }
-  body.invitation-open .hero-motion{ opacity:1; transform:scale(1); }
+  .hero-motion{ position:absolute; inset:0; opacity:0; transform:scale(1.22);
+    transition:opacity 1.2s ease .45s, transform 12s ease .45s; }
+  body.invitation-open .hero-motion{ opacity:1; transform:scale(1.12); }
 
-  .hero-video,.hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 42%; }
+  /* Zoom inn på fontenen i hagen (ikke hele fasaden) */
+  .hero-video,.hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    object-position:48% 72%; }
   .hero-bg{ z-index:0; }
   .hero-video{ z-index:1; }
 
@@ -414,21 +417,26 @@ const CONFIG = {
   }
 
   .hero-veil,.fountain-veil{ position:absolute; inset:0; z-index:4; pointer-events:none;
-    background:linear-gradient(180deg, rgba(243,238,228,.22) 0%, transparent 28%, transparent 68%,
-      rgba(243,238,228,.4) 86%, var(--cream) 97%); }
+    background:linear-gradient(180deg, rgba(26,32,24,.35) 0%, transparent 32%, transparent 58%,
+      rgba(243,238,228,.55) 88%, var(--cream) 98%); }
 
   .scroll-cue{ position:absolute; bottom:max(1.8rem, calc(env(safe-area-inset-bottom) + 1.2rem));
     left:50%; transform:translateX(-50%);
-    z-index:6; color:rgba(74,69,63,.8); font-family:var(--display); font-size:.62rem;
+    z-index:6; color:rgba(243,238,228,.92); font-family:var(--display); font-size:.62rem;
     letter-spacing:.24em; text-transform:uppercase; text-decoration:none; opacity:0; pointer-events:auto;
-    text-shadow:0 1px 8px rgba(243,238,228,.7); }
+    text-shadow:0 2px 12px rgba(0,0,0,.45); }
   body.invitation-open .scroll-cue{ animation:fadeUpCenter .7s ease 1.1s forwards, bob 2.2s ease 1.8s infinite; }
   @keyframes fadeUpCenter{ to{ opacity:1; transform:translateX(-50%); } }
   @keyframes bob{ 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(5px)} }
   .scroll-cue::after{ content:"⌄"; display:block; font-size:1rem; margin-top:.15rem; }
 
   /* ── NAVN / HERO under Sted ───────────────────────── */
-  .names-hero{ text-align:center; padding-top:2.4rem; padding-bottom:2.6rem; }
+  .names-hero{ text-align:center; padding:3.2rem 1.2rem 3.4rem;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% 0%, rgba(168,181,154,.18), transparent 70%),
+      linear-gradient(180deg, var(--cream) 0%, #ebe4d6 48%, var(--cream) 100%);
+    border-top:1px solid rgba(138,123,108,.14);
+    border-bottom:1px solid rgba(138,123,108,.14); }
   .names-hero .hero-label{ font-family:var(--display); font-size:.72rem; letter-spacing:.32em; text-transform:uppercase;
     color:var(--ink-muted); margin-bottom:.35rem; }
   .names-hero .hero-date-short{ font-family:var(--display); font-size:clamp(.95rem,3vw,1.15rem);
