@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Bryllupsinvitasjon — Lavinia & Jon, 17. juli 2027, Bjellandstrand gård Tromøya">
 <title>Lavinia & Jon</title>
+<meta name="theme-revision" content="fountain-first-20260804">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -921,6 +922,19 @@ const CONFIG = {
     hv.load();
   }
 
+  async function resolveHeroVideo(){
+    const primary = CONFIG.heroVideo || "";
+    const fallback = CONFIG.heroVideoFallback || "";
+    const candidates = [...new Set([primary, fallback, "video/fountain.mp4"].filter(Boolean))];
+    for(const src of candidates){
+      try{
+        const res = await fetch(src, { method:"HEAD", cache:"no-cache" });
+        if(res.ok){ setHeroVideo(src); return; }
+      }catch(_){ /* prøv neste */ }
+    }
+    setHeroVideo(fallback || primary || "");
+  }
+
   function applyMedia(){
     const imgs = CONFIG.images || {};
     if(imgs.gate){
@@ -940,7 +954,7 @@ const CONFIG = {
     if(imgs.roseBotanical) $("introRose").src = imgs.roseBotanical;
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
 
-    setHeroVideo(CONFIG.heroVideo || CONFIG.heroVideoFallback || "");
+    resolveHeroVideo();
   }
 
   function renderGallery(){
