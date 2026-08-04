@@ -449,19 +449,6 @@ const CONFIG = {
   .names-hero .hero-name,.names-hero .hero-amp{ font-family:var(--script); color:var(--moss-deep); }
   .names-hero .hero-name{ font-size:clamp(2.5rem,11vw,3.8rem); }
   .names-hero .hero-amp{ font-size:clamp(1.3rem,4.5vw,1.9rem); color:var(--taupe); margin:.05em 0; }
-  .names-hero .reveal:not(.in) .hero-label,
-  .names-hero .reveal:not(.in) .hero-date-short,
-  .names-hero .reveal:not(.in) .hero-name,
-  .names-hero .reveal:not(.in) .hero-amp{ opacity:0; transform:translateY(14px); }
-  .names-hero .reveal.in .hero-label,
-  .names-hero .reveal.in .hero-date-short,
-  .names-hero .reveal.in .hero-name,
-  .names-hero .reveal.in .hero-amp{ animation:fadeUp .75s ease forwards; }
-  .names-hero .reveal.in .hero-label{ animation-delay:.05s; }
-  .names-hero .reveal.in .hero-date-short{ animation-delay:.15s; }
-  .names-hero .reveal.in .hero-name:nth-child(1){ animation-delay:.28s; }
-  .names-hero .reveal.in .hero-amp{ animation-delay:.4s; }
-  .names-hero .reveal.in .hero-name:nth-child(3){ animation-delay:.52s; }
   @keyframes fadeUp{ to{ opacity:1; transform:none; } }
 
   .torn-top,.torn-bottom{ position:relative; height:28px; width:100%; z-index:6; pointer-events:none; }
