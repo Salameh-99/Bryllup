@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Bryllupsinvitasjon — Lavinia & Jon, 17. juli 2027, Bjellandstrand gård Tromøya">
 <title>Lavinia & Jon</title>
-<meta name="theme-revision" content="ekte-port-potter-20260804">
+<meta name="theme-revision" content="fjern-blomst-potter-20260804">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -247,63 +247,10 @@ const CONFIG = {
   .gate-post.left{ left:0; }
   .gate-post.right{ right:0; }
 
-  .gate-vines{ position:absolute; inset:0; z-index:5; pointer-events:none; }
-  .gate-vines img{ position:absolute; width:min(42vw,180px); height:auto; opacity:.92;
-    filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));
-    animation:vineSway 5s ease-in-out infinite; }
-  .gate-vines .vl{ left:-2%; bottom:8%; transform-origin:bottom left; }
-  .gate-vines .vr{ right:-2%; bottom:8%; transform:scaleX(-1); transform-origin:bottom right; animation-delay:1.1s; }
-  @keyframes vineSway{ 0%,100%{ transform:rotate(-1.5deg) } 50%{ transform:rotate(2deg) } }
-  .gate-vines .vr{ animation-name:vineSwayR; }
-  @keyframes vineSwayR{ 0%,100%{ transform:scaleX(-1) rotate(-1.5deg) } 50%{ transform:scaleX(-1) rotate(2deg) } }
-  .cover.opening .gate-vines{ opacity:0; transition:opacity .6s ease .2s; }
+  .gate-vines,.gate-bloom,.hero-roses,.hero-blossoms,.hero-pots{ display:none !important; }
 
-  /* Animerte blomsterpotter — plassert over pottene i portbildet */
-  .gate-pots{ position:absolute; inset:0; z-index:7; pointer-events:none; overflow:hidden; }
-  .gate-pots img{ position:absolute; height:auto; opacity:0;
-    filter:drop-shadow(0 8px 14px rgba(0,0,0,.22));
-    transform-origin:50% 100%; }
-  .gate-pots .pot-blue{ left:0; bottom:1%; width:min(51vw,236px);
-    animation:potReveal 1s cubic-bezier(.2,.8,.2,1) .4s forwards, potSway 5s ease-in-out 1.6s infinite; }
-  .gate-pots .pot-tall{ right:0; bottom:1%; width:min(51vw,236px);
-    animation:potReveal 1.05s cubic-bezier(.2,.8,.2,1) .55s forwards, potSwayR 5.4s ease-in-out 1.75s infinite; }
-  @keyframes potReveal{
-    0%{ opacity:0; transform:translateY(10px) scale(.97); }
-    100%{ opacity:1; transform:translateY(0) scale(1); }
-  }
-  @keyframes potRise{
-    0%{ opacity:0; transform:translateY(36px) scale(.82); }
-    100%{ opacity:1; transform:translateY(0) scale(1); }
-  }
-  @keyframes potSway{
-    0%,100%{ transform:translateY(0) rotate(-1.2deg); }
-    50%{ transform:translateY(-5px) rotate(1.6deg); }
-  }
-  @keyframes potSwayR{
-    0%,100%{ transform:translateY(0) rotate(1deg); }
-    50%{ transform:translateY(-4px) rotate(-1.4deg); }
-  }
-  .cover.opening .gate-pots .pot-blue{
-    animation:potExitL .7s ease forwards; }
-  .cover.opening .gate-pots .pot-tall{
-    animation:potExitR .7s ease .08s forwards; }
-  @keyframes potExitL{
-    to{ opacity:0; transform:translate(-18%, 12%) scale(.9) rotate(-6deg); }
-  }
-  @keyframes potExitR{
-    to{ opacity:0; transform:translate(18%, 12%) scale(.9) rotate(6deg); }
-  }
-
-  .gate-bloom{ position:absolute; z-index:6; width:14px; height:14px; border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #f3d7d2, var(--blush-deep) 55%, #b88a84);
-    box-shadow:0 0 0 3px rgba(168,181,154,.25); opacity:.85;
-    animation:bloomPulse 2.8s ease-in-out infinite; }
-  .gate-bloom.b1{ top:22%; left:10%; animation-delay:.2s; }
-  .gate-bloom.b2{ top:38%; right:12%; width:11px; height:11px; animation-delay:.9s; }
-  .gate-bloom.b3{ bottom:28%; left:14%; width:12px; height:12px; animation-delay:1.4s; }
-  .gate-bloom.b4{ top:18%; right:18%; width:10px; height:10px; animation-delay:.5s; }
-  @keyframes bloomPulse{ 0%,100%{ transform:scale(1); opacity:.75 } 50%{ transform:scale(1.25); opacity:1 } }
-  .cover.opening .gate-bloom{ opacity:0; transition:opacity .4s ease; }
+  /* Potter ligger allerede i portbildet — ingen ekstra overlegg */
+  .gate-pots{ display:none !important; }
 
   .gate-cta{ position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); z-index:8;
     width:86px; height:86px; border:none; cursor:pointer; padding:0;
@@ -331,21 +278,6 @@ const CONFIG = {
   @keyframes hintPulse{ 0%,100%{opacity:.7} 50%{opacity:1} }
   .cover-hint::before{ content:"⌃"; display:block; font-size:.95rem; margin-bottom:.25rem; opacity:.55; }
 
-  .spark{ position:fixed; z-index:201; pointer-events:none; opacity:0;
-    width:10px; height:10px; border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #fff7f2, var(--blush));
-    animation:spark .9s ease-out forwards; }
-  @keyframes spark{ 0%{opacity:1;transform:translate(0,0) scale(.35)} 100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.2)} }
-
-  .petal{ position:fixed; top:-24px; z-index:40; pointer-events:none; opacity:0;
-    width:16px; height:16px; animation:fall linear forwards; }
-  .petal svg{ width:100%; height:100%; display:block; filter:drop-shadow(0 1px 2px rgba(0,0,0,.12)); }
-  @keyframes fall{
-    0%{ opacity:0; transform:translateY(0) translateX(0) rotate(0) scale(.7); }
-    12%{ opacity:.9; }
-    100%{ opacity:0; transform:translateY(105vh) translateX(var(--drift, 40px)) rotate(420deg) scale(1.05); }
-  }
-
   .open-flash{ position:fixed; inset:0; z-index:199; pointer-events:none; opacity:0;
     background:radial-gradient(circle at 50% 48%, rgba(243,238,228,.85) 0%, rgba(168,181,154,.25) 40%, transparent 70%); }
   .open-flash.on{ animation:openFlash 1s ease forwards; }
@@ -371,57 +303,6 @@ const CONFIG = {
 
   /* CSS-fontene skjules — vi viser den ekte fontenen fra Bjellandstrand */
   .fountain{ display:none !important; }
-
-  .hero-roses{ position:absolute; inset:0; z-index:3; pointer-events:none; overflow:visible; }
-  .hero-roses img{ position:absolute; height:auto; opacity:0;
-    filter:drop-shadow(0 8px 16px rgba(74,87,64,.18)); }
-  #roseLeft{ left:2%; bottom:18%; width:38%; max-width:170px; transform-origin:30% 85%;
-    transform:translateY(28px) scale(.55) rotate(-8deg); }
-  #roseRight{ right:1%; bottom:16%; width:40%; max-width:176px; transform-origin:70% 85%;
-    transform:scaleX(-1) translateY(28px) scale(.55) rotate(-8deg); }
-  body.invitation-open #roseLeft{
-    animation:roseBloom 1.35s cubic-bezier(.2,.8,.2,1) .55s forwards, roseSway 4.5s ease-in-out 2s infinite; }
-  body.invitation-open #roseRight{
-    animation:roseBloomFlip 1.35s cubic-bezier(.2,.8,.2,1) .72s forwards, roseSwayFlip 4.8s ease-in-out 2.2s infinite; }
-
-  /* Potter også over fontene-hero etter åpning */
-  .hero-pots{ display:none; }
-  @keyframes roseBloom{
-    0%{ opacity:0; transform:translateY(28px) scale(.55) rotate(-8deg); }
-    60%{ opacity:1; transform:translateY(-4px) scale(1.06) rotate(2deg); }
-    100%{ opacity:1; transform:translateY(0) scale(1) rotate(0deg); }
-  }
-  @keyframes roseBloomFlip{
-    0%{ opacity:0; transform:scaleX(-1) translateY(28px) scale(.55) rotate(-8deg); }
-    60%{ opacity:1; transform:scaleX(-1) translateY(-4px) scale(1.06) rotate(2deg); }
-    100%{ opacity:1; transform:scaleX(-1) translateY(0) scale(1) rotate(0deg); }
-  }
-  @keyframes roseSway{
-    0%,100%{ transform:translateY(0) rotate(-1deg); }
-    50%{ transform:translateY(-3px) rotate(2deg); }
-  }
-  @keyframes roseSwayFlip{
-    0%,100%{ transform:scaleX(-1) translateY(0) rotate(-1deg); }
-    50%{ transform:scaleX(-1) translateY(-3px) rotate(2deg); }
-  }
-
-  /* Floating blossoms in hero after open */
-  .hero-blossoms{ position:absolute; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
-  .hero-blossoms span{ position:absolute; width:10px; height:10px; border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, #fff5f0, var(--blush-deep));
-    opacity:0; }
-  body.invitation-open .hero-blossoms span{ animation:blossomFloat 7s ease-in-out infinite; }
-  .hero-blossoms span:nth-child(1){ left:18%; top:62%; animation-delay:.4s; }
-  .hero-blossoms span:nth-child(2){ left:72%; top:55%; width:8px; height:8px; animation-delay:1.2s; }
-  .hero-blossoms span:nth-child(3){ left:30%; top:40%; width:7px; height:7px; animation-delay:2s; }
-  .hero-blossoms span:nth-child(4){ left:80%; top:70%; width:9px; height:9px; animation-delay:2.8s; }
-  .hero-blossoms span:nth-child(5){ left:12%; top:48%; width:6px; height:6px; animation-delay:1.6s; }
-  @keyframes blossomFloat{
-    0%{ opacity:0; transform:translateY(12px) scale(.6); }
-    20%{ opacity:.85; }
-    80%{ opacity:.7; }
-    100%{ opacity:0; transform:translateY(-70px) scale(1.1); }
-  }
 
   .hero-veil,.fountain-veil{ position:absolute; inset:0; z-index:4; pointer-events:none;
     background:
@@ -518,8 +399,7 @@ const CONFIG = {
   @keyframes tlIn{ to{ opacity:1; transform:none; } }
   .tl-item.rose-event .tl-event{ color:var(--ink); font-family:var(--display); font-size:.82rem;
     letter-spacing:.04em; text-transform:uppercase; font-weight:500; }
-  .tl-item.rose-event .tl-rose{ animation:rosePulse 2.5s ease-in-out infinite; }
-  @keyframes rosePulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+  .tl-item.rose-event .tl-rose{ display:block; }
   .tl-time{ text-align:end; font-family:var(--display); font-size:.95rem; color:var(--ink);
     letter-spacing:.02em; line-height:1.2; white-space:nowrap; }
   .tl-marker{ display:grid; place-items:center; z-index:1; width:var(--tl-mark); height:var(--tl-mark);
@@ -647,8 +527,6 @@ const CONFIG = {
   @media (max-width:720px){
     .gate-cta{ width:76px; height:76px; }
     .gate-cta .initials{ font-size:1.35rem; }
-    #roseLeft{ left:0; bottom:16%; width:42%; max-width:150px; }
-    #roseRight{ right:-1%; bottom:14%; width:44%; max-width:156px; }
     .program-panel{ padding:1.2rem .2rem 1rem; }
     .timeline{ max-width:260px; }
     .tl-sprig{ width:52px; }
@@ -656,16 +534,13 @@ const CONFIG = {
   }
   @media (prefers-reduced-motion:reduce){
     .scroll-cue,.cover-hint,.gate-cta,.rsvp-open-btn,.fountain-jet,.fountain-drop{ animation:none !important; }
-    body.invitation-open .scroll-cue,body.invitation-open #roseLeft,body.invitation-open #roseRight,
-    body.invitation-open .fountain{ opacity:1; transform:none; animation:none !important; }
-    body.invitation-open #roseRight{ transform:scaleX(-1); }
+    body.invitation-open .scroll-cue,body.invitation-open .fountain{ opacity:1; transform:none; animation:none !important; }
     body.invitation-open .hero-motion{ opacity:1; transform:none; }
     .reveal,.tl-item,.names-hero .hero-label,.names-hero .hero-date-short,
     .names-hero .hero-name,.names-hero .hero-amp{ opacity:1; transform:none; animation:none !important; }
     .timeline::before{ transform:translateX(-50%) scaleY(1); }
     .timeline.show .tl-item{ animation:none; opacity:1; transform:none; }
-    .petal,.spark,.gate-bloom,.gate-vines img,.hero-blossoms span{ display:none !important; }
-    .gate-pots img,.hero-pots img{ opacity:1 !important; transform:none !important; animation:none !important; }
+    .gate-pots img{ opacity:1 !important; transform:none !important; animation:none !important; }
     .cover.opening .gate-door.left,.cover.opening .gate-door.right{ transform:none; opacity:0; }
   }
 </style>
@@ -687,18 +562,10 @@ const CONFIG = {
     </div>
     <div class="gate-post left" aria-hidden="true"></div>
     <div class="gate-post right" aria-hidden="true"></div>
-    <div class="gate-vines" aria-hidden="true">
-      <img class="vl" id="gateVineL" src="" alt="">
-      <img class="vr" id="gateVineR" src="" alt="">
-    </div>
     <div class="gate-pots" aria-hidden="true">
       <img class="pot-blue" id="gatePotBlue" src="" alt="">
       <img class="pot-tall" id="gatePotTall" src="" alt="">
     </div>
-    <span class="gate-bloom b1" aria-hidden="true"></span>
-    <span class="gate-bloom b2" aria-hidden="true"></span>
-    <span class="gate-bloom b3" aria-hidden="true"></span>
-    <span class="gate-bloom b4" aria-hidden="true"></span>
     <button class="gate-cta" id="seal" aria-label="Åpne hagen">
       <span class="initials" id="sealInitials"></span>
     </button>
@@ -728,17 +595,6 @@ const CONFIG = {
           <div class="fountain-tier t2"></div>
           <div class="fountain-tier t1"></div>
           <div class="fountain-basin"></div>
-        </div>
-        <div class="hero-roses">
-          <img id="roseLeft" src="" alt="">
-          <img id="roseRight" src="" alt="">
-        </div>
-        <div class="hero-pots" aria-hidden="true">
-          <img id="heroPotBlue" src="" alt="">
-          <img id="heroPotTall" src="" alt="">
-        </div>
-        <div class="hero-blossoms" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
       <div class="hero-veil fountain-veil"></div>
@@ -950,22 +806,8 @@ const CONFIG = {
       $("gateImgR").src = imgs.gate;
     }
     if(imgs.gateGarden) $("gateGarden").src = imgs.gateGarden;
-    if(imgs.roseLeft){
-      $("roseLeft").src = imgs.roseLeft;
-      $("gateVineL").src = imgs.roseLeft;
-    }
-    if(imgs.roseRight){
-      $("roseRight").src = imgs.roseRight;
-      $("gateVineR").src = imgs.roseRight;
-    }
-    if(imgs.potBlue){
-      $("gatePotBlue").src = imgs.potBlue;
-      $("heroPotBlue").src = imgs.potBlue;
-    }
-    if(imgs.potTall){
-      $("gatePotTall").src = imgs.potTall;
-      $("heroPotTall").src = imgs.potTall;
-    }
+    if(imgs.potBlue) $("gatePotBlue").src = imgs.potBlue;
+    if(imgs.potTall) $("gatePotTall").src = imgs.potTall;
     if(imgs.hero) $("heroImg").src = imgs.hero;
     if(imgs.roseBotanical) $("introRose").src = imgs.roseBotanical;
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
@@ -1190,47 +1032,7 @@ const CONFIG = {
     }
   }
 
-  const FLOWER_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="12" cy="12" r="3.2" fill="#E8C4A8"/>
-    <ellipse cx="12" cy="5.5" rx="3.2" ry="4.2" fill="#D8B8B4"/>
-    <ellipse cx="12" cy="18.5" rx="3.2" ry="4.2" fill="#C4A09C"/>
-    <ellipse cx="5.5" cy="12" rx="4.2" ry="3.2" fill="#D8B8B4"/>
-    <ellipse cx="18.5" cy="12" rx="4.2" ry="3.2" fill="#C4A09C"/>
-  </svg>`;
-
-  function spawnSparkles(){
-    if(reduceMotion) return;
-    const s = $("seal"); if(!s) return;
-    const r = s.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
-    for(let i=0;i<16;i++){
-      const sp = document.createElement("div"); sp.className = "spark";
-      const a = Math.random()*Math.PI*2, dist = 60 + Math.random()*120;
-      sp.style.left = cx+"px"; sp.style.top = cy+"px";
-      sp.style.width = (7+Math.random()*8)+"px";
-      sp.style.height = sp.style.width;
-      sp.style.setProperty("--dx", (Math.cos(a)*dist).toFixed(0)+"px");
-      sp.style.setProperty("--dy", (Math.sin(a)*dist).toFixed(0)+"px");
-      document.body.appendChild(sp); setTimeout(()=>sp.remove(),950);
-    }
-  }
-  function spawnPetals(){
-    if(reduceMotion) return;
-    for(let i=0;i<22;i++){
-      const p = document.createElement("div");
-      p.className = "petal";
-      p.innerHTML = FLOWER_SVG;
-      p.style.left = (Math.random()*100)+"vw";
-      p.style.width = (12+Math.random()*14)+"px";
-      p.style.height = p.style.width;
-      p.style.setProperty("--drift", ((Math.random()-.5)*120).toFixed(0)+"px");
-      p.style.animationDuration = (5.5+Math.random()*6)+"s";
-      p.style.animationDelay = (Math.random()*2.8)+"s";
-      document.body.appendChild(p);
-      setTimeout(()=>p.remove(), 15000);
-    }
-  }
-
-  const OPEN = { hero:520, petals:680, petals2:1600, hide:1900 };
+  const OPEN = { hero:520, hide:1900 };
 
   let opened = false;
   function openInvitation(){
@@ -1238,7 +1040,6 @@ const CONFIG = {
     const cover = $("cover");
     const flash = $("openFlash");
 
-    spawnSparkles();
     if(flash){ flash.classList.add("on"); setTimeout(()=>flash.classList.remove("on"), 1000); }
 
     cover.classList.add("opening");
@@ -1251,8 +1052,6 @@ const CONFIG = {
       if(CONFIG.musicSrc) setMusicState(true);
     }, OPEN.hero);
 
-    setTimeout(spawnPetals, OPEN.petals);
-    setTimeout(spawnPetals, OPEN.petals2);
     setTimeout(() => {
       cover.classList.add("done");
       cover.style.display = "none";
