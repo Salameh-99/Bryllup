@@ -61,6 +61,7 @@ const CONFIG = {
     decorFlourish:    "img/decor/decor-flourish.png",
     roseBotanical:    "img/decor/rose-botanical.png",
     coupleHero:       "img/couple-hero.jpg",
+    placePhoto:       "",
     hero:             "img/fountain-still.jpg",
     heroFallback:     "img/fountain-still.jpg",
     programSprigLeft: "img/decor/left-element_1.png",
@@ -71,8 +72,8 @@ const CONFIG = {
       { src: "img/venue-manor.jpg",     tall: false, pos: "center 54%" },
       { src: "img/couple-3.jpg",        tall: false, pos: "center 24%" },
       { src: "img/venue-garden.jpg",    tall: true,  pos: "center center" },
-      { src: "img/venue-interior.jpg",  tall: false, pos: "center center" },
-      { src: "img/couple-2.jpg",        tall: false, pos: "center 32%" }
+      { src: "img/couple-2.jpg",        tall: false, pos: "center 26%" },
+      { src: "img/venue-courtyard.jpg", tall: false, pos: "center center" }
     ]
   },
 
@@ -472,6 +473,22 @@ const CONFIG = {
     border:1px solid rgba(95,111,78,.16); border-radius:2px; overflow:hidden;
     box-shadow:0 4px 20px rgba(74,69,63,.06); }
   .map-frame{ width:100%; aspect-ratio:4/3; border:0; display:block; }
+  .place-photo{
+    max-width:var(--content-w);
+    margin:1rem auto 0;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 10px 28px rgba(74,69,63,.10);
+    background:var(--beige);
+  }
+  .place-photo[hidden]{ display:none; }
+  .place-photo img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    object-position:center 35%;
+    display:block;
+  }
   .venue-btns{ display:flex; gap:.55rem; margin-top:1rem; flex-wrap:wrap; }
   .btn{ flex:1; text-align:center; cursor:pointer; font-family:var(--display); font-size:.82rem; letter-spacing:.06em;
     padding:.72rem .9rem; border-radius:2px; text-decoration:none; transition:.2s; }
@@ -686,6 +703,9 @@ const CONFIG = {
       <div class="map-wrap">
         <iframe class="map-frame" id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kart"></iframe>
       </div>
+      <figure class="place-photo" id="placePhotoWrap" hidden>
+        <img id="placePhoto" src="" alt="">
+      </figure>
       <div class="venue-btns">
         <a class="btn btn-gold" id="saveBtn" target="_blank" rel="noopener"></a>
         <a class="btn btn-ghost" id="dirBtn" target="_blank" rel="noopener"></a>
@@ -848,6 +868,27 @@ const CONFIG = {
     setHeroVideo(fallback || primary || "");
   }
 
+  async function resolvePlacePhoto(){
+    const explicit = CONFIG.images?.placePhoto;
+    const candidates = [
+      explicit,
+      "img/katt.jpg",
+      "img/katte.jpg",
+      "img/cat.jpg",
+      "img/katt.png",
+      "img/katte.png",
+      "img/cat.png"
+    ].filter(Boolean);
+    const unique = [...new Set(candidates)];
+    for(const src of unique){
+      try{
+        const res = await fetch(src, { method:"HEAD", cache:"no-cache" });
+        if(res.ok) return src;
+      }catch(_){ /* prøv neste */ }
+    }
+    return "";
+  }
+
   function applyMedia(){
     const imgs = CONFIG.images || {};
     if(imgs.gate){
@@ -862,6 +903,15 @@ const CONFIG = {
     document.querySelectorAll('[id^="flourish"]').forEach(el => { if(imgs.decorFlourish) el.src = imgs.decorFlourish; });
 
     resolveHeroVideo();
+    resolvePlacePhoto().then(src => {
+      const wrap = $("placePhotoWrap");
+      const img = $("placePhoto");
+      if(!wrap || !img) return;
+      if(!src){ wrap.hidden = true; return; }
+      img.onload = () => { wrap.hidden = false; };
+      img.onerror = () => { wrap.hidden = true; };
+      img.src = src;
+    });
   }
 
   function objectCoverRect(nw, nh, cw, ch, posX, posY){
