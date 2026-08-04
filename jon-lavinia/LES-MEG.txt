@@ -12,7 +12,7 @@ LEGG INN EGNE FILER (når du er klar)
 ------------------------------------
 Dropp filene direkte i mappene — ingen kodeendring trengs:
 
-  jon-lavinia/img/decor/garden-gate.jpg   Cover-porten (ekte Bjellandstrand-inngang)
+  jon-lavinia/img/decor/garden-gate.png   Cover-porten (ekte Bjellandstrand-inngang)
                                           Overskriv med ditt eget portbilde om ønskelig
 
   jon-lavinia/img/fountain.jpg     Nærbilde av den svarte fontenen
