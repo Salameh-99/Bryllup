@@ -15,11 +15,11 @@ Dropp filene direkte i mappene — ingen kodeendring trengs:
   jon-lavinia/img/decor/garden-gate.png   Cover-porten (ekte Bjellandstrand-inngang)
                                           Overskriv med ditt eget portbilde om ønskelig
 
-  jon-lavinia/img/couple-hero.jpg  Parbilde av Lavinia & Jon
-                                   (første skjerm etter porten)
-
-  jon-lavinia/video/fountain.mp4   Fontene-video (hero under Sted)
+  jon-lavinia/video/fountain.mp4   Fontene-video (hero etter porten)
   jon-lavinia/img/fountain.jpg     Fallback-stillbilde for fontene-hero
+
+  jon-lavinia/img/couple-hero.jpg  Parbilde av Lavinia & Jon
+                                   (vises under Sted)
 
   jon-lavinia/img/garden-1.jpg     Ekstra hage-/interiørbilder
   jon-lavinia/img/garden-2.jpg     (valgfritt — skjulte til filene finnes)
@@ -32,7 +32,7 @@ FØR LEVERANSE
 [ ] Sett rsvpEmail i CONFIG (nå: din-epost@example.com)
 [ ] Overskriv couple-hero.jpg / fountain.mp4 ved behov
 [ ] Sett musicSrc hvis ønskelig
-[ ] Test på mobil — hageport åpner, paret først, fontene-hero under Sted
+[ ] Test på mobil — hageport åpner, fontene-hero med navn først
 
 
 REDIGERE
@@ -43,9 +43,9 @@ REDIGERE
   fullNames / initials     Fullt navn og port-monogram (L&J)
   date                     "2027-07-17T16:00:00"
   venue                    Bjellandstrand (+ short til hero)
-  images.coupleHero        Parbilde etter porten
-  heroVideo                Fontene-video under Sted
+  heroVideo                Fontene-video (hero etter porten)
   images.hero              Fontene-still (fallback)
+  images.coupleHero        Parbilde under Sted
   images.gallery           Galleri (manglende filer skjules)
   program                  Tidsplan
   t                        Tekster
@@ -57,23 +57,24 @@ FILSTRUKTUR
     index.html
     LES-MEG.txt
     img/
-      couple-hero.jpg      ← første skjerm etter porten
       fountain.jpg         ← fallback for fontene-hero
+      couple-hero.jpg      ← under Sted
       couple.jpg           ← galleri
       garden-1.jpg         ← valgfritt
       garden-2.jpg         ← valgfritt
       venue-*.jpg          Hagebilder fra Bjellandstrand
       decor/               Port, roser …
     video/
-      fountain.mp4         ← fontene-hero under Sted
+      fountain.mp4         ← fontene-hero etter porten
       fountain-preview.mp4 Fallback
 
 
 COVER
 -----
 Hageport med to dører som svinger opp — ikke konvolutt/vokssegl.
-Etter åpning: paret fyller første skjerm.
-Fontene-videoen ligger under Sted som hero med dato, sted og navn.
+Etter åpning: fontene-videoen fyller første skjerm som hero
+med dato, sted og navn (Lavinia & Jon).
+Parbildet ligger under Sted.
 
 
 SE LOKALT
