@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Bryllupsinvitasjon — Lavinia & Jon, 17. juli 2027, Bjellandstrand gård Tromøya">
 <title>Lavinia & Jon</title>
-<meta name="theme-revision" content="fountain-img9009-20260805">
+<meta name="theme-revision" content="skrift-paa-parbilde-20260805">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,9 +31,9 @@ const CONFIG = {
 
   musicSrc: "",
   /* ── Egne media (legg filene i mappene under) ──
-     video/fountain.mp4   ← fontene-video = hero etter porten
-     img/fountain.jpg     ← fallback-stillbilde for hero
-     img/couple-hero.jpg  ← parbilde under Sted
+     img/couple-hero.jpg  ← parbilde = hero etter porten (med dato/sted/navn)
+     video/fountain.mp4   ← fontene-video under Sted
+     img/fountain.jpg     ← fallback-stillbilde for fontenen
      img/garden-1.jpg …   ← flere hage-/interiørbilder (valgfritt)
   */
   heroVideo: "video/fountain.mp4",
@@ -307,105 +307,105 @@ const CONFIG = {
   .open-flash.on{ animation:openFlash 1s ease forwards; }
   @keyframes openFlash{ 0%{opacity:0} 30%{opacity:.8} 100%{opacity:0} }
 
-  /* ── FONTENE-HERO (første skjerm etter porten) ─────── */
-  .fountain-hero{ --hero-w:100%; position:relative; min-height:100svh; min-height:100dvh;
-    overflow:hidden; background:#1a2018; }
-
-  .hero-media{ position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%);
-    width:var(--hero-w); z-index:0; overflow:hidden; }
-  .hero-motion{ position:absolute; inset:0; opacity:0; transform:scale(1.06);
-    transition:opacity 1.2s ease .45s, transform 10s ease .45s; }
-  body.invitation-open .hero-motion{ opacity:1; transform:scale(1); }
-
-  /* Ekte fontene — full-bleed, sentrert på den svarte fontenen */
-  .hero-video,.hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-    object-position:50% 48%; }
-  .hero-bg{ z-index:0; }
-  .hero-video{ z-index:1; }
-
-  .no-video .hero-video{ display:none; }
-
-  /* CSS-fontene skjules — vi viser den ekte fontenen fra Bjellandstrand */
-  .fountain{ display:none !important; }
-
-  .hero-veil,.fountain-veil{ position:absolute; inset:0; z-index:4; pointer-events:none;
+  /* ── PAR-HERO (første skjerm etter porten) ─────────── */
+  .couple-hero{
+    position:relative; min-height:100svh; min-height:100dvh;
+    overflow:hidden; background:#d8ccb9;
+  }
+  .couple-hero-media{
+    position:absolute; inset:0; opacity:0; transform:scale(1.04);
+    transition:opacity 1.1s ease .4s, transform 9s ease .4s;
+  }
+  body.invitation-open .couple-hero-media{ opacity:1; transform:scale(1); }
+  .couple-hero-media img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center 24%;
+  }
+  .couple-hero-veil{
+    position:absolute; inset:0; z-index:2; pointer-events:none;
     background:
-      radial-gradient(ellipse 70% 48% at 50% 42%, rgba(26,32,24,.38) 0%, transparent 72%),
-      linear-gradient(180deg, rgba(26,32,24,.2) 0%, transparent 26%, transparent 58%,
-      rgba(243,238,228,.35) 88%, var(--cream) 98%); }
+      radial-gradient(ellipse 70% 48% at 50% 42%, rgba(34,30,28,.28) 0%, transparent 72%),
+      linear-gradient(180deg, rgba(34,30,28,.12) 0%, transparent 28%, transparent 55%,
+      rgba(34,30,28,.45) 78%, rgba(243,238,228,.55) 96%);
+  }
 
   .hero-stage{
-    position:absolute; inset:0; left:50%; transform:translateX(-50%); width:var(--hero-w);
-    z-index:5; pointer-events:none;
+    position:absolute; inset:0; z-index:5; pointer-events:none;
     display:flex; align-items:center; justify-content:center;
   }
   .hero-content{
     width:min(82vw, 320px); text-align:center; padding:1.1rem .75rem 1.2rem;
   }
-  .fountain-hero .hero-date-short{
+  .couple-hero .hero-date-short{
     font-family:var(--display); font-size:clamp(.88rem,3vw,1.05rem);
     letter-spacing:.28em; text-transform:uppercase;
-    color:rgba(243,238,228,.92); margin-bottom:.45rem; opacity:0;
-    text-shadow:0 2px 14px rgba(0,0,0,.35);
+    color:rgba(243,238,228,.95); margin-bottom:.45rem; opacity:0;
+    text-shadow:0 2px 14px rgba(0,0,0,.4);
   }
-  .fountain-hero .hero-place{
+  .couple-hero .hero-place{
     font-family:var(--display); font-size:clamp(.72rem,2.6vw,.88rem);
     letter-spacing:.32em; text-transform:uppercase;
-    color:rgba(243,238,228,.8); margin-bottom:.85rem; opacity:0;
-    text-shadow:0 2px 12px rgba(0,0,0,.3);
+    color:rgba(243,238,228,.85); margin-bottom:.85rem; opacity:0;
+    text-shadow:0 2px 12px rgba(0,0,0,.35);
   }
-  .fountain-hero .hero-names{ display:flex; flex-direction:column; align-items:center; gap:0; line-height:1.02; }
-  .fountain-hero .hero-name,.fountain-hero .hero-amp{
-    font-family:var(--script); color:#fff; text-shadow:0 3px 18px rgba(0,0,0,.35);
+  .couple-hero .hero-names{ display:flex; flex-direction:column; align-items:center; gap:0; line-height:1.02; }
+  .couple-hero .hero-name,.couple-hero .hero-amp{
+    font-family:var(--script); color:#fff; text-shadow:0 3px 18px rgba(0,0,0,.4);
     opacity:0; transform:translateY(16px);
   }
-  .fountain-hero .hero-name{ font-size:clamp(2.7rem,11vw,4rem); }
-  .fountain-hero .hero-amp{ font-size:clamp(1.35rem,4.7vw,2rem); color:rgba(243,238,228,.92); margin:.05em 0; }
-  body.invitation-open .fountain-hero .hero-date-short{ animation:fadeUp .7s ease .55s forwards; }
-  body.invitation-open .fountain-hero .hero-place{ animation:fadeUp .7s ease .68s forwards; }
-  body.invitation-open .fountain-hero .hero-name:nth-child(1){ animation:fadeUp .85s ease .82s forwards; }
-  body.invitation-open .fountain-hero .hero-amp{ animation:fadeUp .85s ease .98s forwards; }
-  body.invitation-open .fountain-hero .hero-name:nth-child(3){ animation:fadeUp .85s ease 1.14s forwards; }
+  .couple-hero .hero-name{ font-size:clamp(2.7rem,11vw,4rem); }
+  .couple-hero .hero-amp{ font-size:clamp(1.35rem,4.7vw,2rem); color:rgba(243,238,228,.92); margin:.05em 0; }
+  body.invitation-open .couple-hero .hero-date-short{ animation:fadeUp .7s ease .55s forwards; }
+  body.invitation-open .couple-hero .hero-place{ animation:fadeUp .7s ease .68s forwards; }
+  body.invitation-open .couple-hero .hero-name:nth-child(1){ animation:fadeUp .85s ease .82s forwards; }
+  body.invitation-open .couple-hero .hero-amp{ animation:fadeUp .85s ease .98s forwards; }
+  body.invitation-open .couple-hero .hero-name:nth-child(3){ animation:fadeUp .85s ease 1.14s forwards; }
 
   .scroll-cue{ position:absolute; bottom:max(1.8rem, calc(env(safe-area-inset-bottom) + 1.2rem));
     left:50%; transform:translateX(-50%);
-    z-index:6; color:rgba(74,69,63,.85); font-family:var(--display); font-size:.62rem;
+    z-index:6; color:rgba(243,238,228,.9); font-family:var(--display); font-size:.62rem;
     letter-spacing:.24em; text-transform:uppercase; text-decoration:none; opacity:0; pointer-events:auto;
-    text-shadow:0 1px 8px rgba(243,238,228,.75); }
+    text-shadow:0 1px 8px rgba(0,0,0,.35); }
   body.invitation-open .scroll-cue{ animation:fadeUpCenter .7s ease 1.35s forwards, bob 2.2s ease 2s infinite; }
   @keyframes fadeUpCenter{ to{ opacity:1; transform:translateX(-50%); } }
   @keyframes bob{ 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(5px)} }
   .scroll-cue::after{ content:"⌄"; display:block; font-size:1rem; margin-top:.15rem; }
 
-  /* ── PARET under Sted (full-bleed foto) ────────────── */
-  .couple-section{
+  /* ── FONTENE under Sted (video uten tekst) ─────────── */
+  .fountain-section{
+    --hero-w:100%;
     padding:0;
-    background:var(--cream);
+    background:#1a2018;
     border-top:1px solid rgba(138,123,108,.12);
     border-bottom:1px solid rgba(138,123,108,.12);
   }
-  .couple-section > .wrap{
-    max-width:none;
-    width:100%;
-    margin:0;
-    padding:0;
+  .fountain-section > .wrap{
+    max-width:none; width:100%; margin:0; padding:0;
   }
-  .couple-card{
-    position:relative;
-    width:100%;
-    margin:0;
-    height:min(92svh, 820px);
-    overflow:hidden;
-    background:#d8ccb9;
+  .fountain-card{
+    position:relative; width:100%;
+    min-height:100svh; height:min(100svh, 900px);
+    overflow:hidden; background:#1a2018;
   }
-  .couple-card img{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; object-position:center 24%;
-  }
+  .hero-media{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+  .hero-motion{ position:absolute; inset:0; }
+
+  .hero-video,.hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    object-position:50% 48%; }
+  .hero-bg{ z-index:0; }
+  .hero-video{ z-index:1; }
+  .no-video .hero-video{ display:none; }
+  .fountain{ display:none !important; }
+
+  .hero-veil,.fountain-veil{ position:absolute; inset:0; z-index:4; pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(26,32,24,.1) 0%, transparent 24%, transparent 70%,
+      rgba(243,238,228,.3) 92%, var(--cream) 100%); }
+
   @keyframes fadeUp{ to{ opacity:1; transform:none; } }
 
   .torn-top,.torn-bottom{ position:relative; height:28px; width:100%; z-index:6; pointer-events:none; }
-  .fountain-hero > .torn-bottom{ position:absolute; bottom:0; left:0; right:0; }
+  .couple-hero > .torn-bottom{ position:absolute; bottom:0; left:0; right:0; }
   .torn-top{ margin-bottom:-1px;
     background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 28' preserveAspectRatio='none'%3E%3Cpath d='M0 0h1200v12c-30 8-60-2-90 4s-60 10-90 2-60-6-90 0-60 8-90 2-60-10-90-2-60 6-90 0-60-8-90-2-60 10-90 2-60-6-90 0V0z' fill='%23F3EEE4'/%3E%3C/svg%3E") center/100% 100% no-repeat; }
   .torn-bottom{
@@ -616,11 +616,11 @@ const CONFIG = {
   @media (prefers-reduced-motion:reduce){
     .scroll-cue,.cover-hint,.gate-cta,.rsvp-open-btn,.fountain-jet,.fountain-drop{ animation:none !important; }
     body.invitation-open .scroll-cue,body.invitation-open .fountain{ opacity:1; transform:none; animation:none !important; }
-    body.invitation-open .hero-motion{ opacity:1; transform:none; }
-    body.invitation-open .fountain-hero .hero-date-short,
-    body.invitation-open .fountain-hero .hero-place,
-    body.invitation-open .fountain-hero .hero-name,
-    body.invitation-open .fountain-hero .hero-amp{ opacity:1; transform:none; animation:none !important; }
+    body.invitation-open .couple-hero-media{ opacity:1; transform:none; }
+    body.invitation-open .couple-hero .hero-date-short,
+    body.invitation-open .couple-hero .hero-place,
+    body.invitation-open .couple-hero .hero-name,
+    body.invitation-open .couple-hero .hero-amp{ opacity:1; transform:none; animation:none !important; }
     .reveal,.tl-item{ opacity:1; transform:none; animation:none !important; }
     .timeline::before{ transform:translateX(-50%) scaleY(1); }
     .timeline.show .tl-item{ animation:none; opacity:1; transform:none; }
@@ -659,29 +659,11 @@ const CONFIG = {
 
 <main>
 
-  <!-- 1) Fontene-video som hero etter porten -->
-  <header class="fountain-hero" id="home">
-    <div class="hero-media" id="heroMedia">
-      <div class="hero-motion" id="heroMotion">
-        <img class="hero-bg" id="heroImg" src="" alt="" decoding="async">
-        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"></video>
-        <div class="fountain" id="fountain" aria-hidden="true">
-          <span class="fountain-drop"></span>
-          <span class="fountain-drop"></span>
-          <span class="fountain-drop"></span>
-          <span class="fountain-drop"></span>
-          <span class="fountain-drop"></span>
-          <div class="fountain-jet"></div>
-          <div class="fountain-jet j2"></div>
-          <div class="fountain-jet j3"></div>
-          <div class="fountain-spout"></div>
-          <div class="fountain-tier t3"></div>
-          <div class="fountain-tier t2"></div>
-          <div class="fountain-tier t1"></div>
-          <div class="fountain-basin"></div>
-        </div>
-      </div>
-      <div class="hero-veil fountain-veil"></div>
+  <!-- 1) Parbilde med skrift som hero etter porten -->
+  <header class="couple-hero" id="home">
+    <div class="couple-hero-media" id="coupleHeroMedia">
+      <img id="coupleHeroImg" src="" alt="Lavinia og Jon" decoding="async" fetchpriority="high">
+      <div class="couple-hero-veil"></div>
     </div>
     <div class="hero-stage">
       <div class="hero-content">
@@ -742,11 +724,32 @@ const CONFIG = {
     </div>
   </section>
 
-  <!-- 2) Parbilde under Sted -->
-  <section class="couple-section" id="couple">
+  <!-- 2) Fontene-video under Sted (uten tekst) -->
+  <section class="fountain-section" id="fountainVideo">
     <div class="wrap">
-      <div class="couple-card">
-        <img id="coupleHeroImg" src="" alt="Lavinia og Jon" decoding="async">
+      <div class="fountain-card">
+        <div class="hero-media" id="heroMedia">
+          <div class="hero-motion" id="heroMotion">
+            <img class="hero-bg" id="heroImg" src="" alt="" decoding="async">
+            <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata"></video>
+            <div class="fountain" id="fountain" aria-hidden="true">
+              <span class="fountain-drop"></span>
+              <span class="fountain-drop"></span>
+              <span class="fountain-drop"></span>
+              <span class="fountain-drop"></span>
+              <span class="fountain-drop"></span>
+              <div class="fountain-jet"></div>
+              <div class="fountain-jet j2"></div>
+              <div class="fountain-jet j3"></div>
+              <div class="fountain-spout"></div>
+              <div class="fountain-tier t3"></div>
+              <div class="fountain-tier t2"></div>
+              <div class="fountain-tier t1"></div>
+              <div class="fountain-basin"></div>
+            </div>
+          </div>
+          <div class="hero-veil fountain-veil"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1191,6 +1194,19 @@ const CONFIG = {
   const OPEN = { hero:520, hide:1900 };
 
   let opened = false;
+  let fountainVideoIo;
+  function watchFountainVideo(){
+    const hv = $("heroVideo");
+    const card = document.querySelector(".fountain-card");
+    if(!hv || !card) return;
+    if(fountainVideoIo) fountainVideoIo.disconnect();
+    fountainVideoIo = new IntersectionObserver(es => es.forEach(e => {
+      if(e.isIntersecting) hv.play().catch(()=>{});
+      else hv.pause();
+    }), { threshold: .2 });
+    fountainVideoIo.observe(card);
+  }
+
   function openInvitation(){
     if(opened) return; opened = true;
     const cover = $("cover");
@@ -1203,8 +1219,7 @@ const CONFIG = {
 
     setTimeout(() => {
       document.body.classList.add("invitation-open");
-      const hv = $("heroVideo");
-      if(hv && (hv.src || hv.currentSrc)) hv.play().catch(()=>{});
+      watchFountainVideo();
       if(CONFIG.musicSrc) setMusicState(true);
     }, OPEN.hero);
 
@@ -1227,7 +1242,7 @@ const CONFIG = {
     });
   });
 
-  const spySections = ["home","intro","program","place","couple","gallery","rsvp"];
+  const spySections = ["home","intro","program","place","fountainVideo","gallery","rsvp"];
   let spyIo;
   function initScrollSpy(){
     if(spyIo) spyIo.disconnect();
