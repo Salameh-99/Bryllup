@@ -37,7 +37,7 @@ Legg filene i `img/` med nøyaktig disse navnene:
 
 | Fil | Brukes til |
 |---|---|
-| `img/paret.jpg` | Bilde av paret (dress code + bunn) |
+| `img/paret.jpg` | Bilde av paret (dress code + bunn). Original: `IMG_0422.jpeg` |
 | `img/lokale.jpg` | Bilde av lokalet (sted-seksjonen) |
 | `img/lokale-2.jpg` | Ekstra bilde av lokalet (dress code) |
 
