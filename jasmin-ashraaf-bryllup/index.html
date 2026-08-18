@@ -7,7 +7,7 @@
 <title>Jasmin and Ashraaf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Ovo&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Ovo&display=swap" rel="stylesheet">
 <script>
 const CONFIG = {
   date: "2026-09-26T14:00:00",
@@ -25,7 +25,7 @@ const CONFIG = {
   --ink:#3a3a3a;
   --gold:#C5A16F;
   --champagne:#EAE0D1;
-  --script:"Great Vibes", cursive;
+  --script:"Allura", "Great Vibes", cursive;
   --serif:"Ovo", Georgia, serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -44,15 +44,15 @@ a{color:inherit;text-decoration:none}
 .cover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
 .cover-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(102,2,31,.45),rgba(74,0,20,.72))}
 .cover-inner{position:relative;z-index:2;text-align:center;padding:2rem}
-.cover-names{font-family:var(--script);font-size:clamp(2.6rem,10vw,4.4rem);line-height:.95;font-weight:400}
-.cover-hint{margin-top:1.4rem;font-size:.95rem;letter-spacing:.08em}
+.cover-names{font-family:var(--script);font-size:clamp(3.2rem,12vw,5rem);line-height:.7;font-weight:400}
+.cover-hint{margin-top:1.6rem;font-family:var(--serif);font-size:1.05rem;letter-spacing:.02em}
 .popup-enter{
   margin-top:1.6rem;display:inline-block;padding:.7rem 1.8rem;border-radius:999px;
   background:var(--cream);color:var(--ruby);font-family:var(--serif);font-size:1rem;cursor:pointer;border:0;
 }
 
 /* ── PAGE ── */
-.page{max-width:440px;margin:0 auto;background:var(--ruby);overflow:hidden}
+.page{max-width:440px;margin:0 auto;background:var(--ruby);overflow:visible}
 .hero{
   position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;
   text-align:center;padding:4.2rem 1.4rem 8rem;overflow:hidden;
@@ -63,56 +63,56 @@ a{color:inherit;text-decoration:none}
 .hero-dim{position:absolute;inset:0;background:rgba(0,0,0,.4)}
 .hero-fade{position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(0deg,var(--ruby),transparent)}
 .hero-inner{position:relative;z-index:2;width:100%}
-.eyebrow{font-family:var(--script);font-size:clamp(2rem,8vw,2.6rem);line-height:1}
-.hero-date{margin-top:.35rem;font-size:1.15rem;letter-spacing:.08em}
+.eyebrow{font-family:var(--script);font-size:clamp(2.2rem,9vw,2.7rem);line-height:.9;font-weight:400}
+.hero-date{margin-top:.55rem;font-family:var(--serif);font-size:1.2rem;letter-spacing:.12em;font-weight:700}
 .hero-names{
-  margin:2.4rem 0 1.8rem;font-family:var(--script);
-  font-size:clamp(4.4rem,18vw,5.6rem);line-height:.72;font-weight:400;
+  position:relative;margin:2.6rem 0 2.2rem;font-family:var(--script);
+  font-size:clamp(4.6rem,20vw,5.4rem);line-height:.57;font-weight:400;
 }
-.hero-amp{display:block;font-size:.55em;margin:.12em 0}
-.florals{position:relative;height:170px;margin:0 auto 1.2rem;width:min(100%,380px)}
-.florals img{position:absolute;width:42%;height:auto}
-.florals img:nth-child(1){left:0;bottom:8px;width:36%}
-.florals img:nth-child(2){left:18%;bottom:28px;width:28%}
-.florals img:nth-child(3){left:36%;bottom:0;width:40%}
-.florals img:nth-child(4){left:58%;bottom:22px;width:30%}
-.florals img:nth-child(5){right:0;bottom:4px;width:38%}
+.hero-amp{
+  position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
+  font-size:.58em;line-height:1;font-family:var(--script);
+}
+.florals{position:relative;height:220px;margin:-1.2rem auto 0;width:100%;max-width:440px;overflow:visible}
+.florals img{position:absolute;height:auto;pointer-events:none}
+.florals img:nth-child(1){left:-8%;bottom:12px;width:136px}
+.florals img:nth-child(2){left:8%;bottom:0;width:137px}
+.florals img:nth-child(3){left:18%;bottom:38px;width:100px;z-index:2}
+.florals img:nth-child(4){left:26%;bottom:8px;width:149px;z-index:3}
+.florals img:nth-child(5){left:38%;bottom:52px;width:180px;z-index:1}
+.florals img:nth-child(6){left:58%;bottom:10px;width:180px}
+.florals img:nth-child(7){left:64%;bottom:70px;width:200px;z-index:0}
 
 .letter{padding:0 1.5rem 2.6rem;text-align:center;position:relative;z-index:2}
-.letter h2{font-family:var(--script);font-size:clamp(2rem,8vw,2.6rem);font-weight:400;margin-bottom:.9rem}
-.letter p{font-size:1.02rem;line-height:1.75;color:#fffaf8}
+.letter h2{font-family:var(--script);font-size:clamp(2.3rem,9vw,2.9rem);font-weight:400;margin-bottom:1rem;line-height:1}
+.letter p{font-size:1.05rem;line-height:1.8;color:#fffaf8;font-family:var(--serif)}
 
 /* torn paper bands */
 .band{position:relative;padding:4.2rem 1.4rem 4.8rem;text-align:center}
 .band.cream{background:var(--cream);color:var(--ruby)}
 .band.ruby{background:var(--ruby);color:var(--cream)}
 .torn-top,.torn-bot{
-  position:absolute;left:0;right:0;height:28px;pointer-events:none;
-  background:
-    radial-gradient(circle at 8% 0, var(--paper,var(--cream)) 11px, transparent 12px) 0 0/48px 28px,
-    radial-gradient(circle at 32% 8px, var(--paper,var(--cream)) 10px, transparent 11px) 0 0/48px 28px,
-    radial-gradient(circle at 58% 2px, var(--paper,var(--cream)) 12px, transparent 13px) 0 0/48px 28px,
-    radial-gradient(circle at 84% 6px, var(--paper,var(--cream)) 9px, transparent 10px) 0 0/48px 28px;
+  position:absolute;left:50%;width:min(630px,140%);height:auto;pointer-events:none;
+  transform:translateX(-50%);
 }
-.band.cream .torn-top,.band.cream .torn-bot{--paper:var(--cream)}
-.band.cream .torn-top{top:-14px}
-.band.cream .torn-bot{bottom:-14px;transform:rotate(180deg)}
-.s-title{font-family:var(--script);font-size:clamp(2.4rem,10vw,3.2rem);font-weight:400;line-height:1;margin-bottom:1rem}
-.s-body{font-size:1.02rem;line-height:1.75;max-width:22rem;margin:0 auto}
+.band.cream .torn-top{top:-42px}
+.band.cream .torn-bot{bottom:-42px;transform:translateX(-50%) rotate(180deg)}
+.s-title{font-family:var(--script);font-size:clamp(2.6rem,11vw,3.4rem);font-weight:400;line-height:.95;margin-bottom:1.1rem}
+.s-body{font-size:1.05rem;line-height:1.8;max-width:22rem;margin:0 auto;font-family:var(--serif)}
 
 /* countdown */
 .cd{display:flex;justify-content:center;align-items:flex-start;gap:.35rem;margin-top:1.6rem;color:var(--ruby)}
 .cd-cell{min-width:58px}
-.cd-num{font-size:clamp(1.8rem,8vw,2.4rem);line-height:1}
-.cd-label{font-size:.72rem;margin-top:.35rem}
+.cd-num{font-family:var(--serif);font-size:clamp(1.9rem,8vw,2.5rem);line-height:1}
+.cd-label{font-family:var(--serif);font-size:.78rem;margin-top:.4rem}
 .cd-colon{font-size:2rem;padding-top:.05rem}
 
 /* timeline */
 .tl{position:relative;max-width:320px;margin:2rem auto 0;padding:0}
 .tl::before{content:"";position:absolute;left:50%;top:8px;bottom:8px;width:1px;background:#fff;transform:translateX(-50%)}
 .tl-item{display:grid;grid-template-columns:1fr 22px 1fr;align-items:center;gap:.7rem;padding:1.05rem 0;position:relative}
-.tl-time{text-align:right;font-size:1.05rem}
-.tl-name{text-align:left;font-size:1.05rem}
+.tl-time{text-align:right;font-size:1.08rem;font-family:var(--serif)}
+.tl-name{text-align:left;font-size:1.08rem;font-family:var(--serif)}
 .tl-dot{
   width:11px;height:11px;margin:0 auto;background:#fff;transform:rotate(45deg);
   box-shadow:0 0 0 6px var(--ruby);
@@ -121,7 +121,7 @@ a{color:inherit;text-decoration:none}
 .tl-rose{width:28px;height:28px;margin:0 auto;object-fit:contain}
 
 .venue-name{font-size:1.2rem;margin:.2rem 0 .4rem}
-.venue-img{margin:1.6rem auto 0;width:min(100%,320px);filter:grayscale(1) contrast(1.05)}
+.venue-img{margin:1.6rem auto 0;width:min(100%,320px);filter:none}
 .venue-btn{
   display:inline-block;margin-top:1.2rem;padding:.55rem 1.4rem;border-radius:999px;
   border:1px solid var(--ruby);font-size:.9rem;
@@ -136,8 +136,8 @@ a{color:inherit;text-decoration:none}
 .dc-row.reverse > *{direction:ltr}
 .dc-copy{font-size:.92rem;line-height:1.55}
 .frame{
-  width:100%;aspect-ratio:3/4;object-fit:cover;
-  border:10px solid var(--gold);box-shadow:0 10px 24px rgba(0,0,0,.28);
+  width:100%;height:auto;object-fit:contain;background:transparent;
+  border:0;box-shadow:none;
 }
 
 /* details */
@@ -199,7 +199,7 @@ form.rsvp.open{display:block}
   <video class="cover-video" autoplay muted loop playsinline src="https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/IMG_6230%20(1).MP4"></video>
   <div class="cover-veil"></div>
   <div class="cover-inner">
-    <p class="cover-names">Jasmin<br>&amp;<br>Ashraaf</p>
+    <p class="cover-names">Jasmin<br><br>Ashraaf</p>
     <p class="cover-hint">Click to open</p>
     <button class="popup-enter" id="openBtn" type="button">Åpne invitasjonen</button>
   </div>
@@ -213,16 +213,18 @@ form.rsvp.open{display:block}
     <div class="hero-inner">
       <p class="eyebrow">Wedding Day</p>
       <p class="hero-date">26.09.26</p>
-      <h1 class="hero-names">Jasmin<span class="hero-amp">&amp;</span>Ashraaf</h1>
+      <h1 class="hero-names">Jasmin<br><br>Ashraaf<span class="hero-amp">&amp;</span></h1>
     </div>
   </header>
 
   <div class="florals" aria-hidden="true">
     <img src="https://static.tildacdn.net/tild3565-3335-4966-b062-366237626361/8ruby.png" alt="">
-    <img src="https://static.tildacdn.net/tild3166-6235-4730-b332-636366333436/1ruby.png" alt="">
-    <img src="https://static.tildacdn.net/tild6637-6363-4432-b364-633830313533/noroot.png" alt="">
-    <img src="https://static.tildacdn.net/tild3138-3862-4931-a264-313932393437/4ruby.png" alt="">
     <img src="https://static.tildacdn.net/tild3064-6534-4135-b730-353630663233/6druby.png" alt="">
+    <img src="https://static.tildacdn.net/tild3533-3266-4863-b762-326134376538/7uruby.png" alt="">
+    <img src="https://static.tildacdn.net/tild3138-3862-4931-a264-313932393437/4ruby.png" alt="">
+    <img src="https://static.tildacdn.net/tild6637-6363-4432-b364-633830313533/noroot.png" alt="">
+    <img src="https://static.tildacdn.net/tild3063-6162-4734-b966-356139343638/2ruby.png" alt="">
+    <img src="https://static.tildacdn.net/tild3166-6235-4730-b332-636366333436/1ruby.png" alt="">
   </div>
 
   <section class="letter reveal">
@@ -231,7 +233,7 @@ form.rsvp.open{display:block}
   </section>
 
   <section class="band cream" id="countdown">
-    <div class="torn-top"></div>
+    <img class="torn-top" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
     <h2 class="s-title reveal">The Celebration Begins In</h2>
     <div class="cd">
       <div class="cd-cell"><div class="cd-num" id="cdD">00</div><div class="cd-label">Days</div></div>
@@ -242,7 +244,7 @@ form.rsvp.open{display:block}
       <div class="cd-colon">:</div>
       <div class="cd-cell"><div class="cd-num" id="cdS">00</div><div class="cd-label">Seconds</div></div>
     </div>
-    <div class="torn-bot"></div>
+    <img class="torn-bot" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
   </section>
 
   <section class="band ruby" id="program">
@@ -272,13 +274,13 @@ form.rsvp.open{display:block}
   </section>
 
   <section class="band cream" id="place">
-    <div class="torn-top"></div>
+    <img class="torn-top" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
     <h2 class="s-title reveal">Location</h2>
     <p class="venue-name">Hove</p>
     <p class="s-body">Hoveveien 110a<br>4818 Færvik · Arendal</p>
-    <img class="venue-img" src="img/hero-venue.jpg" alt="Hove">
+    <img class="venue-img" src="https://static.tildacdn.net/tild3036-6339-4661-b266-303136653461/ChatGPT_Image_Nov_17.png" alt="Hove">
     <a class="venue-btn" href="https://www.google.com/maps/dir/?api=1&destination=Hoveveien+110a+4818+F%C3%A6rvik" target="_blank" rel="noopener">Åpne veibeskrivelse</a>
-    <div class="torn-bot"></div>
+    <img class="torn-bot" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
   </section>
 
   <section class="band ruby" id="dresscode">
@@ -292,16 +294,16 @@ form.rsvp.open{display:block}
     </div>
     <div class="dc-row">
       <p class="dc-copy">Herrer: Mørk dress eller smoking. Slips eller sløyfe.</p>
-      <img class="frame" src="img/venue-lounge.jpg" alt="">
+    <img class="frame" src="https://static.tildacdn.net/tild3732-6333-4264-b465-666237366336/Group_169.png" alt="">
     </div>
     <div class="dc-row reverse">
       <p class="dc-copy">Damer: Lang kjole eller elegant ankellengde.</p>
-      <img class="frame" src="img/couple-1.jpg" alt="">
+      <img class="frame" src="https://static.tildacdn.net/tild3433-3734-4762-a164-666138626132/Group_170.png" alt="">
     </div>
   </section>
 
   <section class="band cream" id="details">
-    <div class="torn-top"></div>
+    <img class="torn-top" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
     <h2 class="s-title reveal">Details</h2>
     <div class="details s-body">
       <p>Deres tilstedeværelse er den største gaven. Ønskeliste oppgis gjerne på forespørsel.</p>
@@ -309,14 +311,16 @@ form.rsvp.open{display:block}
       <p>Middag fra Arendal Catering AS. Oppgi allergier i påmeldingen under.</p>
       <p>Del gjerne bildene deres med oss — #JasminOgAshraaf</p>
     </div>
-    <div class="florals" style="margin-top:2rem;margin-bottom:-2.2rem" aria-hidden="true">
+    <div class="florals" style="margin-top:1.2rem;margin-bottom:-2.6rem" aria-hidden="true">
+      <img src="https://static.tildacdn.net/tild3565-3335-4966-b062-366237626361/8ruby.png" alt="">
+      <img src="https://static.tildacdn.net/tild3064-6534-4135-b730-353630663233/6druby.png" alt="">
+      <img src="https://static.tildacdn.net/tild3533-3266-4863-b762-326134376538/7uruby.png" alt="">
+      <img src="https://static.tildacdn.net/tild3138-3862-4931-a264-313932393437/4ruby.png" alt="">
+      <img src="https://static.tildacdn.net/tild6637-6363-4432-b364-633830313533/noroot.png" alt="">
       <img src="https://static.tildacdn.net/tild3063-6162-4734-b966-356139343638/2ruby.png" alt="">
       <img src="https://static.tildacdn.net/tild3166-6235-4730-b332-636366333436/1ruby.png" alt="">
-      <img src="https://static.tildacdn.net/tild6637-6363-4432-b364-633830313533/noroot.png" alt="">
-      <img src="https://static.tildacdn.net/tild3138-3862-4931-a264-313932393437/4ruby.png" alt="">
-      <img src="https://static.tildacdn.net/tild3565-3335-4966-b062-366237626361/8ruby.png" alt="">
     </div>
-    <div class="torn-bot"></div>
+    <img class="torn-bot" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
   </section>
 
   <section class="band ruby" id="rsvp">
@@ -353,7 +357,7 @@ form.rsvp.open{display:block}
   <footer class="closing">
     <h2>Hope to see you there!</h2>
     <p>Jasmin and Ashraaf</p>
-    <img class="couple" src="img/couple-1.jpg" alt="Jasmin og Ashraaf">
+    <img class="couple" src="https://static.tildacdn.net/tild3435-3731-4464-a537-636664626563/ChatGPT_Image_Aug_3_.png" alt="Jasmin og Ashraaf">
   </footer>
 </div>
 
