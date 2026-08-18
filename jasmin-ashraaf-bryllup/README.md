@@ -11,6 +11,8 @@ Invitasjon etter **Tilda template5** (Viktor & Paula / webgency.tilda.ws/templat
 
 Dette er **ikke** Kaupang-malen. Siden følger template5-oppsettet: burgunder/krem, script-typografi, revet papir-overganger, blomsterdekor, tidslinje, dress code, RSVP-knapp og flytende musikk-kontroll.
 
+Siden er bygd for **alle skjermstørrelser**: full bredde på telefon, sentrert invitasjonskolonne på nettbrett og desktop, og egen layout for liggende mobil.
+
 ## Kjøre lokalt
 
 ```bash
