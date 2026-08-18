@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Bryllupsinvitasjon — Jasmin &amp; Ashraaf, 26. september 2026, Hove, Færvik">
+<title>Jasmin &amp; Ashraaf</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   KONFIGURASJON — rediger alt innhold her
+   ══════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  names:     "Jasmin & Ashraaf",
+  date:      "2026-09-26T14:00:00",
+  dateLabel: "Lørdag 26 · September · 2026",
+  venue: {
+    name:    "Hove",
+    address: "Hoveveien 110a, 4818 Færvik · Arendal",
+    mapsQuery: "Hoveveien 110a 4818 Færvik Arendal"
+  },
+  catering:  "Arendal Catering AS",
+  rsvpDeadline: "1. august 2026",
+  hashtag:   "#JasminOgAshraaf",
+
+  program: [
+    { time: "14:00", title: "Vielse",                    note: "Vi ber om at alle er på plass 13:45" },
+    { time: "15:30", title: "Mottakelse &amp; gratulasjoner", note: "Velkomstdrink og fotografering" },
+    { time: "17:00", title: "Middag",                    note: "Servert av Arendal Catering AS" },
+    { time: "20:00", title: "Fest &amp; dans",               note: "Kaken skjæres kl. 21:00" }
+  ],
+
+  /* Google Apps Script endpoint — lim inn URL etter publisering */
+  ENDPOINT: "",
+  /* 'sheet' sender til Apps Script · 'formspree' sender til Formspree */
+  MODE: "sheet"
+};
+</script>
+
+<style>
+/* ─── PALETTE ───────────────────────────────────────────────── */
+:root {
+  --bg0:    #0b0507;
+  --bg1:    #140a0d;
+  --ruby:   #9b1b30;
+  --ruby2:  #c8203c;
+  --blush:  #e8c4c8;
+  --cream:  #f5ece9;
+  --white:  #fff;
+  --line:   rgba(155,27,48,.22);
+  --line2:  rgba(232,196,200,.14);
+  --shadow: rgba(11,5,7,.55);
+
+  --display: "Cormorant Garamond", Georgia, serif;
+  --ui:      "Jost", system-ui, sans-serif;
+}
+
+/* ─── RESET & BASE ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg0); scroll-behavior: smooth; }
+body {
+  font-family: var(--ui);
+  color: var(--cream);
+  background: linear-gradient(160deg, var(--bg0) 0%, var(--bg1) 100%);
+  min-height: 100svh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+body.locked { overflow: hidden; height: 100svh; }
+::selection { background: var(--ruby); color: var(--cream); }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+svg { stroke-linecap: round; stroke-linejoin: round; }
+
+/* ─── NOISE OVERLAY ─────────────────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: .06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── COVER ─────────────────────────────────────────────────── */
+#cover {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem; padding: 2rem; text-align: center;
+  background: var(--bg0);
+  transition: opacity .7s ease, visibility .7s ease;
+}
+#cover.open { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.cover-ornament {
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
+  font-family: var(--display);
+  font-weight: 300;
+  letter-spacing: .18em;
+  color: var(--ruby);
+  line-height: 1;
+  opacity: .7;
+}
+
+.cover-names {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(3.2rem, 14vw, 6.5rem);
+  letter-spacing: .06em;
+  line-height: 1;
+  color: var(--cream);
+  display: flex; flex-direction: column; align-items: center; gap: .05em;
+}
+.cover-amp {
+  font-size: clamp(2rem, 8vw, 3.8rem);
+  color: var(--ruby);
+  line-height: 1;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.cover-sub {
+  font-family: var(--ui);
+  font-weight: 400;
+  font-size: clamp(.75rem, 2.5vw, .95rem);
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--blush);
+  opacity: .7;
+}
+
+/* Ruby SVG gem */
+.cover-gem {
+  width: clamp(72px, 20vw, 110px);
+  height: auto;
+  filter: drop-shadow(0 0 18px rgba(155,27,48,.55));
+  animation: gemPulse 3s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+}
+.cover-gem:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 28px rgba(200,32,60,.7));
+  animation-play-state: paused;
+}
+@keyframes gemPulse {
+  0%,100% { filter: drop-shadow(0 0 14px rgba(155,27,48,.5)); }
+  50%      { filter: drop-shadow(0 0 26px rgba(200,32,60,.75)); }
+}
+
+.cover-btn {
+  padding: .85rem 2.8rem;
+  border: 1px solid var(--ruby);
+  border-radius: 2px;
+  font-family: var(--ui);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: transparent;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.cover-btn:hover { background: var(--ruby); color: var(--white); }
+.cover-btn:focus-visible { outline: 2px solid var(--ruby); outline-offset: 3px; }
+
+/* spark particles */
+.spark {
+  position: fixed; z-index: 201; pointer-events: none;
+  color: var(--blush); opacity: 0; font-size: 10px;
+  animation: spark .9s ease-out forwards;
+}
+@keyframes spark {
+  0%   { opacity: 1; transform: translate(0,0) scale(.3); }
+  100% { opacity: 0; transform: translate(var(--dx),var(--dy)) scale(1.2); }
+}
+
+/* ─── MAIN ──────────────────────────────────────────────────── */
+main { position: relative; z-index: 1; }
+
+/* ─── HERO ──────────────────────────────────────────────────── */
+#hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 5rem 1.5rem 6rem;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%,   rgba(155,27,48,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 70%  70% at 100% 100%, rgba(155,27,48,.08) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(11,5,7,.0) 0%, rgba(11,5,7,.82) 100%),
+    var(--bg0);
+}
+.hero-lines {
+  position: absolute; inset: 28px;
+  border: 1px solid var(--line2); pointer-events: none;
+}
+.hero-lines::before, .hero-lines::after {
+  content: ""; position: absolute;
+  width: 20px; height: 20px; border-color: var(--ruby); border-style: solid; opacity: .4;
+}
+.hero-lines::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+.hero-lines::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+.hero-inner { position: relative; z-index: 2; max-width: 36rem; }
+
+.hero-eyebrow {
+  font-family: var(--ui); font-weight: 400;
+  font-size: clamp(.65rem, 2vw, .8rem);
+  letter-spacing: .38em; text-transform: uppercase;
+  color: var(--ruby2); margin-bottom: 1.4rem;
+}
+
+.hero-names {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(3.6rem, 15vw, 7.2rem);
+  line-height: 1; letter-spacing: .04em; color: var(--cream);
+  display: flex; flex-direction: column; align-items: center; gap: .02em;
+}
+.hero-amp {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  color: var(--ruby); font-style: italic; font-weight: 300;
+  line-height: 1.1; display: block;
+}
+
+.hero-rule {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 1.6rem auto; color: var(--ruby); width: min(220px, 55vw);
+}
+.hero-rule::before, .hero-rule::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ruby));
+}
+.hero-rule::after { background: linear-gradient(90deg, var(--ruby), transparent); }
+
+.hero-date {
+  font-family: var(--ui); font-weight: 300;
+  font-size: clamp(.78rem, 2.5vw, .95rem);
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--blush); opacity: .85;
+}
+.hero-venue-tag {
+  margin-top: .7rem;
+  font-family: var(--display); font-style: italic; font-weight: 300;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  color: var(--blush); opacity: .7;
+}
+
+.scroll-cue {
+  position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
+  z-index: 2; color: var(--ruby); font-size: 1.3rem; opacity: .6;
+  animation: bob 2.2s ease-in-out infinite; text-decoration: none;
+}
+@keyframes bob {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(9px); }
+}
+
+/* ─── SECTIONS ──────────────────────────────────────────────── */
+section {
+  padding: clamp(4rem, 11vw, 6.5rem) 1.5rem;
+  position: relative;
+}
+section + section::before {
+  content: ""; display: block;
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(200px, 50vw); height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+}
+
+.s-wrap  { max-width: 580px; margin-inline: auto; }
+.s-title {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(2rem, 7vw, 3rem);
+  letter-spacing: .08em; text-align: center;
+  color: var(--cream); margin-bottom: .35rem;
+}
+.s-sub {
+  text-align: center; font-family: var(--ui); font-weight: 300;
+  font-size: .8rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ruby2); margin-bottom: 2.8rem; opacity: .85;
+}
+.s-rule {
+  display: flex; align-items: center; justify-content: center;
+  gap: .6rem; margin: .9rem auto 2.8rem; color: var(--ruby);
+}
+.s-rule::before, .s-rule::after {
+  content: ""; height: 1px; width: 36px;
+  background: linear-gradient(90deg, transparent, var(--ruby));
+}
+.s-rule::after { background: linear-gradient(90deg, var(--ruby), transparent); }
+.s-rule-gem { width: 10px; height: 10px; }
+
+/* ─── LETTER / WELCOME ──────────────────────────────────────── */
+#welcome { text-align: center; }
+.welcome-body {
+  font-family: var(--display); font-weight: 300; font-style: italic;
+  font-size: clamp(1.25rem, 4.5vw, 1.65rem);
+  line-height: 1.85; color: var(--blush);
+  max-width: 30rem; margin-inline: auto;
+}
+.welcome-sign {
+  margin-top: 2.4rem;
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  letter-spacing: .06em; color: var(--cream);
+}
+
+/* ─── COUNTDOWN ─────────────────────────────────────────────── */
+#countdown { text-align: center; }
+.cd-wrap {
+  display: inline-flex; gap: 0; align-items: center;
+  justify-content: center; flex-wrap: wrap;
+  border: 1px solid var(--line); border-radius: 3px;
+  padding: .5rem;
+}
+.cd-cell {
+  min-width: 76px; padding: 1.3rem .6rem;
+  position: relative; text-align: center;
+}
+.cd-cell + .cd-cell { border-left: 1px solid var(--line); }
+.cd-num {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  color: var(--cream); line-height: 1; display: block;
+}
+.cd-label {
+  display: block; margin-top: .5rem;
+  font-family: var(--ui); font-weight: 400;
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ruby2);
+}
+.cd-colon {
+  font-family: var(--display); font-size: clamp(1.8rem, 6vw, 2.6rem);
+  color: var(--ruby); padding: 0 .2rem; line-height: 1; align-self: center;
+  opacity: .6;
+}
+.cd-tagline {
+  margin-top: 1.6rem;
+  font-family: var(--display); font-style: italic; font-weight: 300;
+  font-size: clamp(1rem, 3.5vw, 1.3rem); color: var(--blush); opacity: .7;
+}
+
+/* ─── PROGRAM ───────────────────────────────────────────────── */
+#program { }
+.prog-list { list-style: none; max-width: 460px; margin-inline: auto; }
+.prog-item {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: .5rem 1.4rem; align-items: start;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line2);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.prog-item:last-child { border-bottom: none; }
+.prog-item.in { opacity: 1; transform: none; }
+.prog-time {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(1.6rem, 5.5vw, 2rem);
+  color: var(--ruby); line-height: 1; text-align: right;
+  padding-top: .15rem;
+}
+.prog-title {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  color: var(--cream); line-height: 1.2;
+}
+.prog-note {
+  font-family: var(--ui); font-weight: 300;
+  font-size: .82rem; letter-spacing: .04em;
+  color: var(--blush); opacity: .65; margin-top: .3rem;
+}
+
+/* ─── VENUE ─────────────────────────────────────────────────── */
+#venue { text-align: center; }
+.venue-name {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(2.4rem, 9vw, 3.8rem);
+  letter-spacing: .08em; color: var(--cream);
+  margin-bottom: .4rem;
+}
+.venue-addr {
+  font-family: var(--ui); font-weight: 300;
+  font-size: .85rem; letter-spacing: .18em;
+  color: var(--blush); opacity: .7; margin-bottom: .3rem;
+}
+.venue-catering {
+  font-family: var(--ui); font-weight: 400;
+  font-size: .75rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ruby2); margin-bottom: 1.8rem; opacity: .75;
+}
+.map-box {
+  border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+  aspect-ratio: 16/10;
+}
+.map-box iframe { width: 100%; height: 100%; border: 0; display: block; }
+.venue-btn {
+  display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.6rem;
+  padding: .8rem 2.2rem; border: 1px solid var(--ruby);
+  border-radius: 2px; font-family: var(--ui); font-size: .75rem;
+  font-weight: 500; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--cream); transition: background .2s, color .2s;
+}
+.venue-btn:hover { background: var(--ruby); color: var(--white); }
+.venue-btn svg { flex: none; }
+
+/* ─── DRESS CODE ────────────────────────────────────────────── */
+#dresscode { }
+.dc-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+}
+.dc-cell {
+  padding: 2rem 1.5rem;
+  background: rgba(155,27,48,.04);
+  border: none;
+}
+.dc-cell:first-child { border-right: 1px solid var(--line); }
+.dc-icon {
+  font-size: 1.5rem; margin-bottom: .9rem;
+  color: var(--ruby); opacity: .75;
+}
+.dc-heading {
+  font-family: var(--display); font-weight: 400;
+  font-size: 1.15rem; color: var(--cream); margin-bottom: .5rem;
+  letter-spacing: .04em;
+}
+.dc-body {
+  font-family: var(--ui); font-weight: 300;
+  font-size: .85rem; line-height: 1.7; color: var(--blush); opacity: .75;
+}
+.dc-lead {
+  text-align: center; font-family: var(--display); font-style: italic; font-weight: 300;
+  font-size: clamp(1.1rem, 3.8vw, 1.5rem);
+  color: var(--blush); opacity: .8; margin-bottom: 2.2rem;
+  max-width: 26rem; margin-inline: auto;
+}
+
+/* ─── PRACTICAL ─────────────────────────────────────────────── */
+#practical { }
+.pr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px; border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+}
+.pr-cell {
+  padding: 1.8rem 1.4rem;
+  background: rgba(155,27,48,.03);
+}
+.pr-icon {
+  font-size: 1.3rem; color: var(--ruby); opacity: .7; margin-bottom: .7rem;
+}
+.pr-heading {
+  font-family: var(--display); font-weight: 400;
+  font-size: 1.1rem; color: var(--cream); margin-bottom: .4rem;
+  letter-spacing: .03em;
+}
+.pr-body {
+  font-family: var(--ui); font-weight: 300;
+  font-size: .82rem; line-height: 1.7; color: var(--blush); opacity: .68;
+}
+
+/* ─── RSVP ──────────────────────────────────────────────────── */
+#rsvp { }
+.rsvp-deadline {
+  text-align: center; font-family: var(--ui); font-weight: 300;
+  font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--blush); opacity: .55; margin-bottom: 2.8rem;
+}
+
+.attend-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; margin-bottom: 2rem;
+  border: 1px solid var(--line); border-radius: 2px; overflow: hidden;
+}
+.attend-row label {
+  display: block; cursor: pointer; padding: 1rem;
+  text-align: center;
+  font-family: var(--ui); font-weight: 400;
+  font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--blush); opacity: .65;
+  background: transparent;
+  transition: background .2s, color .2s, opacity .2s;
+  position: relative;
+}
+.attend-row label:first-child { border-right: 1px solid var(--line); }
+.attend-row label input { position: absolute; opacity: 0; width: 0; }
+.attend-row label:has(input:checked) {
+  background: var(--ruby); color: var(--white); opacity: 1; font-weight: 500;
+}
+
+.rsvp-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.field label {
+  display: block; font-family: var(--ui); font-weight: 400;
+  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ruby2); margin-bottom: .4rem; opacity: .85;
+}
+.field input, .field textarea {
+  width: 100%; font-family: var(--ui); font-size: .95rem; font-weight: 300;
+  color: var(--cream); background: transparent;
+  border: none; border-bottom: 1px solid var(--line);
+  padding: .6rem 0; border-radius: 0;
+  transition: border-color .2s;
+  appearance: none; -webkit-appearance: none;
+}
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--ruby);
+}
+.field input::placeholder, .field textarea::placeholder {
+  color: var(--blush); opacity: .3;
+}
+.field textarea { resize: vertical; min-height: 72px; }
+
+/* allergy chips */
+.chips {
+  display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .3rem;
+}
+.chips label {
+  display: flex; align-items: center; gap: .4rem;
+  padding: .45rem .9rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-family: var(--ui); font-size: .75rem; font-weight: 400;
+  letter-spacing: .06em; color: var(--blush); opacity: .65;
+  cursor: pointer; transition: border-color .2s, background .2s, opacity .2s;
+}
+.chips label input { position: absolute; opacity: 0; width: 0; }
+.chips label:has(input:checked) {
+  border-color: var(--ruby); background: rgba(155,27,48,.18);
+  color: var(--cream); opacity: 1;
+}
+
+.btn-send {
+  width: 100%; margin-top: .6rem; padding: 1rem 2rem;
+  border: 1px solid var(--ruby); border-radius: 2px;
+  font-family: var(--ui); font-weight: 500;
+  font-size: .78rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--cream); background: transparent; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn-send:hover { background: var(--ruby); color: var(--white); }
+.btn-send:focus-visible { outline: 2px solid var(--ruby); outline-offset: 3px; }
+
+.rsvp-msg {
+  text-align: center; min-height: 1.4rem; margin-top: .8rem;
+  font-family: var(--display); font-style: italic; font-weight: 300;
+  font-size: 1.1rem; color: var(--blush); opacity: .8;
+}
+.rsvp-footer-note {
+  text-align: center; margin-top: 1.6rem;
+  font-family: var(--ui); font-size: .7rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ruby2); opacity: .55;
+}
+
+/* ─── FOOTER ────────────────────────────────────────────────── */
+footer {
+  text-align: center; padding: 4rem 1.5rem 3rem;
+  border-top: 1px solid var(--line2);
+}
+.footer-names {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  letter-spacing: .08em; color: var(--cream);
+}
+.footer-date {
+  margin-top: .7rem; font-family: var(--ui); font-weight: 300;
+  font-size: .78rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ruby2); opacity: .7;
+}
+.footer-addr {
+  margin-top: .35rem; font-family: var(--ui); font-weight: 300;
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--blush); opacity: .4;
+}
+.footer-design {
+  margin-top: 2rem; font-family: var(--ui); font-size: .66rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--blush); opacity: .28;
+}
+.footer-design a {
+  color: inherit; border-bottom: 1px solid rgba(232,196,200,.18);
+  transition: opacity .2s;
+}
+.footer-design a:hover { opacity: .6; }
+
+/* ─── BOTTOM NAV ────────────────────────────────────────────── */
+.nav {
+  position: fixed; bottom: 0; inset-inline: 0; z-index: 100;
+  height: calc(60px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  display: flex; align-items: center; justify-content: space-around;
+  background: rgba(11,5,7,.88); border-top: 1px solid var(--line);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  padding-inline: .5rem;
+}
+.nav a {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  font-family: var(--ui); font-size: .55rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--blush); opacity: .45;
+  flex: 1; transition: opacity .2s, color .2s;
+}
+.nav a:hover { opacity: 1; color: var(--ruby2); }
+.nav a svg { width: 20px; height: 20px; }
+
+/* ─── REVEAL ────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 540px) {
+  .dc-grid { grid-template-columns: 1fr; }
+  .dc-cell:first-child { border-right: none; border-bottom: 1px solid var(--line); }
+  .cd-cell { min-width: 60px; }
+  .hero-lines { inset: 14px; }
+}
+
+/* ─── REDUCED MOTION ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue, .cover-gem { animation: none !important; }
+  .reveal, .prog-item { opacity: 1 !important; transform: none !important; }
+}
+</style>
+<script>if("scrollRestoration" in history) history.scrollRestoration = "manual"; scrollTo(0,0);</script>
+</head>
+
+<body class="locked">
+
+<!-- ░░ COVER ░░ -->
+<div id="cover">
+  <div class="cover-ornament">✦ ✦ ✦</div>
+
+  <div class="cover-names" aria-label="Jasmin og Ashraaf">
+    <span>Jasmin</span>
+    <span class="cover-amp">&amp;</span>
+    <span>Ashraaf</span>
+  </div>
+
+  <!-- Ruby SVG gem — klikk for å åpne -->
+  <svg class="cover-gem" id="coverGem" viewBox="0 0 120 140" fill="none"
+       role="button" tabindex="0" aria-label="Åpne invitasjonen"
+       xmlns="http://www.w3.org/2000/svg">
+    <!-- Fasetter -->
+    <polygon points="60,8 100,42 60,130 20,42" fill="#9b1b30" opacity=".9"/>
+    <polygon points="60,8 100,42 60,58"  fill="#c8203c" opacity=".95"/>
+    <polygon points="60,8 20,42  60,58"  fill="#7a1225" opacity=".9"/>
+    <polygon points="20,42 60,58 60,130" fill="#6a0f1e" opacity=".85"/>
+    <polygon points="100,42 60,58 60,130"fill="#b01c30" opacity=".85"/>
+    <!-- Girdle line -->
+    <polyline points="20,42 60,58 100,42" stroke="rgba(232,196,200,.35)" stroke-width=".8" fill="none"/>
+    <!-- Highlight -->
+    <polygon points="60,8 85,38 60,52 35,38" fill="rgba(255,200,210,.22)"/>
+    <polygon points="60,10 74,32 60,44 46,32" fill="rgba(255,220,225,.18)"/>
+  </svg>
+
+  <p class="cover-sub">Lørdag 26 · September · 2026 &nbsp;·&nbsp; Hove, Færvik</p>
+
+  <button class="cover-btn" id="openBtn">Åpne invitasjonen</button>
+</div>
+
+<main>
+
+  <!-- ░░ HERO ░░ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-lines" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Vi gifter oss</p>
+      <h1 class="hero-names">
+        <span>Jasmin</span>
+        <span class="hero-amp">&amp;</span>
+        <span>Ashraaf</span>
+      </h1>
+      <div class="hero-rule">
+        <svg class="s-rule-gem" viewBox="0 0 20 24" fill="none">
+          <polygon points="10,1 18,8 10,23 2,8" fill="#9b1b30" opacity=".9"/>
+          <polygon points="10,1 18,8 10,13" fill="#c8203c"/>
+          <polygon points="10,1 2,8  10,13" fill="#7a1225"/>
+        </svg>
+      </div>
+      <p class="hero-date">Lørdag 26 · September · 2026</p>
+      <p class="hero-venue-tag">Vi gifter oss på Hove</p>
+    </div>
+    <a href="#welcome" class="scroll-cue" aria-hidden="true">⌄</a>
+  </section>
+
+  <!-- ░░ WELCOME ░░ -->
+  <section id="welcome">
+    <div class="s-wrap reveal">
+      <h2 class="s-title">Velkommen</h2>
+      <div class="s-rule">
+        <svg class="s-rule-gem" viewBox="0 0 20 24" fill="none">
+          <polygon points="10,1 18,8 10,23 2,8" fill="#9b1b30" opacity=".9"/>
+          <polygon points="10,1 18,8 10,13" fill="#c8203c"/>
+          <polygon points="10,1 2,8  10,13" fill="#7a1225"/>
+        </svg>
+      </div>
+      <p class="welcome-body">
+        Vi er uendelig takknemlige for menneskene vi har rundt oss —
+        og vi gleder oss til å feire denne dagen sammen med dere.
+      </p>
+      <p class="welcome-sign">Jasmin &amp; Ashraaf</p>
+    </div>
+  </section>
+
+  <!-- ░░ COUNTDOWN ░░ -->
+  <section id="countdown">
+    <div class="s-wrap reveal" style="text-align:center;">
+      <h2 class="s-title">Nedtelling</h2>
+      <div class="s-rule">
+        <svg class="s-rule-gem" viewBox="0 0 20 24" fill="none">
+          <polygon points="10,1 18,8 10,23 2,8" fill="#9b1b30" opacity=".9"/>
+          <polygon points="10,1 18,8 10,13" fill="#c8203c"/>
+          <polygon points="10,1 2,8  10,13" fill="#7a1225"/>
+        </svg>
+      </div>
+      <div class="cd-wrap">
+        <div class="cd-cell"><span class="cd-num" id="cdD">00</span><span class="cd-label">Dager</span></div>
+        <span class="cd-colon" aria-hidden="true">:</span>
+        <div class="cd-cell"><span class="cd-num" id="cdH">00</span><span class="cd-label">Timer</span></div>
+        <span class="cd-colon" aria-hidden="true">:</span>
+        <div class="cd-cell"><span class="cd-num" id="cdM">00</span><span class="cd-label">Min</span></div>
+        <span class="cd-colon" aria-hidden="true">:</span>
+        <div class="cd-cell"><span class="cd-num" id="cdS">00</span><span class="cd-label">Sek</span></div>
+      </div>
+      <p class="cd-tagline">Feiringen begynner om</p>
+    </div>
+  </section>
+
+  <!-- ░░ PROGRAM ░░ -->
+  <section id="program">
+    <div class="s-wrap">
+      <h2 class="s-title reveal">Program</h2>
+      <p class="s-sub reveal">Dagens forløp</p>
+      <ul class="prog-list" id="progList">
+        <!-- rendered by JS -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- ░░ VENUE ░░ -->
+  <section id="venue">
+    <div class="s-wrap reveal">
+      <h2 class="s-title">Sted</h2>
+      <div class="s-rule">
+        <svg class="s-rule-gem" viewBox="0 0 20 24" fill="none">
+          <polygon points="10,1 18,8 10,23 2,8" fill="#9b1b30" opacity=".9"/>
+          <polygon points="10,1 18,8 10,13" fill="#c8203c"/>
+          <polygon points="10,1 2,8  10,13" fill="#7a1225"/>
+        </svg>
+      </div>
+      <p class="venue-name">Hove</p>
+      <p class="venue-addr">Hoveveien 110a · 4818 Færvik · Arendal</p>
+      <p class="venue-catering">Arendal Catering AS</p>
+      <div class="map-box">
+        <iframe
+          src="https://www.google.com/maps?q=Hoveveien+110a+4818+Færvik+Arendal&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Kart over Hove, Færvik"></iframe>
+      </div>
+      <div style="text-align:center;">
+        <a class="venue-btn"
+           href="https://www.google.com/maps/dir/?api=1&destination=Hoveveien+110a+4818+F%C3%A6rvik+Arendal"
+           target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 22s8-6.5 8-13a8 8 0 10-16 0c0 6.5 8 13 8 13z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          Åpne veibeskrivelse →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ DRESS CODE ░░ -->
+  <section id="dresscode">
+    <div class="s-wrap reveal">
+      <h2 class="s-title">Antrekk</h2>
+      <p class="s-sub">Dresscode</p>
+      <p class="dc-lead">
+        Mørk dress. Vi ønsker at alle skal føle seg vakre —
+        og vi setter pris på om dere unngår hvitt.
+      </p>
+      <div class="dc-grid">
+        <div class="dc-cell">
+          <div class="dc-icon">♟</div>
+          <p class="dc-heading">Herrer</p>
+          <p class="dc-body">Mørk dress eller smoking.<br>Slips eller sløyfe.</p>
+        </div>
+        <div class="dc-cell">
+          <div class="dc-icon">✦</div>
+          <p class="dc-heading">Damer</p>
+          <p class="dc-body">Lang kjole eller elegant ankellengde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ PRACTICAL ░░ -->
+  <section id="practical">
+    <div class="s-wrap reveal">
+      <h2 class="s-title">Praktisk</h2>
+      <p class="s-sub">Godt å vite</p>
+      <div class="pr-grid">
+        <div class="pr-cell">
+          <div class="pr-icon">♡</div>
+          <p class="pr-heading">Gave</p>
+          <p class="pr-body">Deres tilstedeværelse er den største gaven. Ønskeliste oppgis gjerne på forespørsel.</p>
+        </div>
+        <div class="pr-cell">
+          <div class="pr-icon">⊡</div>
+          <p class="pr-heading">Parkering</p>
+          <p class="pr-body">Gratis parkering ved anlegget på Hove. Følg skilting fra Hoveveien.</p>
+        </div>
+        <div class="pr-cell">
+          <div class="pr-icon">◇</div>
+          <p class="pr-heading">Mat &amp; allergier</p>
+          <p class="pr-body">Middag fra Arendal Catering AS. Oppgi allergier i påmeldingen under.</p>
+        </div>
+        <div class="pr-cell">
+          <div class="pr-icon">✦</div>
+          <p class="pr-heading">Bilder</p>
+          <p class="pr-body">Del gjerne bildene dine med oss — <span style="color:var(--ruby2);opacity:.85;">#JasminOgAshraaf</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ RSVP ░░ -->
+  <section id="rsvp">
+    <div class="s-wrap reveal">
+      <h2 class="s-title">Påmelding</h2>
+      <p class="s-sub">Gi oss beskjed</p>
+      <p class="rsvp-deadline">Vi setter stor pris på svar innen 1. august 2026</p>
+
+      <form class="rsvp-form" id="rsvpForm" novalidate>
+        <!-- Attending -->
+        <div class="attend-row" role="group" aria-label="Kommer du?">
+          <label>
+            <input type="radio" name="attend" value="yes" checked aria-pressed="true">
+            Jeg kommer
+          </label>
+          <label>
+            <input type="radio" name="attend" value="no" aria-pressed="false">
+            Kan dessverre ikke
+          </label>
+        </div>
+
+        <!-- Name -->
+        <div class="field">
+          <label for="rName">Navn</label>
+          <input type="text" id="rName" name="name" autocomplete="name" placeholder="Ditt fulle navn" required>
+        </div>
+
+        <!-- Guests -->
+        <div class="field">
+          <label for="rGuests">Antall personer</label>
+          <input type="number" id="rGuests" name="guests" min="1" max="20" value="1">
+        </div>
+
+        <!-- Allergies chips -->
+        <div class="field">
+          <label>Allergier &amp; preferanser</label>
+          <div class="chips" role="group" aria-label="Matpreferanser">
+            <label><input type="checkbox" name="allergy" value="Vegetar"><span>Vegetar</span></label>
+            <label><input type="checkbox" name="allergy" value="Vegansk"><span>Vegansk</span></label>
+            <label><input type="checkbox" name="allergy" value="Glutenfri"><span>Glutenfri</span></label>
+            <label><input type="checkbox" name="allergy" value="Laktosefri"><span>Laktosefri</span></label>
+            <label><input type="checkbox" name="allergy" value="Nøtteallergi"><span>Nøtteallergi</span></label>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="field">
+          <label for="rNotes">Andre merknader</label>
+          <textarea id="rNotes" name="notes" rows="2" placeholder="Andre allergier, hensyn eller beskjeder…"></textarea>
+        </div>
+
+        <button type="submit" class="btn-send">Send svar</button>
+        <p class="rsvp-msg" id="rsvpMsg" aria-live="polite"></p>
+        <p class="rsvp-footer-note">Svarfrist · 1. august 2026</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-names">Jasmin &amp; Ashraaf</p>
+    <p class="footer-date">26 · 09 · 2026</p>
+    <p class="footer-addr">Hoveveien 110a &nbsp;·&nbsp; 4818 Færvik</p>
+    <p class="footer-design">Invitasjon designet av <a href="https://sosmedia.no" target="_blank" rel="noopener">sosmedia.no</a></p>
+  </footer>
+
+</main>
+
+<!-- ░░ BOTTOM NAV ░░ -->
+<nav class="nav" aria-label="Navigasjon">
+  <a href="#hero">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+    <span>Hjem</span>
+  </a>
+  <a href="#program">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+    <span>Program</span>
+  </a>
+  <a href="#venue">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+    <span>Sted</span>
+  </a>
+  <a href="#rsvp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4zM4 7l8 6 8-6"/></svg>
+    <span>Svar</span>
+  </a>
+</nav>
+
+<script>
+(function () {
+  /* ── helpers ── */
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2, "0");
+
+  /* ── countdown ── */
+  const TARGET = new Date(CONFIG.date);
+  function tick() {
+    const diff = TARGET - new Date();
+    const d = Math.max(0, Math.floor(diff / 864e5));
+    const h = Math.max(0, Math.floor(diff % 864e5 / 36e5));
+    const m = Math.max(0, Math.floor(diff % 36e5 / 6e4));
+    const s = Math.max(0, Math.floor(diff % 6e4 / 1e3));
+    $("cdD").textContent = pad(d);
+    $("cdH").textContent = pad(h);
+    $("cdM").textContent = pad(m);
+    $("cdS").textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ── program list ── */
+  const list = $("progList");
+  CONFIG.program.forEach((p, i) => {
+    const li = document.createElement("li");
+    li.className = "prog-item";
+    li.style.transitionDelay = (i * 0.1) + "s";
+    li.innerHTML = `
+      <span class="prog-time">${p.time}</span>
+      <div>
+        <p class="prog-title">${p.title}</p>
+        ${p.note ? `<p class="prog-note">${p.note}</p>` : ""}
+      </div>`;
+    list.appendChild(li);
+  });
+
+  /* ── intersection observer (reveal + program items) ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  document.querySelectorAll(".prog-item").forEach(el => io.observe(el));
+
+  /* ── cover open ── */
+  let opened = false;
+  function spawnSparks(cx, cy) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    for (let i = 0; i < 14; i++) {
+      const sp = document.createElement("div");
+      sp.className = "spark"; sp.textContent = "✦";
+      const a = Math.random() * Math.PI * 2, dist = 50 + Math.random() * 110;
+      sp.style.cssText = `left:${cx}px;top:${cy}px;font-size:${7 + Math.random() * 9}px;`
+        + `--dx:${(Math.cos(a) * dist).toFixed(0)}px;--dy:${(Math.sin(a) * dist).toFixed(0)}px;`;
+      document.body.appendChild(sp);
+      setTimeout(() => sp.remove(), 1000);
+    }
+  }
+
+  function openInvitation(e) {
+    if (opened) return; opened = true;
+    const gem = $("coverGem");
+    const r = gem.getBoundingClientRect();
+    spawnSparks(r.left + r.width / 2, r.top + r.height / 2);
+    document.body.classList.remove("locked");
+    $("cover").classList.add("open");
+    setTimeout(() => { $("cover").style.display = "none"; }, 750);
+  }
+
+  $("coverGem").addEventListener("click", openInvitation);
+  $("coverGem").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openInvitation(); } });
+  $("openBtn").addEventListener("click", openInvitation);
+
+  /* ── RSVP submit ── */
+  $("rsvpForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name    = $("rName").value.trim() || "—";
+    const guests  = $("rGuests").value || "1";
+    const attend  = document.querySelector('input[name="attend"]:checked').value;
+    const notes   = $("rNotes").value.trim() || "—";
+    const allergies = Array.from(document.querySelectorAll('input[name="allergy"]:checked'))
+                           .map(c => c.value).join(", ") || "—";
+    const attendTxt = attend === "yes" ? "Jeg kommer" : "Kan dessverre ikke";
+
+    if (CONFIG.ENDPOINT && CONFIG.MODE === "sheet") {
+      const payload = { name, guests, attend: attendTxt, allergies, notes };
+      fetch(CONFIG.ENDPOINT, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      })
+      .then(() => { $("rsvpMsg").textContent = "Takk! Vi sees 26. september 🤍"; })
+      .catch(() => { $("rsvpMsg").textContent = "Noe gikk galt — send gjerne e-post i stedet."; });
+    } else if (CONFIG.ENDPOINT && CONFIG.MODE === "formspree") {
+      const fd = new FormData(this);
+      fetch(CONFIG.ENDPOINT, { method: "POST", body: fd, headers: { Accept: "application/json" } })
+      .then(r => r.ok ? r : Promise.reject())
+      .then(() => { $("rsvpMsg").textContent = "Takk! Vi sees 26. september 🤍"; })
+      .catch(() => { $("rsvpMsg").textContent = "Noe gikk galt — send gjerne e-post i stedet."; });
+    } else {
+      /* fallback: mailto */
+      const body = `Navn: ${name}\nSvar: ${attendTxt}\nAntall: ${guests}\nAllergier: ${allergies}\nMerknad: ${notes}`;
+      console.log("RSVP (dev):", payload || body);
+      $("rsvpMsg").textContent = "Takk! Vi sees 26. september 🤍";
+    }
+  });
+
+  /* ── smooth nav links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", e => {
+      const target = document.getElementById(a.getAttribute("href").slice(1));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  /* ── reset on back/forward ── */
+  addEventListener("pageshow", () => {
+    scrollTo(0, 0);
+    if (!opened) document.body.classList.add("locked");
+  });
+})();
+</script>
+</body>
+</html>
