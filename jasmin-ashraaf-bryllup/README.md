@@ -104,11 +104,10 @@ Eget domene (f.eks. `jasminogashraaf.no`) koster ca. 100–200 kr/år hos [Domen
 
 | Rolle | Verdi |
 |---|---|
-| Bakgrunn | `#0b0507` → `#140a0d` |
-| Rubin | `#9b1b30` |
-| Rubin lys | `#c8203c` |
-| Blush | `#e8c4c8` |
-| Cream | `#f5ece9` |
+| Varm Hvit | `#F9F7F2` |
+| Romantisk Rød | `#660A11` |
+| Champagne Beige | `#EAE0D1` |
+| Gull Luksus | `#C5A16F` |
 
 **Kjente punkter**
 
