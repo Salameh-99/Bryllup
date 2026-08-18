@@ -1,13 +1,13 @@
-# Jasmin & Ashraaf — bryllupsside
+# Achraaf & Jasmin — bryllupsside
 
 Invitasjon etter **Tilda template5** (Viktor & Paula / webgency.tilda.ws/template5), med innhold for bryllupet på **Hove, 26. september 2026**.
 
 | | |
 |---|---|
-| **Dato** | Lørdag 26.09.2026, kl. 14:00 |
+| **Dato** | Lørdag 26.09.2026, kl. 15:30 |
 | **Sted** | Hoveveien 110a, 4818 Færvik |
 | **Catering** | Arendal Catering AS |
-| **Svarfrist** | 1. august 2026 |
+| **Svarfrist** | 1. september 2026 |
 
 Dette er **ikke** Kaupang-malen. Siden følger template5-oppsettet: burgunder/krem, script-typografi, revet papir-overganger, blomsterdekor, tidslinje, dress code, RSVP-knapp og flytende musikk-kontroll.
 
@@ -23,7 +23,7 @@ python3 -m http.server 8000
 
 ```js
 const CONFIG = {
-  date: "2026-09-26T14:00:00",
+  date: "2026-09-26T15:30:00",
   ENDPOINT: "",   // Google Apps Script URL
   MODE: "sheet"
 };
@@ -37,7 +37,7 @@ Legg filene i `img/` med nøyaktig disse navnene:
 
 | Fil | Brukes til |
 |---|---|
-| `img/paret.jpg` | Bilde av paret (dress code + bunn) |
+| `img/paret.jpg` | Bilde av paret (dress code + bunn). Original: `IMG_0422.jpeg` |
 | `img/lokale.jpg` | Bilde av lokalet (sted-seksjonen) |
 | `img/lokale-2.jpg` | Ekstra bilde av lokalet (dress code) |
 
