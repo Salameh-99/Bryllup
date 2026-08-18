@@ -129,9 +129,10 @@ a{color:inherit;text-decoration:none}
   display:grid;place-items:center;text-align:center;
 }
 .band.cream .photo-slot{background:rgba(102,2,31,.05);border-color:rgba(102,2,31,.25)}
-.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;display:none}
+.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
 .photo-slot.has-img img{display:block}
 .photo-slot.has-img .photo-hint{display:none}
+.photo-slot[data-src="img/paret.jpg"] img{object-position:center 28%}
 .photo-hint{
   font-family:var(--serif);font-size:.9rem;line-height:1.5;padding:1rem;
   color:inherit;opacity:.7;
