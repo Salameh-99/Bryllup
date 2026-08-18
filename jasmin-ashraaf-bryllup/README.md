@@ -31,6 +31,18 @@ const CONFIG = {
 
 RSVP-oppsett: [`docs/oppsett-rsvp.md`](docs/oppsett-rsvp.md)
 
+## Egne bilder
+
+Legg filene i `img/` med nøyaktig disse navnene:
+
+| Fil | Brukes til |
+|---|---|
+| `img/paret.jpg` | Bilde av paret (dress code + bunn) |
+| `img/lokale.jpg` | Bilde av lokalet (sted-seksjonen) |
+| `img/lokale-2.jpg` | Ekstra bilde av lokalet (dress code) |
+
+Til rammene vises en tom plassholder til filen er lagt inn. Blomsterdekoren fra malen beholdes.
+
 ## Palett
 
 | Rolle | Verdi |
