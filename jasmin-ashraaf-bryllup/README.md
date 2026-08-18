@@ -45,14 +45,19 @@ Alt innhold styres av `CONFIG`-objektet øverst i `index.html`:
 const CONFIG = {
   names:     "Jasmin & Ashraaf",
   date:      "2026-09-26T14:00:00",
-  dateLabel: "Lørdag 26 · September · 2026",
-  venue:     { name: "Hove", address: "...", mapsQuery: "..." },
-  catering:  "Arendal Catering AS",
-  rsvpDeadline: "1. august 2026",
-  hashtag:   "#JasminOgAshraaf",
-  program:   [...],
-  ENDPOINT:  "",      // ← URL fra Google Apps Script (se docs/oppsett-rsvp.md)
-  MODE:      "sheet"  // 'sheet' eller 'formspree'
+  names: { no: "Jasmin & Ashraaf", fa: "Jasmin & Ashraaf" },
+  date: "2026-09-26T14:00:00",
+  durationHours: 10,
+  videoSrc: "../video/cover-doors.mp4",
+  images: {
+    hero: "../img/hero-venue.jpg",
+    seal: "../img/wax-seal.png",
+    gallery: [...]
+  },
+  venue: { name: { no: "Hove", fa: "Hove" }, address: "...", mapsQuery: "..." },
+  program: [...],
+  ENDPOINT: "",       // ← URL fra Google Apps Script (se docs/oppsett-rsvp.md)
+  MODE: "sheet"       // 'sheet' eller 'formspree'
 };
 ```
 
@@ -60,10 +65,10 @@ const CONFIG = {
 
 | Hva | Hvor |
 |---|---|
-| Fargepalett | `:root` øverst i `<style>` |
+| Video på cover | `videoSrc` i `CONFIG` |
+| Hero- og galleri-bilder | `images` i `CONFIG` |
 | Nedtellingsdato | `date` i `CONFIG` |
 | Program / tidspunkter | `program`-arrayen i `CONFIG` |
-| Allergivalg | `<div class="chips">` i HTML |
 
 ---
 
@@ -98,16 +103,25 @@ Eget domene (f.eks. `jasminogashraaf.no`) koster ca. 100–200 kr/år hos [Domen
 
 ## Teknisk
 
-**Typografi** — Cormorant Garamond (overskrifter) + Jost (brødtekst), begge fra Google Fonts.
+**Typografi** — Playfair Display (overskrifter), Pinyon Script (detaljer) og Inter (brødtekst), fra Google Fonts.
 
 **Palett**
 
 | Rolle | Verdi |
 |---|---|
-| Varm Hvit | `#F9F7F2` |
-| Romantisk Rød | `#660A11` |
-| Champagne Beige | `#EAE0D1` |
-| Gull Luksus | `#C5A16F` |
+| Ivory | `#FAF6EE` |
+| Cream | `#F2E9D8` |
+| Gull | `#B68E3A` |
+| Gull dyp | `#7A5520` |
+
+**Template-oppsett**
+
+- Videodører på cover
+- Vokssegl-knapp for åpning
+- Hero-bilde med ramme
+- Galleri med seks bilder
+- Reveal-animasjoner og auto-scroll
+- Fast bunnnavigasjon og musikk-knapp
 
 **Kjente punkter**
 
