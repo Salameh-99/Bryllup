@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Bryllupsinvitasjon — Achraaf &amp; Jasmin, 26. september 2026, Hove, Færvik">
-<title>Achraaf and Jasmin</title>
+<title>Achraaf og Jasmin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Ovo&display=swap" rel="stylesheet">
 <script>
 const CONFIG = {
-  date: "2026-09-26T14:00:00",
+  date: "2026-09-26T15:30:00",
   ENDPOINT: "",
   MODE: "sheet",
   musicSrc: "https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/Alex%20Warren%20-%20Ordinary%20Lyrics.mp3",
@@ -29,52 +29,65 @@ const CONFIG = {
   --serif:"Ovo", Georgia, serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--ruby);color:#fff;font-family:var(--serif);-webkit-font-smoothing:antialiased}
-body.locked{overflow:hidden;height:100svh}
-img{max-width:100%;display:block}
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+html,body{
+  background:var(--ruby);color:#fff;font-family:var(--serif);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100%;
+  overscroll-behavior-x:none;scrollbar-width:none;
+}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+body.locked{overflow:hidden;height:100svh;height:100dvh}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;max-width:100%}
 ::selection{background:var(--gold);color:var(--ruby)}
 
 /* ── COVER ── */
 #cover{
   position:fixed;inset:0;z-index:200;display:grid;place-items:center;
   background:var(--ruby);transition:opacity 1.4s ease,visibility 1.4s ease;
+  padding:env(safe-area-inset-top) 1.2rem env(safe-area-inset-bottom);
 }
 #cover.open{opacity:0;visibility:hidden;pointer-events:none}
-.cover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.cover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.55}
 .cover-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(102,2,31,.45),rgba(74,0,20,.72))}
-.cover-inner{position:relative;z-index:2;text-align:center;padding:2rem}
-.cover-names{font-family:var(--script);font-size:clamp(3.2rem,12vw,5rem);line-height:.7;font-weight:400}
+.cover-inner{position:relative;z-index:2;text-align:center;padding:2rem 1.2rem;width:100%;max-width:440px}
+.cover-names{font-family:var(--script);font-size:clamp(2.9rem,11vw,5rem);line-height:.78;font-weight:400}
 .cover-hint{margin-top:1.6rem;font-family:var(--serif);font-size:1.05rem;letter-spacing:.02em}
 .popup-enter{
-  margin-top:1.6rem;display:inline-block;padding:.7rem 1.8rem;border-radius:999px;
+  margin-top:1.6rem;display:inline-block;padding:.75rem 1.8rem;border-radius:999px;
   background:var(--cream);color:var(--ruby);font-family:var(--serif);font-size:1rem;cursor:pointer;border:0;
+  min-height:44px;
 }
 
 /* ── PAGE ── */
-.page{max-width:440px;margin:0 auto;background:var(--ruby);overflow:visible}
+.page{width:100%;max-width:440px;margin:0 auto;background:var(--ruby);overflow:visible}
 .hero{
-  position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;
-  text-align:center;padding:4.2rem 1.4rem 8rem;overflow:hidden;
+  position:relative;min-height:100svh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding:max(4.2rem, calc(env(safe-area-inset-top) + 2.4rem)) 1.4rem 8rem;overflow:hidden;
+  background:var(--ruby);
 }
 .hero-video{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.38;
+  position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;opacity:.38;
 }
 .hero-dim{position:absolute;inset:0;background:rgba(0,0,0,.4)}
-.hero-fade{position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(0deg,var(--ruby),transparent)}
+.hero-fade{position:absolute;left:0;right:0;bottom:-1px;height:140px;background:linear-gradient(0deg,var(--ruby) 0%,var(--ruby) 28%,transparent 100%)}
 .hero-inner{position:relative;z-index:2;width:100%}
 .eyebrow{font-family:var(--script);font-size:clamp(2.2rem,9vw,2.7rem);line-height:.9;font-weight:400}
 .hero-date{margin-top:.55rem;font-family:var(--serif);font-size:1.2rem;letter-spacing:.12em;font-weight:700}
 .hero-names{
   position:relative;margin:2.6rem 0 2.2rem;font-family:var(--script);
-  font-size:clamp(4.6rem,20vw,5.4rem);line-height:.57;font-weight:400;
+  font-size:clamp(3.8rem,17vw,5.4rem);line-height:.66;font-weight:400;
 }
 .hero-amp{
   position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
   font-size:.58em;line-height:1;font-family:var(--script);
 }
-.florals{position:relative;height:220px;margin:-1.2rem auto 0;width:100%;max-width:440px;overflow:visible}
-.florals img{position:absolute;height:auto;pointer-events:none}
+.florals{position:relative;height:220px;margin:-1.2rem auto 0;width:100%;max-width:440px;overflow:hidden}
+.florals img{position:absolute;height:auto;pointer-events:none;max-width:none}
 .florals img:nth-child(1){left:-8%;bottom:12px;width:136px}
 .florals img:nth-child(2){left:8%;bottom:0;width:137px}
 .florals img:nth-child(3){left:18%;bottom:38px;width:100px;z-index:2}
@@ -138,7 +151,13 @@ a{color:inherit;text-decoration:none}
   color:inherit;opacity:.7;
 }
 .photo-hint small{display:block;margin-top:.35rem;opacity:.7;font-size:.75rem}
-.couple-slot{width:100%;max-width:440px;aspect-ratio:3/4;margin:1.8rem auto 0;border:0}
+.couple-slot{
+  width:100%;max-width:440px;aspect-ratio:3/4;margin:1.8rem auto 0;border:0;background:transparent;
+}
+.couple-slot.has-img img{
+  mask-image:linear-gradient(to bottom, transparent 0%, #000 10%, #000 88%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 10%, #000 88%, transparent 100%);
+}
 .dc-row .photo-slot{width:100%;margin:0}
 .venue-btn{
   display:inline-block;margin-top:1.2rem;padding:.55rem 1.4rem;border-radius:999px;
@@ -173,7 +192,7 @@ form.rsvp.open{display:block}
 .field label{display:block;font-size:.9rem;margin-bottom:.35rem}
 .field input,.field textarea,.field select{
   width:100%;padding:.7rem .8rem;border:1px solid #c9c9c9;border-radius:5px;
-  font-family:var(--serif);font-size:1rem;color:#4f4f4f;background:#fff;
+  font-family:var(--serif);font-size:16px;color:#4f4f4f;background:#fff;
 }
 .attend{display:flex;gap:.6rem}
 .attend label{
@@ -185,7 +204,7 @@ form.rsvp.open{display:block}
 .send-btn{width:100%;background:var(--ruby);color:var(--cream)}
 .rsvp-msg{min-height:1.2rem;margin-top:.8rem;text-align:center;font-style:italic}
 
-.closing{padding:1rem 1.4rem 0;text-align:center}
+.closing{padding:1rem 1.4rem max(5.2rem, calc(env(safe-area-inset-bottom) + 4.6rem));text-align:center}
 .closing h2{font-family:var(--script);font-size:clamp(2.2rem,9vw,3rem);font-weight:400}
 .closing p{margin-top:.5rem;font-size:1.05rem}
 .couple{
@@ -195,10 +214,13 @@ form.rsvp.open{display:block}
 }
 
 #audio-control{
-  position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:var(--ruby);
+  position:fixed;
+  bottom:max(16px, env(safe-area-inset-bottom));
+  right:max(16px, env(safe-area-inset-right));
+  width:56px;height:56px;background:var(--ruby);
   border-radius:50%;display:flex;justify-content:center;align-items:center;z-index:300;
   cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,.18);visibility:hidden;opacity:0;transition:opacity .3s;
-  border:0;color:#fff;
+  border:1px solid rgba(255,250,248,.18);color:#fff;
 }
 #audio-control.show{visibility:visible;opacity:1}
 #audio-control svg{width:26px;height:26px;fill:#fff}
@@ -218,7 +240,7 @@ form.rsvp.open{display:block}
   <div class="cover-veil"></div>
   <div class="cover-inner">
     <p class="cover-names">Achraaf<br><br>Jasmin</p>
-    <p class="cover-hint">Click to open</p>
+    <p class="cover-hint">Trykk for å åpne</p>
     <button class="popup-enter" id="openBtn" type="button">Åpne invitasjonen</button>
   </div>
 </div>
@@ -352,11 +374,11 @@ form.rsvp.open{display:block}
       <button class="rsvp-btn" id="rsvpToggle" type="button">RSVP</button>
       <form class="rsvp" id="rsvpForm" novalidate>
         <div class="field">
-          <label for="rName">Your name</label>
+          <label for="rName">Navn</label>
           <input id="rName" name="name" required>
         </div>
         <div class="field">
-          <div>Will you come?</div>
+          <div>Kommer du?</div>
           <div class="attend">
             <label><input type="radio" name="attend" value="yes" checked> Jeg kommer</label>
             <label><input type="radio" name="attend" value="no"> Kan dessverre ikke</label>
@@ -367,18 +389,18 @@ form.rsvp.open{display:block}
           <input id="rGuests" type="number" min="1" max="20" value="1">
         </div>
         <div class="field">
-          <label for="rNotes">Do you have any food intolerances?</label>
+          <label for="rNotes">Allergier eller merknader</label>
           <textarea id="rNotes" rows="2"></textarea>
         </div>
-        <button class="send-btn" type="submit">Submit</button>
+        <button class="send-btn" type="submit">Send</button>
         <p class="rsvp-msg" id="rsvpMsg"></p>
       </form>
     </div>
   </section>
 
   <footer class="closing">
-    <h2>Hope to see you there!</h2>
-    <p>Achraaf and Jasmin</p>
+    <h2>Vi gleder oss til å se dere</h2>
+    <p>Achraaf og Jasmin</p>
     <figure class="photo-slot couple-slot" data-src="img/paret.jpg">
       <img alt="Achraaf og Jasmin">
       <figcaption class="photo-hint">Bilde av paret<small>img/paret.jpg</small></figcaption>

@@ -4,7 +4,7 @@ Invitasjon etter **Tilda template5** (Viktor & Paula / webgency.tilda.ws/templat
 
 | | |
 |---|---|
-| **Dato** | Lørdag 26.09.2026, kl. 14:00 |
+| **Dato** | Lørdag 26.09.2026, kl. 15:30 |
 | **Sted** | Hoveveien 110a, 4818 Færvik |
 | **Catering** | Arendal Catering AS |
 | **Svarfrist** | 1. september 2026 |
@@ -23,7 +23,7 @@ python3 -m http.server 8000
 
 ```js
 const CONFIG = {
-  date: "2026-09-26T14:00:00",
+  date: "2026-09-26T15:30:00",
   ENDPOINT: "",   // Google Apps Script URL
   MODE: "sheet"
 };
