@@ -39,7 +39,11 @@ html,body{
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
   max-width:100%;
+  overscroll-behavior-x:none;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 body.locked{overflow:hidden;height:100svh;height:100dvh}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
@@ -65,18 +69,19 @@ button,input,textarea,select{font:inherit;max-width:100%}
 }
 
 /* ── PAGE ── */
-.page{width:100%;max-width:440px;margin:0 auto;background:var(--ruby);overflow-x:hidden}
+.page{width:100%;max-width:440px;margin:0 auto;background:var(--ruby);overflow:visible}
 .hero{
   position:relative;min-height:100svh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   text-align:center;
   padding:max(4.2rem, calc(env(safe-area-inset-top) + 2.4rem)) 1.4rem 8rem;
   overflow:hidden;
+  background:var(--ruby);
 }
 .hero-video{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.38;
+  position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;opacity:.38;
 }
 .hero-dim{position:absolute;inset:0;background:rgba(0,0,0,.4)}
-.hero-fade{position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(0deg,var(--ruby),transparent)}
+.hero-fade{position:absolute;left:0;right:0;bottom:-1px;height:140px;background:linear-gradient(0deg,var(--ruby) 0%,var(--ruby) 30%,transparent 100%)}
 .hero-inner{position:relative;z-index:2;width:100%}
 .eyebrow{font-family:var(--script);font-size:clamp(2.2rem,9vw,2.7rem);line-height:.9;font-weight:400}
 .hero-date{margin-top:.55rem;font-family:var(--serif);font-size:1.2rem;letter-spacing:.12em;font-weight:700}
