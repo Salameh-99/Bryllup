@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Ovo&display=swap" rel="stylesheet">
 <script>
 const CONFIG = {
-  date: "2026-09-26T15:30:00",
+  date: "2026-09-26T16:00:00",
   ENDPOINT: "",
   MODE: "sheet",
   musicSrc: "https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/Alex%20Warren%20-%20Ordinary%20Lyrics.mp3",
@@ -175,7 +175,16 @@ button,input,textarea,select{font:inherit;max-width:100%}
   box-shadow:0 0 0 6px var(--ruby);
 }
 .tl-item.rose .tl-dot{display:none}
-.tl-rose{width:28px;height:28px;margin:0 auto;object-fit:contain}
+.tl-rose{
+  width:32px;height:32px;margin:0 auto;object-fit:contain;
+  animation:rose-bob 3s ease-in-out infinite;
+  transform-origin:center bottom;
+}
+@keyframes rose-bob{
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  30%{transform:translateY(-5px) rotate(3deg)}
+  60%{transform:translateY(-2px) rotate(-2deg)}
+}
 
 .venue-scene{
   width:min(100%, 28.125rem);margin:0 auto;
@@ -364,7 +373,7 @@ form.rsvp.open{display:block}
     <h2 class="s-title reveal">Schedule of Events</h2>
     <div class="tl">
       <div class="tl-item">
-        <div class="tl-time">15:30</div>
+        <div class="tl-time">16:00</div>
         <div class="tl-dot"></div>
         <div class="tl-name">Mottakelse</div>
       </div>
