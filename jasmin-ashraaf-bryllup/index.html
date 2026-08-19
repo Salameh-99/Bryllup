@@ -175,15 +175,18 @@ button,input,textarea,select{font:inherit;max-width:100%}
   box-shadow:0 0 0 6px var(--ruby);
 }
 .tl-item.rose .tl-dot{display:none}
-.tl-rose{
-  width:32px;height:32px;margin:0 auto;object-fit:contain;
-  animation:rose-bob 3s ease-in-out infinite;
-  transform-origin:center bottom;
+.tl-rose{width:32px;height:32px;margin:0 auto;object-fit:contain}
+
+/* scroll flower */
+.tl-flower-wrap{
+  position:absolute;left:50%;top:0;transform:translateX(-50%);
+  width:72px;height:72px;margin-left:-36px;
+  pointer-events:none;z-index:4;
+  transition:top .15s ease-out;
 }
-@keyframes rose-bob{
-  0%,100%{transform:translateY(0) rotate(-4deg)}
-  30%{transform:translateY(-5px) rotate(3deg)}
-  60%{transform:translateY(-2px) rotate(-2deg)}
+.tl-flower-wrap img{
+  width:72px;height:72px;object-fit:contain;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.18));
 }
 
 .venue-scene{
@@ -371,21 +374,25 @@ form.rsvp.open{display:block}
 
   <section class="band ruby" id="program">
     <h2 class="s-title reveal">Schedule of Events</h2>
-    <div class="tl">
-      <div class="tl-item">
+    <div class="tl" id="tl">
+      <div class="tl-item" data-tl-idx="0">
         <div class="tl-time">16:00</div>
         <div class="tl-dot"></div>
         <div class="tl-name">Mottakelse</div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item" data-tl-idx="1">
         <div class="tl-time">17:00</div>
         <div class="tl-dot"></div>
         <div class="tl-name">Middag</div>
       </div>
-      <div class="tl-item rose">
+      <div class="tl-item" data-tl-idx="2">
         <div class="tl-time">20:00</div>
-        <img class="tl-rose" src="https://static.tildacdn.net/tild3533-3266-4863-b762-326134376538/7uruby.png" alt="">
+        <div class="tl-dot"></div>
         <div class="tl-name">Fest &amp; dans</div>
+      </div>
+      <!-- scroll flower -->
+      <div class="tl-flower-wrap" id="tlFlower">
+        <img src="img/flower.png" alt="">
       </div>
     </div>
   </section>
@@ -558,6 +565,44 @@ form.rsvp.open{display:block}
     if(audio.paused){ audio.play(); playI.style.display="none"; pauseI.style.display="block"; }
     else { audio.pause(); playI.style.display="block"; pauseI.style.display="none"; }
   });
+
+  // ── scroll flower along timeline ──
+  (function(){
+    const tl = document.getElementById('tl');
+    const flower = document.getElementById('tlFlower');
+    if(!tl || !flower) return;
+    const items = Array.from(tl.querySelectorAll('.tl-item'));
+    function getCenter(el){
+      return el.offsetTop + el.offsetHeight / 2;
+    }
+    function update(){
+      const tlRect = tl.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // progress: 0 when timeline top enters viewport, 1 when bottom leaves
+      const prog = Math.max(0, Math.min(1,
+        (vh * 0.5 - tlRect.top) / (tlRect.height + vh * 0.5 - 36)
+      ));
+      // snap to nearest item center
+      const centers = items.map(getCenter);
+      const first = centers[0];
+      const last = centers[centers.length - 1];
+      const targetY = first + (last - first) * prog;
+      // find closest
+      let closest = first;
+      let minDist = Infinity;
+      for(const c of centers){
+        const d = Math.abs(c - targetY);
+        if(d < minDist){ minDist = d; closest = c; }
+      }
+      // snap when close, glide otherwise
+      const snapDist = 20;
+      const finalY = minDist < snapDist ? closest : targetY;
+      flower.style.top = (finalY - 36) + 'px';
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    window.addEventListener('resize', update, {passive:true});
+    update();
+  })();
 
   $("rsvpToggle").addEventListener("click", () => {
     $("rsvpForm").classList.add("open");
