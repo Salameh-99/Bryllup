@@ -47,20 +47,64 @@ button,input,textarea,select{font:inherit;max-width:100%}
 
 /* ── COVER ── */
 #cover{
-  position:fixed;inset:0;z-index:200;display:grid;place-items:center;
-  background:var(--ruby);transition:opacity 1.4s ease,visibility 1.4s ease;
-  padding:env(safe-area-inset-top) 1.2rem env(safe-area-inset-bottom);
+  position:fixed;inset:0;z-index:200;overflow:hidden;background:var(--ruby);
+  transition:opacity 1.4s ease,visibility 1.4s ease;
+  cursor:pointer;
 }
+#cover.opening{pointer-events:none}
 #cover.open{opacity:0;visibility:hidden;pointer-events:none}
-.cover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.55}
-.cover-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(102,2,31,.45),rgba(74,0,20,.72))}
-.cover-inner{position:relative;z-index:2;text-align:center;padding:2rem 1.2rem;width:100%;max-width:440px}
-.cover-names{font-family:var(--script);font-size:clamp(2.9rem,11vw,5rem);line-height:.78;font-weight:400}
-.cover-hint{margin-top:1.6rem;font-family:var(--serif);font-size:1.05rem;letter-spacing:.02em}
+.cover-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.52}
+.cover-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(102,2,31,.38),rgba(74,0,20,.68))}
+
+/* envelope halves */
+.cover-env{
+  position:absolute;inset:0;display:grid;place-items:center;z-index:2;pointer-events:none;
+}
+.cover-half{
+  position:absolute;top:0;width:50%;height:100%;overflow:hidden;
+  transition:transform 1.8s cubic-bezier(.4,0,.2,1);
+}
+.cover-half--l{left:0;transform-origin:left center}
+.cover-half--r{right:0;transform-origin:right center}
+.cover-half--l .cover-half-inner{
+  position:absolute;inset:0;background:var(--ruby);
+}
+.cover-half--r .cover-half-inner{
+  position:absolute;inset:0;background:var(--ruby);
+}
+.cover-half-video{position:absolute;inset:0;width:200%;height:100%;object-fit:cover;object-position:center;opacity:.52;pointer-events:none}
+.cover-half--r .cover-half-video{right:0;left:auto;transform:translateX(-50%)}
+.cover-half-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(102,2,31,.38),rgba(74,0,20,.68))}
+#cover.opening .cover-half--l{transform:translateX(-110%)}
+#cover.opening .cover-half--r{transform:translateX(110%)}
+
+/* wax seal */
+.cover-seal{
+  position:absolute;z-index:4;width:clamp(120px,32vw,170px);
+  left:50%;top:50%;transform:translate(-50%,-50%);
+  transition:transform 1.2s cubic-bezier(.4,0,.2,1),opacity .8s ease;
+  pointer-events:none;
+}
+#cover.opening .cover-seal{
+  transform:translate(-50%,-50%) scale(1.28);
+  opacity:0;
+}
+
+/* inner content sliding down (revealed after open) */
+.cover-inner{
+  position:absolute;z-index:3;text-align:center;
+  left:50%;transform:translateX(-50%);
+  width:min(88%, 360px);
+  bottom:max(env(safe-area-inset-bottom),24px);
+  padding-bottom:1rem;
+  pointer-events:none;
+}
+.cover-names{font-family:var(--script);font-size:clamp(2.8rem,11vw,5rem);line-height:.78;font-weight:400;color:#fff}
+.cover-hint{margin-top:1.4rem;font-family:var(--serif);font-size:1rem;letter-spacing:.06em;color:#fffaf8cc}
 .popup-enter{
-  margin-top:1.6rem;display:inline-block;padding:.75rem 1.8rem;border-radius:999px;
+  margin-top:1.2rem;display:inline-block;padding:.75rem 2rem;border-radius:999px;
   background:var(--cream);color:var(--ruby);font-family:var(--serif);font-size:1rem;cursor:pointer;border:0;
-  min-height:44px;
+  min-height:44px;pointer-events:all;transition:opacity .3s;
 }
 
 /* ── PAGE ── */
@@ -258,10 +302,30 @@ form.rsvp.open{display:block}
 <div id="cover">
   <video class="cover-video" autoplay muted loop playsinline src="https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/IMG_6230%20(1).MP4"></video>
   <div class="cover-veil"></div>
+
+  <!-- envelope halves -->
+  <div class="cover-env">
+    <div class="cover-half cover-half--l">
+      <div class="cover-half-inner">
+        <video class="cover-half-video" autoplay muted loop playsinline src="https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/IMG_6230%20(1).MP4" style="left:0"></video>
+        <div class="cover-half-veil"></div>
+      </div>
+    </div>
+    <div class="cover-half cover-half--r">
+      <div class="cover-half-inner">
+        <video class="cover-half-video" autoplay muted loop playsinline src="https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/IMG_6230%20(1).MP4"></video>
+        <div class="cover-half-veil"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- wax seal (click target) -->
+  <img class="cover-seal" id="openBtn" src="img/wax-seal.png" alt="Åpne invitasjonen">
+
+  <!-- names + hint -->
   <div class="cover-inner">
     <p class="cover-names">Achraaf<br><br>Jasmin</p>
-    <p class="cover-hint">Trykk for å åpne</p>
-    <button class="popup-enter" id="openBtn" type="button">Åpne invitasjonen</button>
+    <p class="cover-hint">Trykk på seglet for å åpne</p>
   </div>
 </div>
 
@@ -473,19 +537,25 @@ form.rsvp.open{display:block}
   const heroV = $("heroVideo");
   heroV.src = CONFIG.videoSrc;
 
+  let opened = false;
   function openInvitation(){
-    document.body.classList.remove("locked");
-    $("cover").classList.add("open");
+    if(opened) return;
+    opened = true;
+    const cover = $("cover");
+    cover.classList.add("opening");
     heroV.play().catch(()=>{});
     audio.play().then(()=>{
       playI.style.display="none"; pauseI.style.display="block";
     }).catch(()=>{});
-    ctrl.classList.add("show");
+    // after animation finishes, hide cover and unlock scroll
+    setTimeout(()=>{
+      document.body.classList.remove("locked");
+      cover.classList.add("open");
+      ctrl.classList.add("show");
+    }, 1900);
   }
   $("openBtn").addEventListener("click", openInvitation);
-  $("cover").addEventListener("click", e => {
-    if(e.target.closest("#openBtn") || e.target === $("cover") || e.target.closest(".cover-inner")) openInvitation();
-  });
+  $("cover").addEventListener("click", openInvitation);
   ctrl.addEventListener("click", () => {
     if(audio.paused){ audio.play(); playI.style.display="none"; pauseI.style.display="block"; }
     else { audio.pause(); playI.style.display="block"; pauseI.style.display="none"; }
