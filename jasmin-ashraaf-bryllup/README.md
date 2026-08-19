@@ -38,7 +38,7 @@ Legg filene i `img/` med nøyaktig disse navnene:
 | Fil | Brukes til |
 |---|---|
 | `img/paret.jpg` | Bilde av paret (dress code + bunn). Original: `IMG_0422.jpeg` |
-| `img/lokale.png` | Bilde av lokalet (sted-seksjonen). Original: `53AB3932-83F1-400E-9D21-C6C9EF5784C7.png` |
+| `img/lokale-bygning.png` | Hove-tegning (Location), svarte streker som i Tilda template5 |
 | `img/lokale-2.jpg` | Ekstra bilde av lokalet (dress code) |
 
 Til rammene vises en tom plassholder til filen er lagt inn. Blomsterdekoren fra malen beholdes.
