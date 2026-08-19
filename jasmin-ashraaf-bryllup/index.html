@@ -11,8 +11,7 @@
 <script>
 const CONFIG = {
   date: "2026-09-26T16:00:00",
-  ENDPOINT: "",
-  MODE: "sheet",
+  rsvpPhone: "", // f.eks. "+47 412 34 567"
   musicSrc: "https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/Alex%20Warren%20-%20Ordinary%20Lyrics.mp3",
   videoSrc: "https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/IMG_6230%20(1).MP4"
 };
@@ -280,7 +279,9 @@ form.rsvp.open{display:block}
 .attend input{display:none}
 .attend label:has(input:checked){background:var(--ruby);color:var(--cream);border-color:var(--ruby)}
 .send-btn{width:100%;background:var(--ruby);color:var(--cream)}
-.rsvp-msg{min-height:1.2rem;margin-top:.8rem;text-align:center;font-style:italic}
+.rsvp-msg,.rsvp-note{min-height:1.2rem;margin-top:.8rem;text-align:center;font-style:italic;font-size:.92rem;line-height:1.45}
+.rsvp-note{opacity:.88;margin-top:.5rem}
+.rsvp-phone{margin-top:.6rem;font-size:1rem;letter-spacing:.02em}
 
 .closing{padding:1rem 1.4rem max(5.2rem, calc(env(safe-area-inset-bottom) + 4.6rem));text-align:center}
 .closing h2{font-family:var(--script);font-size:clamp(2.2rem,9vw,3rem);font-weight:400}
@@ -466,12 +467,13 @@ form.rsvp.open{display:block}
   <section class="band ruby" id="rsvp">
     <h2 class="s-title reveal">Confirm Your Attendance</h2>
     <p class="s-body">Vi setter stor pris på svar innen 1. september 2026</p>
+    <p class="rsvp-phone" id="rsvpPhoneLine" hidden></p>
     <div class="rsvp-wrap">
       <button class="rsvp-btn" id="rsvpToggle" type="button">RSVP</button>
       <form class="rsvp" id="rsvpForm" novalidate>
         <div class="field">
           <label for="rName">Navn</label>
-          <input id="rName" name="name" required>
+          <input id="rName" name="name" required autocomplete="name">
         </div>
         <div class="field">
           <div>Kommer du?</div>
@@ -482,13 +484,14 @@ form.rsvp.open{display:block}
         </div>
         <div class="field">
           <label for="rGuests">Antall personer</label>
-          <input id="rGuests" type="number" min="1" max="20" value="1">
+          <input id="rGuests" type="number" min="1" max="20" value="1" inputmode="numeric">
         </div>
         <div class="field">
           <label for="rNotes">Allergier eller merknader</label>
           <textarea id="rNotes" rows="2"></textarea>
         </div>
-        <button class="send-btn" type="submit">Send</button>
+        <button class="send-btn" type="submit">Send svar på SMS</button>
+        <p class="rsvp-note">På mobil åpnes SMS-appen med meldingen ferdig utfylt. Husk å trykke send.</p>
         <p class="rsvp-msg" id="rsvpMsg"></p>
       </form>
     </div>
@@ -637,23 +640,61 @@ form.rsvp.open{display:block}
     $("rsvpForm").classList.add("open");
     $("rsvpToggle").style.display="none";
   });
+
+  function normalizePhone(phone){
+    return String(phone || "").replace(/[^\d+]/g, "");
+  }
+  function formatPhoneDisplay(phone){
+    const digits = normalizePhone(phone).replace(/^\+/, "");
+    if(digits.startsWith("47") && digits.length === 10){
+      const n = digits.slice(2);
+      return `+47 ${n.slice(0,3)} ${n.slice(3,5)} ${n.slice(5)}`;
+    }
+    return phone.trim();
+  }
+  function buildSmsBody(payload){
+    return [
+      "Hei! Dette er mitt svar på bryllupsinvitasjonen til Achraaf og Jasmin:",
+      "",
+      `Navn: ${payload.name}`,
+      `Svar: ${payload.attend}`,
+      `Antall personer: ${payload.guests}`,
+      `Allergier/merknader: ${payload.notes}`
+    ].join("\n");
+  }
+  function smsUrl(phone, body){
+    const target = normalizePhone(phone);
+    const encoded = encodeURIComponent(body);
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    return ios ? `sms:${target}&body=${encoded}` : `sms:${target}?body=${encoded}`;
+  }
+
+  const rsvpPhone = normalizePhone(CONFIG.rsvpPhone);
+  if(rsvpPhone){
+    const line = $("rsvpPhoneLine");
+    line.textContent = `Send SMS til ${formatPhoneDisplay(CONFIG.rsvpPhone)}`;
+    line.hidden = false;
+  }
+
   $("rsvpForm").addEventListener("submit", e => {
     e.preventDefault();
-    const payload = {
-      name: $("rName").value.trim() || "—",
-      guests: $("rGuests").value || "1",
-      attend: document.querySelector('input[name="attend"]:checked').value === "yes" ? "Jeg kommer" : "Kan dessverre ikke",
-      notes: $("rNotes").value.trim() || "—"
-    };
-    if(CONFIG.ENDPOINT && CONFIG.MODE === "sheet"){
-      fetch(CONFIG.ENDPOINT, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload) })
-        .then(r => r.ok ? r : Promise.reject())
-        .then(() => { $("rsvpMsg").textContent = "Takk! Vi sees 26. september."; })
-        .catch(() => { $("rsvpMsg").textContent = "Noe gikk galt — prøv igjen senere."; });
+    if(!$("rName").value.trim()){
+      $("rsvpMsg").textContent = "Skriv inn navnet ditt.";
       return;
     }
-    console.log("RSVP (dev):", payload);
-    $("rsvpMsg").textContent = "Takk! Vi sees 26. september.";
+    if(!rsvpPhone){
+      $("rsvpMsg").textContent = "SMS-nummer er ikke satt opp ennå.";
+      return;
+    }
+    const payload = {
+      name: $("rName").value.trim(),
+      guests: $("rGuests").value || "1",
+      attend: document.querySelector('input[name="attend"]:checked').value === "yes" ? "Jeg kommer" : "Kan dessverre ikke",
+      notes: $("rNotes").value.trim() || "Ingen"
+    };
+    const body = buildSmsBody(payload);
+    window.location.href = smsUrl(CONFIG.rsvpPhone, body);
+    $("rsvpMsg").textContent = "SMS-appen åpnes — husk å trykke send.";
   });
 })();
 </script>

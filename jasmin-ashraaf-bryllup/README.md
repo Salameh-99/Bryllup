@@ -24,8 +24,7 @@ python3 -m http.server 8000
 ```js
 const CONFIG = {
   date: "2026-09-26T16:00:00",
-  ENDPOINT: "",   // Google Apps Script URL
-  MODE: "sheet"
+  rsvpPhone: "+47 412 34 567", // nummer for RSVP på SMS
 };
 ```
 
