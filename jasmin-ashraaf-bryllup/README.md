@@ -4,7 +4,7 @@ Invitasjon etter **Tilda template5** (Viktor & Paula / webgency.tilda.ws/templat
 
 | | |
 |---|---|
-| **Dato** | Lørdag 26.09.2026, kl. 15:30 |
+| **Dato** | Lørdag 26.09.2026, kl. 16:00 |
 | **Sted** | Hoveveien 110a, 4818 Færvik |
 | **Catering** | Arendal Catering AS |
 | **Svarfrist** | 1. september 2026 |
@@ -23,7 +23,7 @@ python3 -m http.server 8000
 
 ```js
 const CONFIG = {
-  date: "2026-09-26T15:30:00",
+  date: "2026-09-26T16:00:00",
   ENDPOINT: "",   // Google Apps Script URL
   MODE: "sheet"
 };
@@ -39,7 +39,7 @@ Legg filene i `img/` med nøyaktig disse navnene:
 |---|---|
 | `img/paret.jpg` | Bilde av paret (dress code + bunn). Original: `IMG_0422.jpeg` |
 | `img/lokale-bygning.png` | Hove-tegning (Location), svarte streker som i Tilda template5 |
-| `img/lokale-2.jpg` | Ekstra bilde av lokalet (dress code) |
+| `img/lokale-2.jpg` | Bilde av lokalet (dress code). Laget fra `AC-3000x1000-1-1536x512.jpeg` |
 
 Til rammene vises en tom plassholder til filen er lagt inn. Blomsterdekoren fra malen beholdes.
 
