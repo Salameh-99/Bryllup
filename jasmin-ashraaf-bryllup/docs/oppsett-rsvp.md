@@ -11,7 +11,7 @@ Finn `CONFIG` øverst i `index.html`:
 ```js
 const CONFIG = {
   date: "2026-09-26T16:00:00",
-  rsvpPhone: "+47 412 34 567", // ← ditt nummer her
+  rsvpPhone: "+47 918 28 440", // ← ditt nummer her
   ...
 };
 ```
