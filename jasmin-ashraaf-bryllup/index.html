@@ -168,6 +168,12 @@ button,input,textarea,select{font:inherit;max-width:100%}
 #details .torn-bot{z-index:3}
 #details .florals--edge{z-index:2}
 
+@media (max-width:380px){
+  .florals{height:clamp(8.5rem, 58vw, 11rem)}
+  .florals img:nth-child(1){left:-10%}
+  .florals img:nth-child(7){left:58%;width:48%}
+}
+
 .letter{padding:0 1.5rem 2.6rem;text-align:center;position:relative;z-index:2}
 .letter h2{font-family:var(--script);font-size:clamp(2.15rem,8.5vw,2.9rem);font-weight:400;margin-bottom:1rem;line-height:1.08}
 .letter p{font-size:1.05rem;line-height:1.8;color:#fffaf8;font-family:var(--serif)}
