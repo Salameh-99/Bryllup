@@ -176,20 +176,20 @@ button,input,textarea,select{font:inherit;max-width:100%}
 .tl-item.rose .tl-dot{display:none}
 .tl-rose{width:32px;height:32px;margin:0 auto;object-fit:contain}
 
-/* scroll flower */
+/* scroll flower — centered on diamond dots */
 .tl-flower-wrap{
   position:absolute;left:50%;top:0;transform:translateX(-50%);
-  width:44px;height:44px;margin-left:8px;
+  width:32px;height:32px;
   pointer-events:none;z-index:4;
 }
 .tl-flower-wrap img{
-  width:44px;height:44px;object-fit:contain;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.22));
+  width:32px;height:32px;object-fit:contain;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.2));
   transform:scale(1);
   transition:transform .35s cubic-bezier(.34,1.56,.64,1);
 }
 .tl-flower-wrap.bloom img{
-  transform:scale(1.32);
+  transform:scale(1.28);
 }
 
 .venue-scene{
@@ -581,20 +581,21 @@ form.rsvp.open{display:block}
     else { audio.pause(); playI.style.display="block"; pauseI.style.display="none"; }
   });
 
-  // ── scroll flower along timeline ──
+  // ── scroll flower along timeline (snaps to diamond centers) ──
   (function(){
     const tl = document.getElementById('tl');
     const flower = document.getElementById('tlFlower');
     if(!tl || !flower) return;
     const items = Array.from(tl.querySelectorAll('.tl-item'));
-    const HALF = 22; // half of flower size (44px)
-    const SNAP = 18; // px distance to snap
-    const BLOOM = 24; // px distance to trigger bloom
+    const HALF = 16; // half of flower size (32px)
+    const SNAP = 16; // px distance to snap onto diamond
     let lastSnapped = -1;
     let bloomTimeout = null;
 
-    function getCenter(el){
-      return el.offsetTop + el.offsetHeight / 2;
+    function getDotCenter(item){
+      const dot = item.querySelector('.tl-dot');
+      if(!dot) return item.offsetTop + item.offsetHeight / 2;
+      return item.offsetTop + dot.offsetTop + dot.offsetHeight / 2;
     }
 
     function triggerBloom(idx){
@@ -608,16 +609,16 @@ form.rsvp.open{display:block}
     function update(){
       const tlRect = tl.getBoundingClientRect();
       const vh = window.innerHeight;
-      const centers = items.map(getCenter);
+      const centers = items.map(getDotCenter);
       const first = centers[0];
       const last = centers[centers.length - 1];
-      // map scroll so flower enters at first item when section hits mid-screen
+      // map scroll so flower enters at first diamond when section hits mid-screen
       const prog = Math.max(0, Math.min(1,
         (vh * 0.52 - tlRect.top) / (tlRect.height)
       ));
       const targetY = first + (last - first) * prog;
 
-      // find closest center
+      // find closest diamond
       let closestIdx = 0;
       let minDist = Infinity;
       for(let i=0;i<centers.length;i++){
