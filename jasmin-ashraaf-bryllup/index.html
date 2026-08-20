@@ -129,15 +129,44 @@ button,input,textarea,select{font:inherit;max-width:100%}
   position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
   font-size:.58em;line-height:1;font-family:var(--script);
 }
-.florals{position:relative;height:220px;margin:-1.2rem auto 0;width:100%;max-width:440px;overflow:hidden}
-.florals img{position:absolute;height:auto;pointer-events:none;max-width:none}
-.florals img:nth-child(1){left:-8%;bottom:12px;width:136px}
-.florals img:nth-child(2){left:8%;bottom:0;width:137px}
-.florals img:nth-child(3){left:18%;bottom:38px;width:100px;z-index:2}
-.florals img:nth-child(4){left:26%;bottom:8px;width:149px;z-index:3}
-.florals img:nth-child(5){left:38%;bottom:52px;width:180px;z-index:1}
-.florals img:nth-child(6){left:58%;bottom:10px;width:180px}
-.florals img:nth-child(7){left:64%;bottom:70px;width:200px;z-index:0}
+.florals{
+  position:relative;
+  width:100%;
+  max-width:min(28rem, 100%);
+  height:clamp(9.5rem, 52vw, 14.5rem);
+  margin:-.8rem auto 0;
+  overflow:visible;
+  pointer-events:none;
+  z-index:2;
+}
+.florals img{
+  position:absolute;
+  height:auto;
+  max-width:none;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+/* Scale each bloom to container width so the cluster fits phones and tablets */
+.florals img:nth-child(1){left:-6%;  bottom:6%;  width:30%; max-width:8.5rem}
+.florals img:nth-child(2){left:10%;  bottom:0;    width:30%; max-width:8.6rem}
+.florals img:nth-child(3){left:20%;  bottom:18%;  width:22%; max-width:6.25rem; z-index:2}
+.florals img:nth-child(4){left:28%;  bottom:4%;   width:33%; max-width:9.3rem;  z-index:3}
+.florals img:nth-child(5){left:40%;  bottom:24%;  width:40%; max-width:11.25rem;z-index:1}
+.florals img:nth-child(6){left:58%;  bottom:3%;   width:40%; max-width:11.25rem}
+.florals img:nth-child(7){left:62%;  bottom:30%;  width:44%; max-width:12.5rem; z-index:0}
+
+/* Footer florals: tuck into the torn cream→ruby edge */
+.florals--edge{
+  margin-top:clamp(.8rem, 3vw, 1.4rem);
+  margin-bottom:clamp(-4.2rem, -12vw, -3rem);
+}
+#details{
+  padding-bottom:clamp(2.4rem, 8vw, 3.6rem);
+  overflow:visible;
+}
+#details .torn-bot{z-index:3}
+#details .florals--edge{z-index:2}
 
 .letter{padding:0 1.5rem 2.6rem;text-align:center;position:relative;z-index:2}
 .letter h2{font-family:var(--script);font-size:clamp(2.15rem,8.5vw,2.9rem);font-weight:400;margin-bottom:1rem;line-height:1.08}
@@ -457,7 +486,7 @@ form.rsvp.open{display:block}
       <p>Middag fra Arendal Catering AS. Oppgi allergier i påmeldingen under.</p>
       <p>Del gjerne bildene deres med oss — #AchraafOgJasmin</p>
     </div>
-    <div class="florals" style="margin-top:1.2rem;margin-bottom:-2.6rem" aria-hidden="true">
+    <div class="florals florals--edge" aria-hidden="true">
       <img src="https://static.tildacdn.net/tild3565-3335-4966-b062-366237626361/8ruby.png" alt="">
       <img src="https://static.tildacdn.net/tild3064-6534-4135-b730-353630663233/6druby.png" alt="">
       <img src="https://static.tildacdn.net/tild3533-3266-4863-b762-326134376538/7uruby.png" alt="">
