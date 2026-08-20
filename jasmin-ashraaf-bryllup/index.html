@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Bryllupsinvitasjon — Achraaf &amp; Jasmin, 26. september 2026, Hove, Færvik">
+<meta name="theme-color" content="#66021f">
+<meta property="og:title" content="Achraaf og Jasmin">
+<meta property="og:description" content="Bryllupsinvitasjon — 26. september 2026, Hove, Færvik">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/paret.jpg">
 <title>Achraaf og Jasmin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -208,8 +213,6 @@ button,input,textarea,select{font:inherit;max-width:100%}
   width:11px;height:11px;margin:0 auto;background:#fff;transform:rotate(45deg);
   box-shadow:0 0 0 6px var(--ruby);
 }
-.tl-item.rose .tl-dot{display:none}
-.tl-rose{width:32px;height:32px;margin:0 auto;object-fit:contain}
 
 /* scroll flower — centered on diamond dots */
 .tl-flower-wrap{
@@ -243,7 +246,6 @@ button,input,textarea,select{font:inherit;max-width:100%}
   width:100%;height:auto;display:block;margin-top:.4rem;
   filter:drop-shadow(0 4px 14px rgba(102,2,31,.10));
 }
-.venue-img{margin:1.6rem auto 0;width:min(100%,320px);filter:none}
 .photo-slot{
   position:relative;margin:1.6rem auto 0;width:min(100%,280px);
   aspect-ratio:3/4;overflow:hidden;
@@ -253,40 +255,32 @@ button,input,textarea,select{font:inherit;max-width:100%}
 .band.cream .photo-slot{background:rgba(102,2,31,.05);border-color:rgba(102,2,31,.25)}
 .photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
 .photo-slot.has-img img{display:block}
-.photo-slot.has-img .photo-hint{display:none}
-.photo-slot[data-src="img/paret.jpg"] img{object-position:center 28%}
-.photo-slot[data-src="img/lokale-2.jpg"]{aspect-ratio:4/3;width:100%}
-.photo-slot[data-src="img/lokale-2.jpg"] img{object-position:center 42%}
-.photo-hint{
-  font-family:var(--serif);font-size:.9rem;line-height:1.5;padding:1rem;
-  color:inherit;opacity:.7;
-}
-.photo-hint small{display:block;margin-top:.35rem;opacity:.7;font-size:.75rem}
 .couple-slot{
   width:100%;max-width:440px;aspect-ratio:3/4;margin:1.8rem auto 0;border:0;background:transparent;
 }
 .couple-slot.has-img img{
+  object-position:center 28%;
   mask-image:linear-gradient(to bottom, transparent 0%, #000 10%, #000 88%, transparent 100%);
   -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 10%, #000 88%, transparent 100%);
 }
-.dc-row .photo-slot{width:100%;margin:0}
 .venue-btn{
   display:inline-block;margin-top:1.2rem;padding:.55rem 1.4rem;border-radius:999px;
   border:1px solid var(--ruby);font-size:.9rem;
 }
 
-/* dress code */
-.dc-lead{max-width:22rem;margin:0 auto 1.6rem;line-height:1.7}
+/* stemning / mood */
+.mood-lead{max-width:22rem;margin:0 auto 1.6rem;line-height:1.7}
 .swatches{display:flex;justify-content:center;gap:.7rem;margin:1.2rem 0 2rem}
 .swatch{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.25)}
-.dc-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;margin:1.4rem 0;text-align:left}
-.dc-row.reverse{direction:rtl}
-.dc-row.reverse > *{direction:ltr}
-.dc-copy{font-size:.92rem;line-height:1.55}
-.frame{
-  width:100%;height:auto;object-fit:contain;background:transparent;
-  border:0;box-shadow:none;
+.mood-photos{
+  display:grid;gap:1rem;max-width:22rem;margin:0 auto;
 }
+.mood-photo{
+  width:100%;height:auto;display:block;
+  border:1px solid rgba(197,161,111,.45);
+}
+.mood-photo--venue{aspect-ratio:4/3;object-fit:cover;object-position:center 42%}
+.mood-photo--couple{aspect-ratio:3/4;object-fit:cover;object-position:center 28%}
 
 /* details */
 .details p + p{margin-top:.9rem}
@@ -326,11 +320,6 @@ form.rsvp.open{display:block}
 }
 .site-credit a{text-decoration:none;border-bottom:1px solid rgba(255,250,248,.35)}
 .site-credit a:hover{opacity:1;border-bottom-color:var(--gold)}
-.couple{
-  margin-top:1.8rem;width:100%;max-height:520px;object-fit:cover;object-position:center 20%;
-  mask-image:linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
-}
 
 #audio-control{
   position:fixed;
@@ -347,8 +336,10 @@ form.rsvp.open{display:block}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  .reveal,#cover{transition:none}
+  .reveal,#cover,.cover-panel,.cover-seal,.tl-flower-wrap img{transition:none}
   .reveal{opacity:1;transform:none}
+  #cover.opening .cover-panel--l,#cover.opening .cover-panel--r{transform:none}
+  .tl-flower-wrap.bloom img{transform:none}
 }
 @media (max-width: 430px){
   .venue-scene__name{font-size:1.18rem}
@@ -405,7 +396,7 @@ form.rsvp.open{display:block}
   </section>
 
   <section class="band cream" id="countdown">
-    <img class="torn-top" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
+    <img class="torn-top" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="" aria-hidden="true">
     <h2 class="s-title reveal">The Celebration Begins In</h2>
     <div class="cd">
       <div class="cd-cell"><div class="cd-num" id="cdD">00</div><div class="cd-label">Days</div></div>
@@ -438,7 +429,7 @@ form.rsvp.open{display:block}
         <div class="tl-name">Fest &amp; dans</div>
       </div>
       <!-- scroll flower -->
-      <div class="tl-flower-wrap" id="tlFlower">
+      <div class="tl-flower-wrap" id="tlFlower" aria-hidden="true">
         <img src="img/flower.png" alt="">
       </div>
     </div>
@@ -454,32 +445,22 @@ form.rsvp.open{display:block}
       </div>
       <img class="venue-scene__art" src="img/lokale-bygning.png" alt="Hove" loading="lazy" width="1266" height="528">
     </div>
-    <a class="venue-btn" href="https://www.google.com/maps/dir/?api=1&destination=Hoveveien+110a+4818+F%C3%A6rvik" target="_blank" rel="noopener">Åpne veibeskrivelse</a>
+    <a class="venue-btn" href="https://www.google.com/maps/dir/?api=1&destination=Hoveveien+110a+4818+F%C3%A6rvik" target="_blank" rel="noopener noreferrer">Åpne veibeskrivelse</a>
     <img class="torn-bot" src="https://static.tildacdn.net/tild3832-6561-4131-b539-313934396635/Mask_group_2_1_Trace.svg" alt="">
   </section>
 
-  <section class="band ruby" id="dresscode">
-    <h2 class="s-title reveal">Dress Code</h2>
-    <p class="dc-lead">Mørk dress. Vi ønsker at alle skal føle seg vakre — og vi setter pris på om dere unngår hvitt.</p>
+  <section class="band ruby" id="stemning">
+    <h2 class="s-title reveal">Stemning</h2>
+    <p class="mood-lead">Vi gleder oss til en varm og elegant kveld i rubin og champagne — sammen med dere.</p>
     <div class="swatches" aria-hidden="true">
       <span class="swatch" style="background:#60603b"></span>
       <span class="swatch" style="background:#660A11"></span>
       <span class="swatch" style="background:#40312c"></span>
       <span class="swatch" style="background:#efdfcd"></span>
     </div>
-    <div class="dc-row">
-      <p class="dc-copy">Herrer: Mørk dress eller smoking. Slips eller sløyfe.</p>
-      <figure class="photo-slot" data-src="img/lokale-2.jpg">
-        <img alt="Lokalet">
-        <figcaption class="photo-hint">Bilde av lokalet<small>img/lokale-2.jpg</small></figcaption>
-      </figure>
-    </div>
-    <div class="dc-row reverse">
-      <p class="dc-copy">Damer: Lang kjole eller elegant ankellengde.</p>
-      <figure class="photo-slot" data-src="img/paret.jpg">
-        <img alt="Achraaf og Jasmin">
-        <figcaption class="photo-hint">Bilde av paret<small>img/paret.jpg</small></figcaption>
-      </figure>
+    <div class="mood-photos">
+      <img class="mood-photo mood-photo--venue" src="img/lokale-2.jpg" alt="Hove" loading="lazy" width="1200" height="900">
+      <img class="mood-photo mood-photo--couple" src="img/paret.jpg" alt="Achraaf og Jasmin" loading="lazy" width="800" height="1067">
     </div>
   </section>
 
@@ -516,8 +497,8 @@ form.rsvp.open{display:block}
           <input id="rName" name="name" required autocomplete="name">
         </div>
         <div class="field">
-          <div>Kommer du?</div>
-          <div class="attend">
+          <span id="rAttendLabel">Kommer du?</span>
+          <div class="attend" role="group" aria-labelledby="rAttendLabel">
             <label><input type="radio" name="attend" value="yes" checked> Jeg kommer</label>
             <label><input type="radio" name="attend" value="no"> Kan dessverre ikke</label>
           </div>
@@ -540,17 +521,14 @@ form.rsvp.open{display:block}
   <footer class="closing">
     <h2>Vi gleder oss til å se dere</h2>
     <p>Achraaf og Jasmin</p>
-    <figure class="photo-slot couple-slot" data-src="img/paret.jpg">
-      <img alt="Achraaf og Jasmin">
-      <figcaption class="photo-hint">Bilde av paret<small>img/paret.jpg</small></figcaption>
+    <figure class="photo-slot couple-slot has-img">
+      <img src="img/paret.jpg" alt="Achraaf og Jasmin" loading="lazy">
     </figure>
     <p class="site-credit">Designet av <a href="https://sosmedia.no" target="_blank" rel="noopener noreferrer">sosmedia.no</a></p>
   </footer>
 </div>
 
-<audio id="invitation-audio" loop>
-  <source src="https://pub-4dc8201144ca418fb604349c73e8c724.r2.dev/Alex%20Warren%20-%20Ordinary%20Lyrics.mp3" type="audio/mp3">
-</audio>
+<audio id="invitation-audio" loop preload="none"></audio>
 <button id="audio-control" type="button" aria-label="Musikk">
   <svg id="icon-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
   <svg id="icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
@@ -575,22 +553,13 @@ form.rsvp.open{display:block}
   }), {threshold:.12});
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  document.querySelectorAll(".photo-slot").forEach(slot => {
-    const src = slot.getAttribute("data-src");
-    const img = slot.querySelector("img");
-    if(!src || !img) return;
-    const probe = new Image();
-    probe.onload = () => { img.src = src; slot.classList.add("has-img"); };
-    probe.onerror = () => {};
-    probe.src = src;
-  });
-
   const audio = $("invitation-audio");
   const ctrl = $("audio-control");
   const playI = $("icon-play");
   const pauseI = $("icon-pause");
   const heroV = $("heroVideo");
-  heroV.src = CONFIG.videoSrc;
+  if(CONFIG.musicSrc) audio.src = CONFIG.musicSrc;
+  if(CONFIG.videoSrc) heroV.src = CONFIG.videoSrc;
 
   let opened = false;
   function openInvitation(){
