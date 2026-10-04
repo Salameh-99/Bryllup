@@ -483,8 +483,10 @@
   }
 
   function safeUrl(url) {
+    const text = String(url || "").trim();
+    if (!text) return "";
     try {
-      const parsed = new URL(url, window.location.href);
+      const parsed = new URL(text);
       if (parsed.protocol === "http:" || parsed.protocol === "https:") return parsed.href;
     } catch (error) {
       return "";

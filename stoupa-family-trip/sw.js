@@ -1,6 +1,6 @@
 /* Lagrer siden lokalt etter første besøk, så planen kan åpnes med dårlig nett.
    Google Maps ligger utenfor cachen og trenger fortsatt nett. */
-const CACHE = "stoupa-trip-v1";
+const CACHE = "stoupa-trip-v3";
 const FILES = ["./index.html", "./styles.css", "./script.js"];
 
 self.addEventListener("install", (event) => {
